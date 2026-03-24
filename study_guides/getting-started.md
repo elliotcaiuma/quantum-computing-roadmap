@@ -26,12 +26,12 @@ Before starting, ensure you have:
 
 ## Week 1: Your First Qubit
 
-### Day 1-2: Install & Test
+### Install & Test
 
 ```bash
 # Clone the repository
-git clone https://github.com/elliotcaiuma/quantum-foundations.git
-cd quantum-foundations
+git clone https://github.com/elliotcaiuma/quantum-computing-roadmap.git
+cd quantum-roadmap
 
 # Set up environment
 python -m venv venv
@@ -45,7 +45,7 @@ pip install -r requirements.txt
 python code/foundations/test_setup.py
 ```
 
-### Day 3-4: Create Your First State
+### Create Your First State
 
 ```python
 # Run the state creator
@@ -57,7 +57,7 @@ python code/foundations/create_state.py
 - Normalization: $|\alpha|^2 + |\beta|^2 = 1$
 - Probability: $P(0) = |\alpha|^2$, $P(1) = |\beta|^2$
 
-### Day 5-7: Practice States
+### Practice States
 
 **Exercises:**
 1. Create $|0\rangle$, $|1\rangle$
@@ -79,7 +79,6 @@ python code/foundations/create_state.py
 ### Code Practice
 
 ```python
-# code/foundations/bloch_sphere.py
 from qiskit import QuantumCircuit
 from qiskit.visualization import plot_bloch_multivector
 
