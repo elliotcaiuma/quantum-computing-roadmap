@@ -1,8 +1,8 @@
-# Quantum Computing Foundations
+# Quantum Computing Roadmap
 
 A beginner-friendly learning path for mastering quantum computing fundamentals with hands-on Qiskit implementations.
 
-![Quantum Computing](https://img.shields.io/badge/Quantum-Foundations-blue)
+![Quantum Computing](https://img.shields.io/badge/Quantum-Roadmap-blue)
 ![Qiskit](https://img.shields.io/badge/Qiskit-2.x-purple)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
@@ -30,8 +30,8 @@ This repository focuses on **quantum computing foundations** — single-qubit an
 
 ```bash
 # Clone
-git clone https://github.com/elliotcaiuma/quantum-foundations.git
-cd quantum-foundations
+git clone https://github.com/elliotcaiuma/quantum-computing-roadmap.git
+cd quantum-computing-roadmap
 
 # Setup
 python -m venv venv
@@ -45,7 +45,7 @@ python code/foundations/01_hello_qubit.py
 ## 📁 Structure
 
 ```
-quantum-foundations/
+quantum-computing-roadmap/
 ├── README.md
 ├── ROADMAP.md
 ├── SETUP.md
