@@ -131,7 +131,7 @@ qc.measure(0, 0)  # Measure
 
 ---
 
-## Week 4: Tensor Products
+## Step 4: Tensor Products
 
 ### Key Concept
 
@@ -233,9 +233,9 @@ Send 2 classical bits using 1 qubit:
 
 **A:** No! Linear algebra and complex numbers are enough.
 
-### Q: How much time per week?
+### Q: How much time per step?
 
-**A:** 5-8 hours (1 hour daily + weekend review).
+**A:** Varies by person. Complete each step before moving to the next.
 
 ### Q: What if I don't understand entanglement?
 
