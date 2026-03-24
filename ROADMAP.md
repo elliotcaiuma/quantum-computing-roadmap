@@ -1,12 +1,12 @@
-# Quantum Computing Learning Roadmap
+# Quantum Computing Foundations Roadmap
 
-## Detailed Study Plan
+## 6-Week Study Plan
 
-This roadmap provides a week-by-week guide for mastering quantum computing based on Nielsen & Chuang's textbook with practical Qiskit implementations.
+This focused roadmap covers only **foundations** — single-qubit and multi-qubit systems. Master these before moving to algorithms.
 
 ---
 
-## Phase 1: Foundations (Weeks 1-3)
+## Phase 1: Single-Qubit Foundations (Weeks 1-3)
 
 ### Week 1: Quantum Mechanics Basics
 
@@ -15,22 +15,27 @@ This roadmap provides a week-by-week guide for mastering quantum computing based
 - State vectors in Hilbert space
 - Qubit representation: $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$
 - Normalization condition: $|\alpha|^2 + |\beta|^2 = 1$
+- Complex probability amplitudes
 
 **Reading:**
-- Nielsen & Chuang: Sections 1.1-1.3, 2.1-2.2
+- Nielsen & Chuang: Sections 1.1-1.3, 2.1
 
 **Coding:**
 ```python
 # code/foundations/create_state.py
-from qiskit import QuantumCircuit
 from qiskit.quantum_info import Statevector
 
 # Create custom state
-psi = Statevector.from_label('0')
+psi = Statevector([1/np.sqrt(2), 1/np.sqrt(2)])  # |+⟩
 print(psi)
 ```
 
 **Milestone:** Can represent any single-qubit state and calculate probabilities
+
+**Check Understanding:**
+- [ ] Explain what a qubit is
+- [ ] Normalize a state vector
+- [ ] Calculate measurement probabilities
 
 ---
 
@@ -41,6 +46,7 @@ print(psi)
 - Bloch vector: $\vec{r} = (\langle X \rangle, \langle Y \rangle, \langle Z \rangle)$
 - Pure states on surface, mixed states inside
 - Euler angles for rotations
+- North pole = $|0\rangle$, South pole = $|1\rangle$
 
 **Reading:**
 - Nielsen & Chuang: Section 1.2, 2.4
@@ -48,8 +54,8 @@ print(psi)
 **Coding:**
 ```python
 # code/foundations/bloch_sphere.py
-from qiskit.visualization import plot_bloch_multivector
 from qiskit import QuantumCircuit
+from qiskit.visualization import plot_bloch_multivector
 
 qc = QuantumCircuit(1)
 qc.h(0)  # Hadamard gate
@@ -58,17 +64,23 @@ plot_bloch_multivector(qc)
 
 **Milestone:** Visualize any single-qubit state on Bloch sphere
 
+**Check Understanding:**
+- [ ] Plot |0⟩, |1⟩, |+⟩, |-⟩ on Bloch sphere
+- [ ] Explain what Bloch vector components mean
+- [ ] Rotate state with gates
+
 ---
 
 ### Week 3: Single-Qubit Gates & Measurement
 
 **Topics:**
-- Pauli gates: X, Y, Z
-- Hadamard gate: H
+- Pauli gates: X, Y, Z (and matrices)
+- Hadamard gate: H (creates superposition)
 - Phase gates: S, T
 - Rotation gates: Rx, Ry, Rz
 - Measurement postulates
 - Born rule: $P(i) = |\langle i|\psi\rangle|^2$
+- Expectation values
 
 **Reading:**
 - Nielsen & Chuang: Sections 2.2.3, 4.2
@@ -79,16 +91,22 @@ plot_bloch_multivector(qc)
 from qiskit import QuantumCircuit
 
 qc = QuantumCircuit(1)
-qc.x(0)  # X gate
-qc.h(0)  # Hadamard
+qc.x(0)   # X gate (NOT)
+qc.h(0)   # Hadamard (superposition)
+qc.z(0)   # Z gate (phase flip)
 qc.measure_all()
 ```
 
 **Milestone:** Implement all single-qubit gates and measure in any basis
 
+**Check Understanding:**
+- [ ] Write matrix for X, Y, Z, H
+- [ ] Explain what H does to |0⟩
+- [ ] Measure in X, Y, Z bases
+
 ---
 
-## Phase 2: Multi-Qubit Systems (Weeks 4-6)
+## Phase 2: Multi-Qubit Foundations (Weeks 4-6)
 
 ### Week 4: Tensor Products
 
@@ -96,6 +114,7 @@ qc.measure_all()
 - Composite systems: $|\psi\rangle = |\psi_1\rangle \otimes |\psi_2\rangle$
 - Tensor product notation
 - Dimension: $2^n$ for n qubits
+- Kronecker product
 - Separable vs entangled states
 
 **Reading:**
@@ -107,13 +126,18 @@ qc.measure_all()
 import numpy as np
 
 # Tensor product of two states
-psi1 = np.array([1, 0])
-psi2 = np.array([0, 1])
-psi_combined = np.kron(psi1, psi2)
+psi1 = np.array([1, 0])      # |0⟩
+psi2 = np.array([0, 1])      # |1⟩
+psi_combined = np.kron(psi1, psi2)  # |01⟩
 print(psi_combined)  # [0, 1, 0, 0]
 ```
 
 **Milestone:** Compute tensor products for multi-qubit states
+
+**Check Understanding:**
+- [ ] Compute tensor product of 2 qubits
+- [ ] Explain why dimension is 2^n
+- [ ] Identify separable states
 
 ---
 
@@ -122,8 +146,11 @@ print(psi_combined)  # [0, 1, 0, 0]
 **Topics:**
 - Bell states (4 maximally entangled states)
 - $|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$
-- Schmidt decomposition
-- CHSH inequality
+- $|\Phi^-\rangle = \frac{1}{\sqrt{2}}(|00\rangle - |11\rangle)$
+- $|\Psi^+\rangle = \frac{1}{\sqrt{2}}(|01\rangle + |10\rangle)$
+- $|\Psi^-\rangle = \frac{1}{\sqrt{2}}(|01\rangle - |10\rangle)$
+- Schmidt decomposition (intro)
+- CHSH inequality (optional)
 
 **Reading:**
 - Nielsen & Chuang: Sections 2.3, 4.3
@@ -134,21 +161,28 @@ print(psi_combined)  # [0, 1, 0, 0]
 from qiskit import QuantumCircuit
 
 qc = QuantumCircuit(2)
-qc.h(0)
-qc.cx(0, 1)  # Create Bell state
+qc.h(0)        # Create superposition
+qc.cx(0, 1)    # CNOT creates Bell state
 ```
 
 **Milestone:** Create all 4 Bell states and verify entanglement
 
+**Check Understanding:**
+- [ ] Create all 4 Bell states
+- [ ] Explain why Bell states are entangled
+- [ ] Measure correlations
+
 ---
 
-### Week 6: Multi-Qubit Gates & Teleportation
+### Week 6: Multi-Qubit Gates & Protocols
 
 **Topics:**
 - CNOT gate (controlled-NOT)
+- Matrix representation
+- Truth table
 - CZ, SWAP gates
 - Quantum teleportation protocol
-- Superdense coding
+- Superdense coding (2-bit protocol)
 
 **Reading:**
 - Nielsen & Chuang: Sections 4.3-4.4
@@ -160,271 +194,54 @@ from qiskit import QuantumCircuit
 
 # Teleportation circuit
 qc = QuantumCircuit(3)
-# Alice's qubit, Bell pair, Bob's qubit
+# Qubit 0: Alice's state to teleport
+# Qubit 1,2: Bell pair (Alice, Bob)
 ```
 
-**Milestone:** Implement quantum teleportation protocol
+**Milestone:** Implement quantum teleportation and superdense coding
+
+**Check Understanding:**
+- [ ] Draw CNOT truth table
+- [ ] Implement teleportation protocol
+- [ ] Explain superdense coding
 
 ---
 
-## Phase 3: Quantum Circuits (Weeks 7-9)
+## Assessment: Foundation Mastery
 
-### Week 7: Circuit Construction
+After completing 6 weeks, you should be able to:
 
-**Topics:**
-- Quantum circuit notation
-- Gate sequences
-- Circuit diagrams
-- Reversible computation
+### Single-Qubit ✅
+- [ ] Represent any single-qubit state as $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$
+- [ ] Visualize on Bloch sphere
+- [ ] Implement X, Y, Z, H, S, T gates
+- [ ] Measure in X, Y, Z bases
+- [ ] Calculate probabilities using Born rule
 
-**Reading:**
-- Nielsen & Chuang: Sections 4.1-4.2
-
-**Coding:**
-```python
-# code/circuits/builder.py
-from qiskit import QuantumCircuit
-
-qc = QuantumCircuit(4, 4)
-qc.h(range(4))
-qc.cx(0, 1)
-qc.cx(1, 2)
-```
-
-**Milestone:** Build complex multi-gate circuits
+### Multi-Qubit ✅
+- [ ] Compute tensor products
+- [ ] Create all 4 Bell states
+- [ ] Explain entanglement
+- [ ] Implement CNOT, CZ, SWAP
+- [ ] Run quantum teleportation protocol
 
 ---
 
-### Week 8: Controlled Operations
+## Weekly Study Routine
 
-**Topics:**
-- Controlled-U gates
-- Decomposition: 2 CNOTs + 3 single-qubit
-- Toffoli gate (controlled-controlled-NOT)
-- Multi-controlled gates
+### Session Structure (60-90 minutes)
 
-**Reading:**
-- Nielsen & Chuang: Sections 4.3
+1. **Reading (20-30 min):** Read assigned Nielsen & Chuang sections
+2. **Theory (20 min):** Work through derivations by hand
+3. **Coding (30-40 min):** Implement concepts in Qiskit
+4. **Review (10 min):** Update progress tracker, note questions
 
-**Coding:**
-```python
-# code/circuits/controlled_u.py
-from qiskit import QuantumCircuit
+### Weekly Review (Sunday)
 
-qc = QuantumCircuit(3)
-qc.cu(theta, phi, lam, 0, 1, 2)  # Controlled-U
-```
-
-**Milestone:** Decompose controlled-unitary gates
-
----
-
-### Week 9: Universality & Synthesis
-
-**Topics:**
-- Universal gate sets
-- Two-level unitaries
-- Approximating arbitrary unitaries
-- Gate count optimization
-
-**Reading:**
-- Nielsen & Chuang: Sections 4.7-4.8
-
-**Coding:**
-```python
-# code/circuits/synthesis.py
-from qiskit.synthesis import synth_qubit_unitary
-```
-
-**Milestone:** Synthesize arbitrary single-qubit unitaries
-
----
-
-## Phase 4: Quantum Algorithms (Weeks 10-15)
-
-### Week 10-11: Quantum Fourier Transform
-
-**Topics:**
-- QFT definition
-- Circuit implementation
-- Complexity: O(n²) vs classical O(n2^n)
-- Applications
-
-**Reading:**
-- Nielsen & Chuang: Section 5.1
-
-**Coding:**
-```python
-# code/algorithms/qft.py
-from qiskit.circuit.library import QFT
-
-qft = QFT(num_qubits=4)
-```
-
-**Milestone:** Implement QFT for n qubits
-
----
-
-### Week 12-13: Grover's Algorithm
-
-**Topics:**
-- Unstructured search
-- Oracle construction
-- Amplitude amplification
-- O(√N) speedup
-
-**Reading:**
-- Nielsen & Chuang: Section 6.1
-
-**Coding:**
-```python
-# code/algorithms/grover.py
-from qiskit.circuit.library import GroverOperator
-```
-
-**Milestone:** Implement Grover's search for database
-
----
-
-### Week 14-15: Shor's Algorithm
-
-**Topics:**
-- Integer factorization
-- Period finding
-- Modular exponentiation
-- Continued fractions
-
-**Reading:**
-- Nielsen & Chuang: Section 6.2
-
-**Coding:**
-```python
-# code/algorithms/shor.py
-# Implement period finding for factoring 15
-```
-
-**Milestone:** Factor small integers (15, 21)
-
----
-
-## Phase 5: Quantum Information (Weeks 16-21)
-
-### Week 16-17: Density Matrices
-
-**Topics:**
-- Mixed states
-- Density operator: $\rho = \sum_i p_i |\psi_i\rangle\langle\psi_i|$
-- Partial trace
-- Purification
-
-**Reading:**
-- Nielsen & Chuang: Sections 2.4, 8.2
-
-**Coding:**
-```python
-# code/advanced/density_matrix.py
-from qiskit.quantum_info import DensityMatrix
-```
-
-**Milestone:** Work with mixed states and partial trace
-
----
-
-### Week 18-19: Quantum Noise
-
-**Topics:**
-- Quantum channels
-- Kraus representation
-- Noise models: depolarizing, dephasing, amplitude damping
-- Master equation
-
-**Reading:**
-- Nielsen & Chuang: Sections 8.3-8.5
-
-**Coding:**
-```python
-# code/advanced/noise.py
-from qiskit_aer.noise import NoiseModel
-```
-
-**Milestone:** Simulate noise channels
-
----
-
-### Week 20-21: Error Correction
-
-**Topics:**
-- 3-qubit bit-flip code
-- Phase-flip code
-- Shor's 9-qubit code
-- Stabilizer formalism
-
-**Reading:**
-- Nielsen & Chuang: Sections 10.1-10.6
-
-**Coding:**
-```python
-# code/advanced/error_correction.py
-# Implement 3-qubit code
-```
-
-**Milestone:** Implement basic error correction codes
-
----
-
-## Phase 6: Advanced Topics (Weeks 22+)
-
-### Week 22-23: VQE
-
-**Topics:**
-- Variational Quantum Eigensolver
-- Ansatz construction
-- Classical optimization
-- Quantum chemistry applications
-
-**Coding:**
-```python
-# code/advanced/vqe.py
-from qiskit.algorithms import VQE
-```
-
-**Milestone:** Calculate ground state energy of H₂
-
----
-
-### Week 24-25: QAOA
-
-**Topics:**
-- Quantum Approximate Optimization Algorithm
-- Combinatorial optimization
-- MaxCut problem
-- Ansatz: alternating operators
-
-**Coding:**
-```python
-# code/advanced/qaoa.py
-from qiskit.algorithms import QAOA
-```
-
-**Milestone:** Solve MaxCut with QAOA
-
----
-
-### Week 26+: Hamiltonian Simulation
-
-**Topics:**
-- Trotterization
-- Product formulas
-- Error analysis
-- Ising model
-
-**Coding:**
-```python
-# code/advanced/trotter.py
-# Implement first and second-order Trotter
-```
-
-**Milestone:** Simulate time evolution of Hamiltonian
+- Review all code written during the week
+- Re-read difficult sections
+- Update `progress/template.md`
+- Plan next week's topics
 
 ---
 
@@ -451,37 +268,37 @@ Use `progress/template.md` to track weekly progress:
 
 ---
 
-## Assessment Checkpoints
+## What's Next?
 
-### After Phase 1
-- ✅ Can represent any single-qubit state
-- ✅ Visualize on Bloch sphere
-- ✅ Implement all single-qubit gates
+After mastering foundations, you're ready for:
 
-### After Phase 2
-- ✅ Create Bell states
-- ✅ Implement teleportation
-- ✅ Understand entanglement
+### Phase 3: Quantum Algorithms
+- Quantum Fourier Transform (QFT)
+- Grover's search algorithm
+- Shor's factoring algorithm
 
-### After Phase 3
-- ✅ Build complex circuits
-- ✅ Decompose controlled gates
-- ✅ Synthesize unitaries
+### Phase 4: Quantum Information
+- Density matrices
+- Quantum noise
+- Error correction
 
-### After Phase 4
-- ✅ Implement QFT
-- ✅ Run Grover's search
-- ✅ Factor integers with Shor's
+But first, **master these foundations**. Don't rush!
 
-### After Phase 5
-- ✅ Work with density matrices
-- ✅ Simulate noise
-- ✅ Implement error correction
+---
 
-### After Phase 6
-- ✅ Run VQE for molecules
-- ✅ Solve optimization with QAOA
-- ✅ Simulate Hamiltonian dynamics
+## Common Questions
+
+### Q: How long should I spend on foundations?
+
+**A:** 6 weeks with consistent daily study (1-2 hours). Don't rush—these concepts are used throughout quantum computing.
+
+### Q: Should I memorize gate matrices?
+
+**A:** Understand them, don't just memorize. Know what X, H, CNOT do intuitively.
+
+### Q: What if I get stuck?
+
+**A:** Normal! Quantum is counterintuitive. Code everything, visualize on Bloch sphere, ask on Quantum Computing Stack Exchange.
 
 ---
 

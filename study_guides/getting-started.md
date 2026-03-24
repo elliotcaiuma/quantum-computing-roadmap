@@ -1,33 +1,37 @@
-# Getting Started with Quantum Computing
+# Getting Started with Quantum Foundations
 
-## Prerequisites Checklist
+## Focus: Weeks 1-6 Only
 
-Before diving into quantum computing, ensure you have:
-
-### Mathematics
-- [ ] **Linear Algebra:** Vectors, matrices, eigenvalues, eigenvectors
-- [ ] **Complex Numbers:** Euler's formula, polar form, complex conjugate
-- [ ] **Probability:** Basic probability, expectation values
-- [ ] **Calculus:** Derivatives, integrals (helpful but not essential)
-
-### Programming
-- [ ] **Python Basics:** Variables, functions, loops, classes
-- [ ] **NumPy:** Array operations, linear algebra
-- [ ] **Matplotlib:** Basic plotting (optional but helpful)
-
-### Physics (Optional)
-- [ ] **Basic Quantum Mechanics:** Wave functions, Schrödinger equation (helpful but not required)
+This guide covers **only foundations** — single-qubit and multi-qubit systems. Master these before touching algorithms.
 
 ---
 
-## Week 1: Your First Quantum Circuit
+## Prerequisites Checklist
+
+Before starting, ensure you have:
+
+### Mathematics
+- [ ] **Linear Algebra:** Vectors, matrices, matrix multiplication
+- [ ] **Complex Numbers:** $i = \sqrt{-1}$, complex conjugate, $|z|^2$
+- [ ] **Probability:** Basic probability (optional but helpful)
+
+### Programming
+- [ ] **Python Basics:** Variables, functions, loops
+- [ ] **NumPy:** Arrays, `np.kron()` for tensor products
+
+### Physics
+- [ ] **Not Required!** We teach the math you need
+
+---
+
+## Week 1: Your First Qubit
 
 ### Day 1-2: Install & Test
 
 ```bash
 # Clone the repository
-git clone https://github.com/elliotcaiuma/quantum-computing-roadmap.git
-cd quantum-computing-roadmap
+git clone https://github.com/elliotcaiuma/quantum-foundations.git
+cd quantum-foundations
 
 # Set up environment
 python -m venv venv
@@ -49,134 +53,260 @@ python code/foundations/create_state.py
 ```
 
 **Learn:**
-- What is a qubit?
-- How to represent $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$
+- What is a qubit? $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$
 - Normalization: $|\alpha|^2 + |\beta|^2 = 1$
+- Probability: $P(0) = |\alpha|^2$, $P(1) = |\beta|^2$
 
-### Day 5-7: Visualize on Bloch Sphere
+### Day 5-7: Practice States
 
-**Key Concepts:**
-- Bloch sphere representation
-- North pole = $|0\rangle$, South pole = $|1\rangle$
-- Equator = superposition states
+**Exercises:**
+1. Create $|0\rangle$, $|1\rangle$
+2. Create $|+\rangle = \frac{|0\rangle + |1\rangle}{\sqrt{2}}$
+3. Create $|-\rangle = \frac{|0\rangle - |1\rangle}{\sqrt{2}}$
+4. Calculate measurement probabilities for each
 
 ---
 
-## Week 2: Single-Qubit Gates
+## Week 2: Bloch Sphere
+
+### Key Concepts
+
+- **Bloch sphere:** Visual representation of single-qubit states
+- **North pole:** $|0\rangle$
+- **South pole:** $|1\rangle$
+- **Equator:** Superposition states ($|+\rangle$, $|-\rangle$, $|+i\rangle$, $|-i\rangle$)
+
+### Code Practice
+
+```python
+# code/foundations/bloch_sphere.py
+from qiskit import QuantumCircuit
+from qiskit.visualization import plot_bloch_multivector
+
+qc = QuantumCircuit(1)
+qc.h(0)  # Creates |+⟩
+plot_bloch_multivector(qc)  # Shows on Bloch sphere
+```
+
+### Exercises
+
+1. Plot |0⟩, |1⟩ — should be at poles
+2. Plot |+⟩, |-⟩ — should be on equator
+3. Apply X gate to |0⟩ — where does it move?
+4. Apply H gate to |0⟩ — where does it move?
+
+---
+
+## Week 3: Gates & Measurement
 
 ### Gates to Master
 
-| Gate | Matrix | Effect |
+| Gate | Effect | Matrix |
 |------|--------|--------|
-| **X** | $\begin{pmatrix}0 & 1\\ 1 & 0\end{pmatrix}$ | Bit flip (NOT) |
-| **Y** | $\begin{pmatrix}0 & -i\\ i & 0\end{pmatrix}$ | Bit + phase flip |
-| **Z** | $\begin{pmatrix}1 & 0\\ 0 & -1\end{pmatrix}$ | Phase flip |
-| **H** | $\frac{1}{\sqrt{2}}\begin{pmatrix}1 & 1\\ 1 & -1\end{pmatrix}$ | Creates superposition |
-| **S** | $\begin{pmatrix}1 & 0\\ 0 & i\end{pmatrix}$ | Phase gate (π/2) |
-| **T** | $\begin{pmatrix}1 & 0\\ 0 & e^{i\pi/4}\end{pmatrix}$ | Phase gate (π/4) |
+| **X** | Bit flip (NOT) | $\begin{pmatrix}0 & 1\\ 1 & 0\end{pmatrix}$ |
+| **Y** | Bit + phase flip | $\begin{pmatrix}0 & -i\\ i & 0\end{pmatrix}$ |
+| **Z** | Phase flip | $\begin{pmatrix}1 & 0\\ 0 & -1\end{pmatrix}$ |
+| **H** | Creates superposition | $\frac{1}{\sqrt{2}}\begin{pmatrix}1 & 1\\ 1 & -1\end{pmatrix}$ |
 
-### Practice Code
+### Measurement
 
-```python
-from qiskit import QuantumCircuit
-
-qc = QuantumCircuit(1)
-qc.x(0)   # X gate
-qc.h(0)   # Hadamard
-qc.z(0)   # Z gate
-```
-
----
-
-## Week 3: Measurement
-
-### Born Rule
-
-Probability of measuring outcome $i$:
+**Born Rule:**
 $$P(i) = |\langle i|\psi\rangle|^2$$
 
-### Practice
-
+**Code:**
 ```python
 from qiskit import QuantumCircuit
 
 qc = QuantumCircuit(1, 1)
-qc.h(0)  # Create superposition
+qc.h(0)  # Superposition
 qc.measure(0, 0)  # Measure
 ```
 
 **Expected:** 50% |0⟩, 50% |1⟩
 
+### Exercises
+
+1. Apply X to |0⟩ — what do you get?
+2. Apply H to |0⟩ — measure 100 times, what %?
+3. Apply H then Z — what happens?
+
+---
+
+## Week 4: Tensor Products
+
+### Key Concept
+
+For 2 qubits:
+$$|\psi\rangle = |\psi_1\rangle \otimes |\psi_2\rangle$$
+
+Dimension: $2^n$ for n qubits (2 qubits = 4 dimensions)
+
+### Code Practice
+
+```python
+# code/multi_qubit/tensor_products.py
+import numpy as np
+
+psi1 = np.array([1, 0])  # |0⟩
+psi2 = np.array([0, 1])  # |1⟩
+psi_combined = np.kron(psi1, psi2)  # |01⟩
+print(psi_combined)  # [0, 1, 0, 0]
+```
+
+### Exercises
+
+1. Compute $|0\rangle \otimes |0\rangle$
+2. Compute $|0\rangle \otimes |1\rangle$
+3. Compute $|1\rangle \otimes |0\rangle$
+4. Compute $|1\rangle \otimes |1\rangle$
+
+---
+
+## Week 5: Entanglement & Bell States
+
+### Bell States
+
+4 maximally entangled states:
+
+$$|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$$
+$$|\Phi^-\rangle = \frac{1}{\sqrt{2}}(|00\rangle - |11\rangle)$$
+$$|\Psi^+\rangle = \frac{1}{\sqrt{2}}(|01\rangle + |10\rangle)$$
+$$|\Psi^-\rangle = \frac{1}{\sqrt{2}}(|01\rangle - |10\rangle)$$
+
+### Circuit to Create $|\Phi^+\rangle$
+
+```python
+from qiskit import QuantumCircuit
+
+qc = QuantumCircuit(2)
+qc.h(0)     # Hadamard on qubit 0
+qc.cx(0, 1) # CNOT with control=0, target=1
+```
+
+### Exercises
+
+1. Create all 4 Bell states
+2. Measure both qubits — what correlations do you see?
+3. Why can't Bell states be written as tensor product?
+
+---
+
+## Week 6: Teleportation & Superdense Coding
+
+### Quantum Teleportation
+
+**Protocol:**
+1. Alice and Bob share Bell pair
+2. Alice has qubit |ψ⟩ to teleport
+3. Alice measures her qubits
+4. Alice sends classical bits to Bob
+5. Bob applies correction gates
+
+**Circuit:**
+```python
+# code/multi_qubit/teleportation.py
+from qiskit import QuantumCircuit
+
+qc = QuantumCircuit(3)
+# Qubit 0: State to teleport
+# Qubit 1,2: Bell pair (Alice, Bob)
+```
+
+### Superdense Coding
+
+Send 2 classical bits using 1 qubit:
+1. Alice and Bob share Bell pair
+2. Alice applies gates based on 2 bits
+3. Alice sends qubit to Bob
+4. Bob measures and decodes 2 bits
+
+### Exercises
+
+1. Implement full teleportation circuit
+2. Verify teleported state matches original
+3. Implement superdense coding protocol
+
 ---
 
 ## Common Questions
 
-### Q: Do I need a physics background?
+### Q: Do I need physics background?
 
-**A:** No! Many successful quantum programmers come from CS/math backgrounds. The math is more important than physics intuition.
+**A:** No! Linear algebra and complex numbers are enough.
 
-### Q: How much math do I need?
+### Q: How much time per week?
 
-**A:** Comfort with linear algebra (vectors, matrices) is essential. Complex numbers are used throughout. Calculus is helpful but not required for basics.
+**A:** 5-8 hours (1 hour daily + weekend review).
 
-### Q: Should I use Qiskit or another framework?
+### Q: What if I don't understand entanglement?
 
-**A:** Qiskit is recommended because:
-- Excellent documentation
-- Large community
-- Runs on real IBM hardware
-- Python-based (accessible)
+**A:** Normal! It's counterintuitive. Focus on the math: Bell states can't be written as $|\psi_1\rangle \otimes |\psi_2\rangle$.
 
-Alternatives: Cirq (Google), Pennylane (Xanadu), Q# (Microsoft)
+### Q: Should I memorize matrices?
 
-### Q: How long until I understand quantum algorithms?
-
-**A:** With consistent study (1-2 hours daily):
-- 2-3 weeks: Comfortable with single-qubit
-- 4-6 weeks: Multi-qubit and entanglement
-- 8-10 weeks: First algorithms (QFT, Grover's)
+**A:** Understand them. Know what H does (creates superposition), what CNOT does (flips target when control is |1⟩).
 
 ---
 
 ## Tips for Success
 
-### 1. Code Every Day
+### 1. Code Every Concept
 
-Don't just read—implement everything:
+Don't just read—implement:
 ```python
 # Even simple exercises help
 qc = QuantumCircuit(1)
 qc.h(0)
 ```
 
-### 2. Visualize States
+### 2. Visualize Constantly
 
-Use Bloch sphere constantly:
+Use Bloch sphere:
 ```python
-from qiskit.visualization import plot_bloch_multivector
 plot_bloch_multivector(qc)
 ```
 
-### 3. Join Communities
+### 3. Track Progress
 
-- Qiskit Slack: https://qiskit.slack.com
+Update `progress/template.md` weekly.
+
+### 4. Ask Questions
+
 - Quantum Computing Stack Exchange
-- r/QuantumComputing (Reddit)
-
-### 4. Be Patient
-
-Quantum computing is counterintuitive. It's normal to feel confused initially. Keep coding!
+- Qiskit Slack: https://qiskit.slack.com
 
 ---
 
-## Next Steps
+## Mastery Checklist
 
-After Week 3:
-1. Move to **multi-qubit systems** (Week 4-6)
-2. Learn **entanglement** and Bell states
-3. Implement **quantum teleportation**
+After 6 weeks, you should be able to:
 
-Follow `ROADMAP.md` for the complete study plan.
+### Single-Qubit ✅
+- [ ] Represent any state as $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$
+- [ ] Normalize states
+- [ ] Visualize on Bloch sphere
+- [ ] Implement X, Y, Z, H, S, T gates
+- [ ] Measure in X, Y, Z bases
+- [ ] Calculate probabilities
+
+### Multi-Qubit ✅
+- [ ] Compute tensor products
+- [ ] Create all 4 Bell states
+- [ ] Explain entanglement
+- [ ] Implement CNOT, CZ, SWAP
+- [ ] Run teleportation protocol
+- [ ] Run superdense coding
+
+---
+
+## What's Next?
+
+After mastering foundations:
+- **Quantum Algorithms:** QFT, Grover's, Shor's
+- **Variational Methods:** VQE, QAOA
+- **Quantum Information:** Density matrices, error correction
+
+But first, **master these 6 weeks**. Don't rush!
 
 ---
 

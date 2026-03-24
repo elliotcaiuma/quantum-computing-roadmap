@@ -1,66 +1,44 @@
-# Quantum Computing Roadmap
+# Quantum Computing Foundations
 
-A comprehensive learning path for mastering quantum computing, based on Nielsen & Chuang's textbook with hands-on Qiskit implementations.
+A beginner-friendly learning path for mastering quantum computing fundamentals with hands-on Qiskit implementations.
 
-![Quantum Computing](https://img.shields.io/badge/Quantum-Computing-blue)
+![Quantum Computing](https://img.shields.io/badge/Quantum-Foundations-blue)
 ![Qiskit](https://img.shields.io/badge/Qiskit-2.x-purple)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 ## 🎯 Overview
 
-This repository provides a structured roadmap for learning quantum computing from foundations to advanced topics. Whether you're a physics student, software engineer, or researcher, this guide will help you navigate the quantum landscape systematically.
+This repository focuses on **quantum computing foundations** — everything you need to master single-qubit and multi-qubit systems before moving to algorithms. Based on Nielsen & Chuang's textbook with practical Qiskit code.
 
-## 📚 Learning Path
+## 📚 What's Covered
 
-### Phase 1: Foundations (2-3 weeks)
+### Phase 1: Single-Qubit Foundations (Weeks 1-3)
 - Dirac notation and bra-ket formalism
-- Qubit representation and Bloch sphere
+- Qubit representation: $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$
+- Bloch sphere visualization
 - Single-qubit gates (X, Y, Z, H, S, T)
 - Quantum measurement theory
 
-### Phase 2: Multi-Qubit Systems (2-3 weeks)
+### Phase 2: Multi-Qubit Foundations (Weeks 4-6)
 - Tensor products and composite systems
 - Entanglement and Bell states
 - Multi-qubit gates (CNOT, CZ, SWAP)
 - Quantum teleportation protocol
-
-### Phase 3: Quantum Circuits (2-3 weeks)
-- Circuit construction and notation
-- Controlled operations
 - Superdense coding
-- Universality of quantum gates
-
-### Phase 4: Quantum Algorithms (4-6 weeks)
-- Quantum Fourier Transform (QFT)
-- Phase estimation algorithm
-- Grover's search algorithm
-- Shor's factoring algorithm
-
-### Phase 5: Quantum Information (4-6 weeks)
-- Density matrices and mixed states
-- Quantum noise and decoherence
-- Quantum error correction
-- Entropy and information theory
-
-### Phase 6: Advanced Topics (Ongoing)
-- Variational algorithms (VQE, QAOA)
-- Hamiltonian simulation
-- Quantum machine learning
-- Real hardware execution (IBM Quantum)
 
 ## 🛠️ Prerequisites
 
-- **Mathematics:** Linear algebra, complex numbers, probability
+- **Mathematics:** Linear algebra (vectors, matrices), complex numbers
 - **Programming:** Python basics
-- **Physics:** Basic quantum mechanics (helpful but not required)
+- **Physics:** Not required (we teach the math you need)
 
 ## 🚀 Quick Start
 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/elliotcaiuma/quantum-computing-roadmap.git
-cd quantum-computing-roadmap
+git clone https://github.com/elliotcaiuma/quantum-foundations.git
+cd quantum-foundations
 ```
 
 ### 2. Set Up Environment
@@ -85,77 +63,79 @@ pip install -r requirements.txt
 python code/foundations/test_setup.py
 ```
 
+Expected output:
+```
+✓ Qiskit working!
+✓ NumPy imported
+✓ Matplotlib ready
+🎉 All tests passed! Setup complete!
+```
+
+### 4. Run Your First Code
+
+```bash
+# Create and visualize quantum states
+python code/foundations/create_state.py
+
+# Explore multi-qubit systems
+python code/multi_qubit/bell_states.py
+```
+
 ## 📁 Repository Structure
 
 ```
-quantum-computing-roadmap/
+quantum-foundations/
 ├── README.md                    # This file
-├── ROADMAP.md                   # Detailed learning path
+├── ROADMAP.md                   # Week-by-week study plan
 ├── requirements.txt             # Python dependencies
 ├── SETUP.md                     # Environment setup guide
 │
 ├── code/                        # Qiskit implementations
-│   ├── foundations/             # Phase 1-2 code
-│   │   ├── create_state.py
-│   │   ├── bloch_sphere.py
-│   │   └── measurement.py
-│   ├── multi_qubit/            # Phase 2-3 code
-│   │   ├── bell_states.py
-│   │   ├── teleportation.py
-│   │   └── superdense.py
-│   ├── algorithms/             # Phase 4 code
-│   │   ├── qft.py
-│   │   ├── grover.py
-│   │   └── shor.py
-│   └── advanced/               # Phase 5-6 code
-│       ├── vqe.py
-│       ├── qaoa.py
-│       └── trotterization.py
+│   ├── foundations/             # Phase 1: Single-qubit
+│   │   ├── test_setup.py        # Verify installation
+│   │   ├── create_state.py      # State creator
+│   │   ├── bloch_sphere.py      # Bloch visualization
+│   │   └── measurement.py       # Measurement simulator
+│   └── multi_qubit/             # Phase 2: Multi-qubit
+│       ├── tensor_products.py   # Tensor product calculator
+│       ├── bell_states.py       # Bell state generator
+│       ├── teleportation.py     # Teleportation protocol
+│       └── superdense.py        # Superdense coding
 │
-├── study_guides/               # Topic-specific guides
-│   ├── dirac-notation.md
-│   ├── bloch-sphere.md
-│   ├── entanglement.md
-│   └── error-correction.md
+├── study_guides/                # Beginner guides
+│   ├── getting-started.md       # Week 1-3 guide
+│   ├── dirac-notation.md        # Bra-ket formalism
+│   └── bloch-sphere.md          # Visualization guide
 │
-├── projects/                   # Project ideas & templates
-│   ├── beginner/
-│   ├── intermediate/
-│   └── advanced/
-│
-├── resources/                  # External resources
-│   ├── textbooks.md
-│   ├── video-lectures.md
-│   └── online-tools.md
-│
-└── progress/                   # Learning tracking
-    └── template.md             # Progress tracking template
+└── progress/                    # Learning tracking
+    └── template.md              # Weekly progress tracker
 ```
 
 ## 📖 Textbook Reference
 
-This roadmap follows **Nielsen & Chuang's** "Quantum Computation and Quantum Information" (10th Anniversary Edition):
+This roadmap follows **Nielsen & Chuang's** "Quantum Computation and Quantum Information":
 
-- **Chapters 1-4:** Fundamental Concepts (Phases 1-3)
-- **Chapters 5-7:** Quantum Computation (Phase 4)
-- **Chapters 8-12:** Quantum Information (Phases 5-6)
+- **Chapters 1-2:** Fundamental concepts (Phase 1)
+- **Chapter 4:** Quantum circuits (Phase 2)
 
-## 🎓 Project Ideas
+## 🎓 Learning Outcomes
 
-### Beginner
-- State creator and Bloch sphere visualizer
-- Measurement simulator with arbitrary bases
-- Single-qubit gate library
+After completing this foundation course, you will be able to:
 
-### Intermediate
-- Bell state generator and correlator
-- Quantum teleportation protocol
-- Superdense coding implementation
+✅ Represent any single-qubit state  
+✅ Visualize states on Bloch sphere  
+✅ Implement all single-qubit gates  
+✅ Measure in arbitrary bases (X, Y, Z)  
+✅ Create Bell states and verify entanglement  
+✅ Implement quantum teleportation  
+✅ Build multi-qubit circuits  
 
-### Advanced
-- Grover's search algorithm
-- Shor's factoring algorithm
-- VQE for molecular ground states
+## 🔗 Next Steps
+
+After mastering foundations, continue to:
+- **Quantum Algorithms:** QFT, Grover's, Shor's
+- **Variational Methods:** VQE, QAOA
+- **Quantum Information:** Error correction, noise
 
 ## 🔗 External Resources
 
@@ -166,7 +146,7 @@ This roadmap follows **Nielsen & Chuang's** "Quantum Computation and Quantum Inf
 
 ## 📊 Progress Tracking
 
-Track your learning journey using the template in `progress/template.md`. Update weekly with:
+Track your learning journey using `progress/template.md`. Update weekly with:
 - Topics covered
 - Code completed
 - Challenges faced
