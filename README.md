@@ -12,26 +12,30 @@ This repository focuses on **quantum computing foundations** — single-qubit an
 
 ## 📚 What's Covered
 
-### Phase 1: Single-Qubit (Weeks 1-3)
+### Phase 1: Single-Qubit
 - Dirac notation and bra-ket formalism
 - Qubit representation
 - Bloch sphere visualization
 - Single-qubit gates (X, Y, Z, H, S, T)
 - Quantum measurement
 
-### Phase 2: Multi-Qubit (Weeks 4-6)
+**Theory:** Read `docs/quantum-computing-phase1.pdf` (23 pages)
+
+### Phase 2: Multi-Qubit
 - Tensor products
 - Entanglement and Bell states
 - Multi-qubit gates (CNOT, CZ, SWAP)
 - Quantum teleportation
 - Superdense coding
 
+**Theory:** Read `docs/quantum-computing-phase2.pdf` (15 pages)
+
 ## 🚀 Quick Start
 
 ```bash
 # Clone
 git clone https://github.com/elliotcaiuma/quantum-computing-roadmap.git
-cd quantum-computing-roadmap
+cd quantum-roadmap
 
 # Setup
 python -m venv venv
@@ -71,6 +75,10 @@ quantum-computing-roadmap/
 │       ├── 15_bell_factory.py
 │       ├── 16_measure_bell.py
 │       └── 17_bell_analyzer.py
+│
+├── docs/
+│   ├── quantum-computing-phase1.pdf    (23 pages, theory)
+│   └── quantum-computing-phase2.pdf    (15 pages, theory)
 │
 ├── study_guides/
 │   └── getting-started.md
@@ -112,9 +120,5 @@ MIT License
 
 ## 👨‍💻 Author
 
-**Elliot Cai**  
+**Cai Yundi Elliot**  
 GitHub: [@elliotcaiuma](https://github.com/elliotcaiuma)
-
----
-
-*Last Updated: March 2026*

@@ -1,6 +1,6 @@
 # Getting Started with Quantum Foundations
 
-## Focus: Weeks 1-6 Only
+## Focus: Steps 1-6
 
 This guide covers **only foundations** — single-qubit and multi-qubit systems. Master these before touching algorithms.
 
@@ -24,7 +24,14 @@ Before starting, ensure you have:
 
 ---
 
-## Week 1: Your First Qubit
+## Step 1: Your First Qubit
+
+### Theory Reference
+
+**Read:** `docs/quantum-computing-phase1.pdf` (23 pages)
+- Dirac notation, qubit representation
+- Bloch sphere visualization
+- Complete derivations and proofs
 
 ### Install & Test
 
@@ -67,7 +74,14 @@ python code/foundations/create_state.py
 
 ---
 
-## Week 2: Bloch Sphere
+## Step 2: Bloch Sphere
+
+### Theory Reference
+
+**Read:** `docs/quantum-computing-phase1.pdf` - Section on Bloch Sphere
+- Geometric representation
+- State visualization
+- Complete mathematical derivations
 
 ### Key Concepts
 
@@ -96,7 +110,15 @@ plot_bloch_multivector(qc)  # Shows on Bloch sphere
 
 ---
 
-## Week 3: Gates & Measurement
+## Step 3: Gates & Measurement
+
+### Theory Reference
+
+**Read:** `docs/quantum-computing-phase1.pdf` - Sections on Gates & Measurement
+- Single-qubit gates (X, Y, Z, H, S, T)
+- Measurement postulates
+- Born rule derivations
+- Complete proofs
 
 ### Gates to Master
 
@@ -133,6 +155,14 @@ qc.measure(0, 0)  # Measure
 
 ## Step 4: Tensor Products
 
+### Theory Reference
+
+**Read:** `docs/quantum-computing-phase2.pdf` (15 pages) - Section on Tensor Products
+- Composite systems
+- Kronecker product
+- Separable vs entangled states
+- Complete derivations
+
 ### Key Concept
 
 For 2 qubits:
@@ -161,7 +191,15 @@ print(psi_combined)  # [0, 1, 0, 0]
 
 ---
 
-## Week 5: Entanglement & Bell States
+## Step 5: Entanglement & Bell States
+
+### Theory Reference
+
+**Read:** `docs/quantum-computing-phase2.pdf` - Sections on Entanglement & Bell States
+- Bell state definitions
+- Entanglement proofs
+- Measurement correlations
+- Complete derivations
 
 ### Bell States
 
@@ -190,7 +228,15 @@ qc.cx(0, 1) # CNOT with control=0, target=1
 
 ---
 
-## Week 6: Teleportation & Superdense Coding
+## Step 6: Teleportation & Superdense Coding
+
+### Theory Reference
+
+**Read:** `docs/quantum-computing-phase2.pdf` - Sections on Quantum Protocols
+- Teleportation protocol
+- Superdense coding
+- Complete circuit derivations
+- Step-by-step proofs
 
 ### Quantum Teleportation
 
@@ -267,7 +313,7 @@ plot_bloch_multivector(qc)
 
 ### 3. Track Progress
 
-Update `progress/template.md` weekly.
+Update `progress/template.md` after each step.
 
 ### 4. Ask Questions
 
@@ -278,7 +324,7 @@ Update `progress/template.md` weekly.
 
 ## Mastery Checklist
 
-After 6 weeks, you should be able to:
+After completing all steps, you should be able to:
 
 ### Single-Qubit ✅
 - [ ] Represent any state as $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$
@@ -305,8 +351,4 @@ After mastering foundations:
 - **Variational Methods:** VQE, QAOA
 - **Quantum Information:** Density matrices, error correction
 
-But first, **master these 6 weeks**. Don't rush!
-
----
-
-*Last Updated: March 2026*
+But first, **master these 6 steps**. Don't rush!

@@ -124,7 +124,7 @@
 
 ## Phase 5: Quantum Information
 
-### Week 16-21
+### Steps 16-21
 
 [Continue pattern...]
 
