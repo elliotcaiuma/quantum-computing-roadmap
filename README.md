@@ -8,161 +8,107 @@ A beginner-friendly learning path for mastering quantum computing fundamentals w
 
 ## 🎯 Overview
 
-This repository focuses on **quantum computing foundations** — everything you need to master single-qubit and multi-qubit systems before moving to algorithms. Based on Nielsen & Chuang's textbook with practical Qiskit code.
+This repository focuses on **quantum computing foundations** — single-qubit and multi-qubit systems. Based on Nielsen & Chuang's textbook with practical Qiskit code.
 
 ## 📚 What's Covered
 
-### Phase 1: Single-Qubit Foundations (Weeks 1-3)
+### Phase 1: Single-Qubit (Weeks 1-3)
 - Dirac notation and bra-ket formalism
-- Qubit representation: $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$
+- Qubit representation
 - Bloch sphere visualization
 - Single-qubit gates (X, Y, Z, H, S, T)
-- Quantum measurement theory
+- Quantum measurement
 
-### Phase 2: Multi-Qubit Foundations (Weeks 4-6)
-- Tensor products and composite systems
+### Phase 2: Multi-Qubit (Weeks 4-6)
+- Tensor products
 - Entanglement and Bell states
 - Multi-qubit gates (CNOT, CZ, SWAP)
-- Quantum teleportation protocol
+- Quantum teleportation
 - Superdense coding
-
-## 🛠️ Prerequisites
-
-- **Mathematics:** Linear algebra (vectors, matrices), complex numbers
-- **Programming:** Python basics
-- **Physics:** Not required (we teach the math you need)
 
 ## 🚀 Quick Start
 
-### 1. Clone the Repository
-
 ```bash
+# Clone
 git clone https://github.com/elliotcaiuma/quantum-foundations.git
 cd quantum-foundations
-```
 
-### 2. Set Up Environment
-
-```bash
-# Create virtual environment
+# Setup
 python -m venv venv
-
-# Activate (Windows)
-.\venv\Scripts\Activate.ps1
-
-# Activate (macOS/Linux)
-source venv/bin/activate
-
-# Install dependencies
+.\venv\Scripts\Activate.ps1  # Windows
 pip install -r requirements.txt
+
+# Run first code
+python code/foundations/01_hello_qubit.py
 ```
 
-### 3. Test Your Setup
-
-```bash
-python code/foundations/test_setup.py
-```
-
-Expected output:
-```
-✓ Qiskit working!
-✓ NumPy imported
-✓ Matplotlib ready
-🎉 All tests passed! Setup complete!
-```
-
-### 4. Run Your First Code
-
-```bash
-# Create and visualize quantum states
-python code/foundations/create_state.py
-
-# Explore multi-qubit systems
-python code/multi_qubit/bell_states.py
-```
-
-## 📁 Repository Structure
+## 📁 Structure
 
 ```
 quantum-foundations/
-├── README.md                    # This file
-├── ROADMAP.md                   # Week-by-week study plan
-├── requirements.txt             # Python dependencies
-├── SETUP.md                     # Environment setup guide
+├── README.md
+├── ROADMAP.md
+├── SETUP.md
+├── requirements.txt
 │
-├── code/                        # Qiskit implementations
-│   ├── foundations/             # Phase 1: Single-qubit
-│   │   ├── test_setup.py        # Verify installation
-│   │   ├── create_state.py      # State creator
-│   │   ├── bloch_sphere.py      # Bloch visualization
-│   │   └── measurement.py       # Measurement simulator
-│   └── multi_qubit/             # Phase 2: Multi-qubit
-│       ├── tensor_products.py   # Tensor product calculator
-│       ├── bell_states.py       # Bell state generator
-│       ├── teleportation.py     # Teleportation protocol
-│       └── superdense.py        # Superdense coding
+├── code/
+│   ├── foundations/     # Levels 1-9: Single-qubit
+│   │   ├── 01_hello_qubit.py
+│   │   ├── 02_create_basis.py
+│   │   ├── 03_create_superposition.py
+│   │   ├── 04_custom_state.py
+│   │   ├── 05_measure_z.py
+│   │   ├── 06_measure_any_basis.py
+│   │   ├── 07_apply_x_gate.py
+│   │   ├── 08_apply_all_single_gates.py
+│   │   └── 09_gate_transformer.py
+│   └── multi_qubit/     # Levels 10-17: Multi-qubit
+│       ├── 10_hello_2qubit.py
+│       ├── 11_tensor_product.py
+│       ├── 12_tensor_product_calculator.py
+│       ├── 13_create_bell_phi_plus.py
+│       ├── 14_all_bell_states.py
+│       ├── 15_bell_factory.py
+│       ├── 16_measure_bell.py
+│       └── 17_bell_analyzer.py
 │
-├── study_guides/                # Beginner guides
-│   ├── getting-started.md       # Week 1-3 guide
-│   ├── dirac-notation.md        # Bra-ket formalism
-│   └── bloch-sphere.md          # Visualization guide
+├── study_guides/
+│   └── getting-started.md
 │
-└── progress/                    # Learning tracking
-    └── template.md              # Weekly progress tracker
+└── progress/
+    └── template.md
 ```
 
-## 📖 Textbook Reference
+## 🎓 Code Progression
 
-This roadmap follows **Nielsen & Chuang's** "Quantum Computation and Quantum Information":
+Code follows **easy → hard, specific → general**:
 
-- **Chapters 1-2:** Fundamental concepts (Phase 1)
-- **Chapter 4:** Quantum circuits (Phase 2)
+| Level Range | Focus | Style |
+|-------------|-------|-------|
+| 1-3 | Copy-paste examples | No functions |
+| 4-6 | First functions | Single purpose |
+| 7-9 | Gate operations | Reusable tools |
+| 10-12 | Tensor products | Multi-qubit intro |
+| 13-15 | Bell states | Entanglement |
+| 16-17 | Analysis | Complete tools |
 
-## 🎓 Learning Outcomes
+See `code/README.md` for details.
 
-After completing this foundation course, you will be able to:
+## 📖 Textbook
 
-✅ Represent any single-qubit state  
-✅ Visualize states on Bloch sphere  
-✅ Implement all single-qubit gates  
-✅ Measure in arbitrary bases (X, Y, Z)  
-✅ Create Bell states and verify entanglement  
-✅ Implement quantum teleportation  
-✅ Build multi-qubit circuits  
+Follows **Nielsen & Chuang**:
+- Chapters 1-2: Fundamental concepts
+- Chapter 4: Quantum circuits
 
-## 🔗 Next Steps
+## 🔗 Resources
 
-After mastering foundations, continue to:
-- **Quantum Algorithms:** QFT, Grover's, Shor's
-- **Variational Methods:** VQE, QAOA
-- **Quantum Information:** Error correction, noise
-
-## 🔗 External Resources
-
-- **Qiskit Textbook:** https://qiskit.org/textbook
-- **Qiskit Documentation:** https://qiskit.org/documentation
-- **IBM Quantum:** https://quantum.ibm.com
-- **Quantum Computing Stack Exchange:** https://quantumcomputing.stackexchange.com
-
-## 📊 Progress Tracking
-
-Track your learning journey using `progress/template.md`. Update weekly with:
-- Topics covered
-- Code completed
-- Challenges faced
-- Next goals
-
-## 🤝 Contributing
-
-Contributions are welcome! Please:
-1. Fork the repository
-2. Create a feature branch
-3. Add your improvements
-4. Submit a pull request
+- Qiskit Textbook: https://qiskit.org/textbook
+- Qiskit Docs: https://qiskit.org/documentation
+- IBM Quantum: https://quantum.ibm.com
 
 ## 📄 License
 
-MIT License - see [LICENSE](LICENSE) for details.
+MIT License
 
 ## 👨‍💻 Author
 
