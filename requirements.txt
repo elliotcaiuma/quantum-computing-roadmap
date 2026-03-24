@@ -1,0 +1,23 @@
+# Python dependencies for quantum computing roadmap
+
+# Core scientific computing
+numpy>=1.24.0
+scipy>=1.10.0
+matplotlib>=3.7.0
+
+# Quantum computing
+qiskit>=1.0.0
+qiskit-aer>=0.13.0
+qiskit-visualization
+
+# Development tools
+jupyter>=1.0.0
+notebook>=7.0.0
+
+# Optional: for advanced features
+# qiskit-nature>=0.5.0  # Quantum chemistry
+# qiskit-optimization>=0.5.0  # Optimization algorithms
+# qiskit-machine-learning>=0.5.0  # QML
+
+# Documentation
+# sphinx>=6.0.0  # If building docs
