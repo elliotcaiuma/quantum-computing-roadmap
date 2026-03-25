@@ -7,7 +7,13 @@ For pure bipartite states:
 """
 
 import numpy as np
-from level_23_schmidt_decomposition import schmidt_decomposition
+
+
+def schmidt_decomposition(psi, dim_a=2, dim_b=2):
+    """Compute Schmidt decomposition of bipartite state."""
+    psi_matrix = psi.reshape(dim_a, dim_b)
+    U, s, Vh = np.linalg.svd(psi_matrix)
+    return s, U, Vh.conj().T
 
 
 def is_entangled(psi, dim_a=2, dim_b=2):

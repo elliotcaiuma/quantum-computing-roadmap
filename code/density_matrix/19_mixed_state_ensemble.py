@@ -5,7 +5,18 @@ Create density matrix from ensemble {p_i, |psi_i>}.
 """
 
 import numpy as np
-from level_18_create_density_matrix import density_matrix
+
+
+def density_matrix(psi):
+    """Create density matrix from state vector.
+    
+    Args:
+        psi: State vector as numpy array
+        
+    Returns:
+        Density matrix as 2D numpy array
+    """
+    return np.outer(psi, psi.conj())
 
 
 def mixed_state_ensemble(states, probs):
