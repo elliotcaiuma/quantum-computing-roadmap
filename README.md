@@ -30,6 +30,16 @@ This repository focuses on **quantum computing foundations** — single-qubit an
 
 **Theory:** Read `docs/quantum-computing-phase2.pdf` (15 pages)
 
+### Phase 3: Density Matrix & Decomposition
+- Density matrix formalism (pure vs mixed states)
+- Bloch sphere for mixed states
+- Purification
+- Schmidt decomposition
+- Reduced density matrices
+- Entanglement detection
+
+**Theory:** Read `docs/quantum-computing-phase3.pdf` (12 pages)
+
 ## 🚀 Quick Start
 
 ```bash
@@ -66,19 +76,30 @@ quantum-computing-roadmap/
 │   │   ├── 07_apply_x_gate.py
 │   │   ├── 08_apply_all_single_gates.py
 │   │   └── 09_gate_transformer.py
-│   └── multi_qubit/     # Levels 10-17: Multi-qubit
-│       ├── 10_hello_2qubit.py
-│       ├── 11_tensor_product.py
-│       ├── 12_tensor_product_calculator.py
-│       ├── 13_create_bell_phi_plus.py
-│       ├── 14_all_bell_states.py
-│       ├── 15_bell_factory.py
-│       ├── 16_measure_bell.py
-│       └── 17_bell_analyzer.py
+│   ├── multi_qubit/     # Levels 10-17: Multi-qubit
+│   │   ├── 10_hello_2qubit.py
+│   │   ├── 11_tensor_product.py
+│   │   ├── 12_tensor_product_calculator.py
+│   │   ├── 13_create_bell_phi_plus.py
+│   │   ├── 14_all_bell_states.py
+│   │   ├── 15_bell_factory.py
+│   │   ├── 16_measure_bell.py
+│   │   └── 17_bell_analyzer.py
+│   └── density_matrix/  # Levels 18-26: Density matrix & decomposition
+│       ├── 18_create_density_matrix.py
+│       ├── 19_mixed_state_ensemble.py
+│       ├── 20_check_valid_density_matrix.py
+│       ├── 21_bloch_vector.py
+│       ├── 22_purification.py
+│       ├── 23_schmidt_decomposition.py
+│       ├── 24_reduced_density_matrix.py
+│       ├── 25_entanglement_check.py
+│       └── 26_complete_analyzer.py
 │
 ├── docs/
 │   ├── quantum-computing-phase1.pdf    (23 pages, theory)
-│   └── quantum-computing-phase2.pdf    (15 pages, theory)
+│   ├── quantum-computing-phase2.pdf    (15 pages, theory)
+│   └── quantum-computing-phase3.pdf    (12 pages, theory)
 │
 ├── study_guides/
 │   └── getting-started.md
