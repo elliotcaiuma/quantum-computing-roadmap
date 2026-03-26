@@ -12,25 +12,31 @@ This repository focuses on **quantum computing foundations** — single-qubit an
 
 ## 📚 What's Covered
 
-### Phase 1: Single-Qubit
+### Phase 1: Single-Qubit Foundations ✅
 - Dirac notation and bra-ket formalism
 - Qubit representation
 - Bloch sphere visualization
-- Single-qubit gates (X, Y, Z, H, S, T)
-- Quantum measurement
+- Single-qubit gates (X, Y, Z, H, S, T) with geometric interpretations
+- Quantum measurement (complete mathematical treatment)
 
-**Theory:** Read `docs/quantum-computing-phase1.pdf` (23 pages)
+**Theory:** Read `docs/quantum-computing-phase1.pdf` (40 pages)
 
-### Phase 2: Multi-Qubit
-- Tensor products
-- Entanglement and Bell states
-- Multi-qubit gates (CNOT, CZ, SWAP)
+**Code:** Levels 1-9 in `code/foundations/`
+
+### Phase 2: Multi-Qubit Systems ✅
+- Tensor products and composite systems
+- Entanglement and Bell states (all 4 Bell states)
+- Multi-qubit gates (CNOT, CZ, SWAP) with matrix representations
+- Rotation gates (R_x, R_y, R_z) and Z-Y-Z decomposition
+- A-X-B-X-C decomposition for controlled-U gates
 - Quantum teleportation
 - Superdense coding
 
-**Theory:** Read `docs/quantum-computing-phase2.pdf` (15 pages)
+**Theory:** Read `docs/quantum-computing-phase2.pdf` (44 pages)
 
-### Phase 3: Density Matrix & Decomposition
+**Code:** Levels 11-20 in `code/multi_qubit/`
+
+### Phase 3: Density Matrix & Decomposition 🚧
 - Density matrix formalism (pure vs mixed states)
 - Bloch sphere for mixed states
 - Purification
@@ -39,6 +45,8 @@ This repository focuses on **quantum computing foundations** — single-qubit an
 - Entanglement detection
 
 **Theory:** Read `docs/quantum-computing-phase3.pdf` (12 pages)
+
+**Code:** Levels 21-29 in `code/density_matrix/`
 
 ## 🚀 Quick Start
 
@@ -66,7 +74,7 @@ quantum-computing-roadmap/
 ├── requirements.txt
 │
 ├── code/
-│   ├── foundations/     # Levels 1-9: Single-qubit
+│   ├── foundations/     # Levels 1-9: Single-qubit foundations
 │   │   ├── 01_hello_qubit.py
 │   │   ├── 02_create_basis.py
 │   │   ├── 03_create_superposition.py
@@ -76,30 +84,32 @@ quantum-computing-roadmap/
 │   │   ├── 07_apply_x_gate.py
 │   │   ├── 08_apply_all_single_gates.py
 │   │   └── 09_gate_transformer.py
-│   ├── multi_qubit/     # Levels 10-17: Multi-qubit
-│   │   ├── 10_hello_2qubit.py
-│   │   ├── 11_tensor_product.py
-│   │   ├── 12_tensor_product_calculator.py
-│   │   ├── 13_create_bell_phi_plus.py
-│   │   ├── 14_all_bell_states.py
-│   │   ├── 15_bell_factory.py
-│   │   ├── 16_measure_bell.py
-│   │   └── 17_bell_analyzer.py
-│   └── density_matrix/  # Levels 18-26: Density matrix & decomposition
-│       ├── 18_create_density_matrix.py
-│       ├── 19_mixed_state_ensemble.py
-│       ├── 20_check_valid_density_matrix.py
-│       ├── 21_bloch_vector.py
-│       ├── 22_purification.py
-│       ├── 23_schmidt_decomposition.py
-│       ├── 24_reduced_density_matrix.py
-│       ├── 25_entanglement_check.py
-│       └── 26_complete_analyzer.py
+│   ├── multi_qubit/     # Levels 11-20: Multi-qubit systems
+│   │   ├── 11_hello_2qubit.py
+│   │   ├── 12_tensor_product.py
+│   │   ├── 13_tensor_product_calculator.py
+│   │   ├── 14_create_bell_phi_plus.py
+│   │   ├── 15_all_bell_states.py
+│   │   ├── 16_bell_factory.py
+│   │   ├── 17_measure_bell.py
+│   │   ├── 18_bell_analyzer.py
+│   │   ├── 19_ancilla_measurement.py
+│   │   └── 20_controlled_u_decomposition.py
+│   └── density_matrix/  # Levels 21-29: Density matrix & decomposition
+│       ├── 21_create_density_matrix.py
+│       ├── 22_mixed_state_ensemble.py
+│       ├── 23_check_valid_density_matrix.py
+│       ├── 24_bloch_vector.py
+│       ├── 25_purification.py
+│       ├── 26_schmidt_decomposition.py
+│       ├── 27_reduced_density_matrix.py
+│       ├── 28_entanglement_check.py
+│       └── 29_complete_analyzer.py
 │
 ├── docs/
-│   ├── quantum-computing-phase1.pdf    (23 pages, theory)
-│   ├── quantum-computing-phase2.pdf    (15 pages, theory)
-│   └── quantum-computing-phase3.pdf    (12 pages, theory)
+│   ├── quantum-computing-phase1.pdf    (40 pages, single-qubit foundations) ✅
+│   ├── quantum-computing-phase2.pdf    (44 pages, multi-qubit systems) ✅
+│   └── quantum-computing-phase3.pdf    (12 pages, density matrix) 🚧
 │
 ├── study_guides/
 │   └── getting-started.md
@@ -117,9 +127,11 @@ Code follows **easy → hard, specific → general**:
 | 1-3 | Copy-paste examples | No functions |
 | 4-6 | First functions | Single purpose |
 | 7-9 | Gate operations | Reusable tools |
-| 10-12 | Tensor products | Multi-qubit intro |
-| 13-15 | Bell states | Entanglement |
-| 16-17 | Analysis | Complete tools |
+| 11-13 | Tensor products | Multi-qubit intro |
+| 14-18 | Bell states | Entanglement |
+| 19 | Ancilla measurement | Physical process |
+| 20 | Controlled-U decomposition | Universal gate construction |
+| 21-29 | Density matrix | Mixed state analysis |
 
 See `code/README.md` for details.
 
