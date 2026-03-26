@@ -6,13 +6,13 @@ A beginner-friendly learning path for mastering quantum computing fundamentals w
 ![Qiskit](https://img.shields.io/badge/Qiskit-2.x-purple)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-## 🎯 Overview
+## Overview
 
 This repository focuses on **quantum computing foundations** — single-qubit and multi-qubit systems. Based on Nielsen & Chuang's textbook with practical Qiskit code.
 
-## 📚 What's Covered
+## What's Covered
 
-### Phase 1: Single-Qubit Foundations ✅
+### Phase 1: Single-Qubit Foundations [COMPLETE]
 - Dirac notation and bra-ket formalism
 - Qubit representation
 - Bloch sphere visualization
@@ -23,7 +23,7 @@ This repository focuses on **quantum computing foundations** — single-qubit an
 
 **Code:** Levels 1-9 in `code/foundations/`
 
-### Phase 2: Multi-Qubit Systems ✅
+### Phase 2: Multi-Qubit Systems [COMPLETE]
 - Tensor products and composite systems
 - Entanglement and Bell states (all 4 Bell states)
 - Multi-qubit gates (CNOT, CZ, SWAP) with matrix representations
@@ -36,7 +36,7 @@ This repository focuses on **quantum computing foundations** — single-qubit an
 
 **Code:** Levels 11-20 in `code/multi_qubit/`
 
-### Phase 3: Density Matrix & Decomposition 🚧
+### Phase 3: Density Matrix & Decomposition [IN PROGRESS]
 - Density matrix formalism (pure vs mixed states)
 - Bloch sphere for mixed states
 - Purification
@@ -48,7 +48,7 @@ This repository focuses on **quantum computing foundations** — single-qubit an
 
 **Code:** Levels 21-29 in `code/density_matrix/`
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 # Clone
@@ -64,7 +64,7 @@ pip install -r requirements.txt
 python code/foundations/01_hello_qubit.py
 ```
 
-## 📁 Structure
+## Structure
 
 ```
 quantum-computing-roadmap/
@@ -107,9 +107,9 @@ quantum-computing-roadmap/
 │       └── 29_complete_analyzer.py
 │
 ├── docs/
-│   ├── quantum-computing-phase1.pdf    (40 pages, single-qubit foundations) ✅
-│   ├── quantum-computing-phase2.pdf    (44 pages, multi-qubit systems) ✅
-│   └── quantum-computing-phase3.pdf    (12 pages, density matrix) 🚧
+│   ├── quantum-computing-phase1.pdf    (40 pages, single-qubit foundations) [COMPLETE]
+│   ├── quantum-computing-phase2.pdf    (44 pages, multi-qubit systems) [COMPLETE]
+│   └── quantum-computing-phase3.pdf    (12 pages, density matrix) [IN PROGRESS]
 │
 ├── study_guides/
 │   └── getting-started.md
@@ -118,7 +118,7 @@ quantum-computing-roadmap/
     └── template.md
 ```
 
-## 🎓 Code Progression
+## Code Progression
 
 Code follows **easy → hard, specific → general**:
 
@@ -135,13 +135,13 @@ Code follows **easy → hard, specific → general**:
 
 See `code/README.md` for details.
 
-## 📖 Textbook
+## Textbook
 
 Follows **Nielsen & Chuang**:
 - Chapters 1-2: Fundamental concepts
 - Chapter 4: Quantum circuits
 
-## 🔗 Resources
+## Resources
 
 - Qiskit Textbook: https://qiskit.org/textbook
 - Qiskit Docs: https://qiskit.org/documentation
