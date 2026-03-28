@@ -142,6 +142,12 @@ Follows **Nielsen & Chuang**:
 - Chapters 1-2: Fundamental concepts
 - Chapter 4: Quantum circuits
 
+## Mathematical Reference
+
+**Linear Algebra Done Right** (Axler, 3rd ed.):
+- Chapter 7: Singular Value Decomposition (Section 7.C)
+- Used for Schmidt decomposition derivation (Phase 3)
+
 ## Resources
 
 - Qiskit Textbook: https://qiskit.org/textbook
