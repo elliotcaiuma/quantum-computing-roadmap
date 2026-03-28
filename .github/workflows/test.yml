@@ -41,7 +41,7 @@ jobs:
         echo "=== Testing Phase 2: Multi-Qubit ==="
         python code/multi_qubit/11_hello_2qubit.py
         python code/multi_qubit/14_create_bell_phi_plus.py
-        python code/multi_qubit/20_controlled_u_decomposition.py
+        python code/multi_qubit/19_ancilla_measurement.py
     
     - name: Run Phase 3 samples (Density Matrix)
       env:
