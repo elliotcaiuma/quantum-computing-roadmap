@@ -1,0 +1,45 @@
+name: Run Code Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Run Phase 1 samples (Single-Qubit)
+      run: |
+        echo "=== Testing Phase 1: Single-Qubit ==="
+        python code/foundations/01_hello_qubit.py
+        python code/foundations/04_custom_state.py
+        python code/foundations/09_gate_transformer.py
+    
+    - name: Run Phase 2 samples (Multi-Qubit)
+      run: |
+        echo "=== Testing Phase 2: Multi-Qubit ==="
+        python code/multi_qubit/11_hello_2qubit.py
+        python code/multi_qubit/14_create_bell_phi_plus.py
+        python code/multi_qubit/20_controlled_u_decomposition.py
+    
+    - name: Run Phase 3 samples (Density Matrix)
+      run: |
+        echo "=== Testing Phase 3: Density Matrix ==="
+        python code/density_matrix/21_create_density_matrix.py
+        python code/density_matrix/26_schmidt_decomposition.py
+        python code/density_matrix/29_complete_analyzer.py
