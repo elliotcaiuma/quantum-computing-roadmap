@@ -5,6 +5,8 @@ A beginner-friendly learning path for mastering quantum computing fundamentals w
 ![Quantum Computing](https://img.shields.io/badge/Quantum-Roadmap-blue)
 ![Qiskit](https://img.shields.io/badge/Qiskit-2.x-purple)
 ![License](https://img.shields.io/badge/License-MIT-green)
+![Lint](https://github.com/elliotcaiuma/quantum-computing-roadmap/actions/workflows/lint.yml/badge.svg)
+![Tests](https://github.com/elliotcaiuma/quantum-computing-roadmap/actions/workflows/test.yml/badge.svg)
 
 ## Overview
 
