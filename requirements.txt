@@ -8,7 +8,6 @@ matplotlib>=3.7.0
 # Quantum computing
 qiskit>=1.0.0
 qiskit-aer>=0.13.0
-qiskit-visualization
 
 # Development tools
 jupyter>=1.0.0
