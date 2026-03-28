@@ -36,15 +36,16 @@ This repository focuses on **quantum computing foundations** — single-qubit an
 
 **Code:** Levels 11-20 in `code/multi_qubit/`
 
-### Phase 3: Density Matrix & Decomposition [IN PROGRESS]
+### Phase 3: Density Matrix & Decomposition [COMPLETE]
 - Density matrix formalism (pure vs mixed states)
 - Bloch sphere for mixed states
-- Purification
-- Schmidt decomposition
-- Reduced density matrices
-- Entanglement detection
+- Purification (mixed states as parts of larger pure states)
+- Schmidt decomposition via SVD (complete derivation)
+- Reduced density matrices and partial trace
+- Entanglement detection (Schmidt rank test)
+- Von Neumann entropy and purity measures
 
-**Theory:** Read `docs/quantum-computing-phase3.pdf` (12 pages)
+**Theory:** Read `docs/quantum-computing-phase3.pdf` (31 pages)
 
 **Code:** Levels 21-29 in `code/density_matrix/`
 
@@ -109,7 +110,7 @@ quantum-computing-roadmap/
 ├── docs/
 │   ├── quantum-computing-phase1.pdf    (40 pages, single-qubit foundations) [COMPLETE]
 │   ├── quantum-computing-phase2.pdf    (44 pages, multi-qubit systems) [COMPLETE]
-│   └── quantum-computing-phase3.pdf    (12 pages, density matrix) [IN PROGRESS]
+│   └── quantum-computing-phase3.pdf    (31 pages, density matrix & decomposition) [COMPLETE]
 │
 ├── study_guides/
 │   └── getting-started.md
