@@ -138,13 +138,15 @@ Code follows **easy → hard, specific → general**:
 
 See `code/README.md` for details.
 
-## Textbook
+## References
 
-Follows **Nielsen & Chuang**:
+### Quantum Computing
+
+**Nielsen & Chuang** - *Quantum Computation and Quantum Information*:
 - Chapters 1-2: Fundamental concepts
 - Chapter 4: Quantum circuits
 
-## Mathematical Reference
+### Mathematics
 
 **Linear Algebra Done Right** (Axler, 3rd ed.):
 - Chapter 7: Singular Value Decomposition (Section 7.C)
