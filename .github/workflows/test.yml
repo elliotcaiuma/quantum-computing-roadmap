@@ -49,6 +49,6 @@ jobs:
         PYTHONIOENCODING: "utf-8"
       run: |
         echo "=== Testing Phase 3: Density Matrix ==="
-        python code/density_matrix/18_create_density_matrix.py
-        python code/density_matrix/23_schmidt_decomposition.py
-        python code/density_matrix/26_complete_analyzer.py
+        python code/density_matrix/21_create_density_matrix.py
+        python code/density_matrix/26_schmidt_decomposition.py
+        python code/density_matrix/29_complete_analyzer.py
