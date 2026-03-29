@@ -51,7 +51,7 @@ def oracle_balanced_parity(n):
     """
     qc = QuantumCircuit(n + 1)
     for i in range(n):
-        qc.CX(i, n)  # CNOT from each input to target
+        qc.cx(i, n)  # CNOT from each input to target
     return qc
 
 def oracle_balanced_first_qubit(n):
@@ -64,7 +64,7 @@ def oracle_balanced_first_qubit(n):
         QuantumCircuit - oracle that checks first qubit
     """
     qc = QuantumCircuit(n + 1)
-    qc.CX(0, n)  # CNOT from first qubit to target
+    qc.cx(0, n)  # CNOT from first qubit to target
     return qc
 
 # Test oracle
