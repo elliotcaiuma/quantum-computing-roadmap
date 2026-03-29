@@ -62,3 +62,6 @@ jobs:
         python code/algorithms/30_oracle_functions.py
         python code/algorithms/31_deutsch_jozsa.py
         python code/algorithms/32_grover_search.py
+        python code/algorithms/33_phase_estimation.py
+        python code/algorithms/34_shor_factoring.py
+        python code/algorithms/35_quantum_fourier_transform.py
