@@ -156,8 +156,9 @@ See `code/README.md` for details.
 | Phase 2 | Multi-Qubit Systems | 44 pages | 11-20 | ✅ COMPLETE |
 | Phase 3 | Density Matrix & Decomposition | 31 pages | 21-29 | ✅ COMPLETE |
 | Phase 4 | Quantum Algorithms | 29 pages | 30-35 | ✅ COMPLETE |
+| Phase 5 | Hamiltonian Simulation | 22 pages | 36-43 | ✅ COMPLETE |
 
-**Total:** 144 pages of theory + 35 code levels
+**Total:** 166 pages of theory + 43 code levels
 
 ---
 
@@ -194,13 +195,55 @@ See `code/README.md` for details.
 
 ---
 
+## Phase 5: Hamiltonian Simulation [COMPLETE]
+
+### Topics
+
+- Time evolution operator $e^{-iHt}$ and matrix exponential
+- Lie-Trotter product formula and intuition
+- First-order Trotterization (error scaling O(t²/n))
+- Second-order symmetric Trotter / Strang splitting (error scaling O(t³/n²))
+- Higher-order Suzuki expansions (4th-order: O(t⁵/n⁴))
+- Heisenberg model simulation (spin-spin correlations)
+- Molecular H₂ simulation (electronic structure, dissociation curve)
+- Error analysis and resource estimation
+
+### Code Progression
+
+```
+36_time_evolution.py      → U(t) = e^{-iHt}
+37_trotter_introduction.py → Commuting vs. non-commuting
+38_first_order_trotter.py  → O(t²/n) scaling
+39_second_order_trotter.py → O(t³/n²) scaling (50-500× better)
+40_suzuki_expansions.py   → 4th-order: O(t⁵/n⁴)
+41_heisenberg_model.py    → Spin correlations ⟨XX⟩, ⟨YY⟩, ⟨ZZ⟩
+42_molecular_h2.py        → H₂ dissociation curve
+43_error_analysis.py      → Resource estimation
+```
+
+### Milestone
+
+✅ Implement time evolution operator
+✅ Understand Trotter-Suzuki decomposition
+✅ Simulate Heisenberg spin model
+✅ Calculate molecular H₂ ground state
+✅ Estimate resources for chemical accuracy
+✅ Know when quantum has advantage (~8 qubits)
+
+---
+
 ## Next Steps
 
-After completing all 4 phases:
-- Variational methods (VQE, QAOA) for NISQ devices
-- Quantum error correction (surface codes, fault tolerance)
-- Quantum simulation (chemistry, materials science)
-- Quantum machine learning (QML algorithms)
+After completing all 5 phases:
+- **Phase 6: Quantum Error Correction** (planned)
+  - Bit-flip and phase-flip codes
+  - Shor code (9-qubit)
+  - Steane code (7-qubit)
+  - Surface codes and fault tolerance
+  
+- **Variational methods** (VQE, QAOA) for NISQ devices
+- **Advanced quantum simulation** (chemistry, materials science)
+- **Quantum machine learning** (QML algorithms)
 
 ---
 
