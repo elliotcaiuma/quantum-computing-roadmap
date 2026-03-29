@@ -13,16 +13,34 @@ from qiskit import QuantumCircuit
 from qiskit_aer import AerSimulator
 import numpy as np
 
-def qft_manual(n):
-    """Manual QFT implementation to avoid deprecated library."""
+def qft_manual(n, inverse=False):
+    """Manual QFT implementation to avoid deprecated library.
+    
+    Args:
+        n: int - number of qubits
+        inverse: bool - if True, return inverse QFT
+    """
     qc = QuantumCircuit(n)
-    for j in range(n):
-        qc.h(j)
-        for k in range(j + 1, n):
-            angle = 2 * np.pi / (2 ** (k - j + 1))
-            qc.cp(angle, k, j)
-    for i in range(n // 2):
-        qc.swap(i, n - 1 - i)
+    
+    if inverse:
+        # Reverse SWAPs first
+        for i in range(n // 2):
+            qc.swap(i, n - 1 - i)
+        # Then reverse the rotations and Hadamards
+        for j in range(n - 1, -1, -1):
+            for k in range(n - 1, j, -1):
+                angle = -2 * np.pi / (2 ** (k - j + 1))
+                qc.cp(angle, k, j)
+            qc.h(j)
+    else:
+        for j in range(n):
+            qc.h(j)
+            for k in range(j + 1, n):
+                angle = 2 * np.pi / (2 ** (k - j + 1))
+                qc.cp(angle, k, j)
+        for i in range(n // 2):
+            qc.swap(i, n - 1 - i)
+    
     return qc
 
 def phase_estimation(unitary, eigenstate_prep, n_count):
@@ -53,7 +71,7 @@ def phase_estimation(unitary, eigenstate_prep, n_count):
             qc.compose(unitary.control(), qubits=[j] + list(range(n_count, n_count + n_target)), inplace=True)
     
     # Step 4: Inverse QFT on counting qubits
-    qc.compose(qft_manual(n_count).inverse(), qubits=range(n_count), inplace=True)
+    qc.compose(qft_manual(n_count, inverse=True), qubits=range(n_count), inplace=True)
     
     # Step 5: Measure counting qubits
     qc.measure(range(n_count), range(n_count))
