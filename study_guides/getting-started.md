@@ -1,354 +1,395 @@
-# Getting Started with Quantum Foundations
+# Getting Started with Quantum Computing
 
-## Focus: Steps 1-6
+## Complete Learning Path (Phases 1-5)
 
-This guide covers **only foundations** — single-qubit and multi-qubit systems. Master these before touching algorithms.
-
----
-
-## Prerequisites Checklist
-
-Before starting, ensure you have:
-
-### Mathematics
-- [ ] **Linear Algebra:** Vectors, matrices, matrix multiplication
-- [ ] **Complex Numbers:** $i = \sqrt{-1}$, complex conjugate, $|z|^2$
-- [ ] **Probability:** Basic probability (optional but helpful)
-
-### Programming
-- [ ] **Python Basics:** Variables, functions, loops
-- [ ] **NumPy:** Arrays, `np.kron()` for tensor products
-
-### Physics
-- [ ] **Not Required!** We teach the math you need
+This guide covers the **complete roadmap** — from single-qubit basics through Hamiltonian simulation for quantum chemistry.
 
 ---
 
-## Step 1: Your First Qubit
-
-### Theory Reference
-
-**Read:** `docs/quantum-computing-phase1.pdf` (23 pages)
-- Dirac notation, qubit representation
-- Bloch sphere visualization
-- Complete derivations and proofs
-
-### Install & Test
+## Quick Start
 
 ```bash
-# Clone the repository
+# Clone
 git clone https://github.com/elliotcaiuma/quantum-computing-roadmap.git
-cd quantum-roadmap
+cd quantum-computing-roadmap
 
-# Set up environment
+# Setup
 python -m venv venv
 .\venv\Scripts\Activate.ps1  # Windows
 source venv/bin/activate     # macOS/Linux
-
-# Install dependencies
 pip install -r requirements.txt
 
-# Test setup
-python code/foundations/test_setup.py
+# Test
+python code/foundations/01_hello_qubit.py
 ```
-
-### Create Your First State
-
-```python
-# Run the state creator
-python code/foundations/create_state.py
-```
-
-**Learn:**
-- What is a qubit? $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$
-- Normalization: $|\alpha|^2 + |\beta|^2 = 1$
-- Probability: $P(0) = |\alpha|^2$, $P(1) = |\beta|^2$
-
-### Practice States
-
-**Exercises:**
-1. Create $|0\rangle$, $|1\rangle$
-2. Create $|+\rangle = \frac{|0\rangle + |1\rangle}{\sqrt{2}}$
-3. Create $|-\rangle = \frac{|0\rangle - |1\rangle}{\sqrt{2}}$
-4. Calculate measurement probabilities for each
 
 ---
 
-## Step 2: Bloch Sphere
+## Phase Overview
 
-### Theory Reference
+| Phase | Topic | PDF | Code | Prerequisites |
+|-------|-------|-----|------|---------------|
+| **1** | Single-Qubit | 40 pages | 9 files | Linear algebra basics |
+| **2** | Multi-Qubit | 44 pages | 10 files | Phase 1 complete |
+| **3** | Density Matrix | 31 pages | 9 files | Phase 2 complete |
+| **4** | Algorithms | 29 pages | 6 files | Phases 1-3 complete |
+| **5** | Hamiltonian Simulation | 30 pages | 8 files | Phase 4 complete |
 
-**Read:** `docs/quantum-computing-phase1.pdf` - Section on Bloch Sphere
-- Geometric representation
-- State visualization
-- Complete mathematical derivations
-
-### Key Concepts
-
-- **Bloch sphere:** Visual representation of single-qubit states
-- **North pole:** $|0\rangle$
-- **South pole:** $|1\rangle$
-- **Equator:** Superposition states ($|+\rangle$, $|-\rangle$, $|+i\rangle$, $|-i\rangle$)
-
-### Code Practice
-
-```python
-from qiskit import QuantumCircuit
-from qiskit.visualization import plot_bloch_multivector
-
-qc = QuantumCircuit(1)
-qc.h(0)  # Creates |+⟩
-plot_bloch_multivector(qc)  # Shows on Bloch sphere
-```
-
-### Exercises
-
-1. Plot |0⟩, |1⟩ — should be at poles
-2. Plot |+⟩, |-⟩ — should be on equator
-3. Apply X gate to |0⟩ — where does it move?
-4. Apply H gate to |0⟩ — where does it move?
+**Total:** 174 pages + 42 code files
 
 ---
 
-## Step 3: Gates & Measurement
+## Phase 1: Single-Qubit Foundations
 
-### Theory Reference
+**Duration:** 2-3 weeks  
+**PDF:** `docs/quantum-computing-phase1.pdf`  
+**Code:** `code/foundations/` (Levels 1-9)
 
-**Read:** `docs/quantum-computing-phase1.pdf` - Sections on Gates & Measurement
+### What You'll Learn
+
+- Dirac notation (bras, kets, outer products)
+- Qubit representation: $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$
+- Bloch sphere visualization
 - Single-qubit gates (X, Y, Z, H, S, T)
-- Measurement postulates
-- Born rule derivations
-- Complete proofs
+- Quantum measurement (Born rule)
 
-### Gates to Master
+### Code Progression
 
-| Gate | Effect | Matrix |
-|------|--------|--------|
-| **X** | Bit flip (NOT) | $\begin{pmatrix}0 & 1\\ 1 & 0\end{pmatrix}$ |
-| **Y** | Bit + phase flip | $\begin{pmatrix}0 & -i\\ i & 0\end{pmatrix}$ |
-| **Z** | Phase flip | $\begin{pmatrix}1 & 0\\ 0 & -1\end{pmatrix}$ |
-| **H** | Creates superposition | $\frac{1}{\sqrt{2}}\begin{pmatrix}1 & 1\\ 1 & -1\end{pmatrix}$ |
-
-### Measurement
-
-**Born Rule:**
-$$P(i) = |\langle i|\psi\rangle|^2$$
-
-**Code:**
-```python
-from qiskit import QuantumCircuit
-
-qc = QuantumCircuit(1, 1)
-qc.h(0)  # Superposition
-qc.measure(0, 0)  # Measure
+```
+01_hello_qubit.py          → Create |0⟩
+02_create_basis.py         → Create |0⟩, |1⟩
+03_create_superposition.py → Create |+⟩, |-⟩
+04_custom_state.py         → Create ANY state
+05_measure_z.py            → Measure in Z basis
+06_measure_any_basis.py    → Measure in X/Y/Z
+07_apply_x_gate.py         → Apply X gate
+08_apply_all_single_gates.py → All single gates
+09_gate_transformer.py     → Apply ANY sequence
 ```
 
-**Expected:** 50% |0⟩, 50% |1⟩
+### Milestones
 
-### Exercises
+- [ ] Represent any single-qubit state
+- [ ] Visualize states on Bloch sphere
+- [ ] Implement all single-qubit gates
+- [ ] Measure in any basis (X, Y, Z)
+- [ ] Calculate measurement probabilities
 
-1. Apply X to |0⟩ — what do you get?
-2. Apply H to |0⟩ — measure 100 times, what %?
-3. Apply H then Z — what happens?
+### Key Equations
+
+**Qubit state:**
+$$|\psi\rangle = \alpha|0\rangle + \beta|1\rangle, \quad |\alpha|^2 + |\beta|^2 = 1$$
+
+**Measurement probability:**
+$$P(0) = |\alpha|^2, \quad P(1) = |\beta|^2$$
+
+**Bloch sphere:**
+$$|\psi\rangle = \cos(\theta/2)|0\rangle + e^{i\phi}\sin(\theta/2)|1\rangle$$
 
 ---
 
-## Step 4: Tensor Products
+## Phase 2: Multi-Qubit Systems
 
-### Theory Reference
+**Duration:** 3-4 weeks  
+**PDF:** `docs/quantum-computing-phase2.pdf`  
+**Code:** `code/multi_qubit/` (Levels 11-20)
 
-**Read:** `docs/quantum-computing-phase2.pdf` (15 pages) - Section on Tensor Products
-- Composite systems
-- Kronecker product
-- Separable vs entangled states
-- Complete derivations
+### What You'll Learn
 
-### Key Concept
-
-For 2 qubits:
-$$|\psi\rangle = |\psi_1\rangle \otimes |\psi_2\rangle$$
-
-Dimension: $2^n$ for n qubits (2 qubits = 4 dimensions)
-
-### Code Practice
-
-```python
-# code/multi_qubit/tensor_products.py
-import numpy as np
-
-psi1 = np.array([1, 0])  # |0⟩
-psi2 = np.array([0, 1])  # |1⟩
-psi_combined = np.kron(psi1, psi2)  # |01⟩
-print(psi_combined)  # [0, 1, 0, 0]
-```
-
-### Exercises
-
-1. Compute $|0\rangle \otimes |0\rangle$
-2. Compute $|0\rangle \otimes |1\rangle$
-3. Compute $|1\rangle \otimes |0\rangle$
-4. Compute $|1\rangle \otimes |1\rangle$
-
----
-
-## Step 5: Entanglement & Bell States
-
-### Theory Reference
-
-**Read:** `docs/quantum-computing-phase2.pdf` - Sections on Entanglement & Bell States
-- Bell state definitions
-- Entanglement proofs
-- Measurement correlations
-- Complete derivations
-
-### Bell States
-
-4 maximally entangled states:
-
-$$|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$$
-$$|\Phi^-\rangle = \frac{1}{\sqrt{2}}(|00\rangle - |11\rangle)$$
-$$|\Psi^+\rangle = \frac{1}{\sqrt{2}}(|01\rangle + |10\rangle)$$
-$$|\Psi^-\rangle = \frac{1}{\sqrt{2}}(|01\rangle - |10\rangle)$$
-
-### Circuit to Create $|\Phi^+\rangle$
-
-```python
-from qiskit import QuantumCircuit
-
-qc = QuantumCircuit(2)
-qc.h(0)     # Hadamard on qubit 0
-qc.cx(0, 1) # CNOT with control=0, target=1
-```
-
-### Exercises
-
-1. Create all 4 Bell states
-2. Measure both qubits — what correlations do you see?
-3. Why can't Bell states be written as tensor product?
-
----
-
-## Step 6: Teleportation & Superdense Coding
-
-### Theory Reference
-
-**Read:** `docs/quantum-computing-phase2.pdf` - Sections on Quantum Protocols
-- Teleportation protocol
+- Tensor products and composite systems
+- Entanglement and Bell states
+- Multi-qubit gates (CNOT, CZ, SWAP)
+- Quantum teleportation
 - Superdense coding
-- Complete circuit derivations
-- Step-by-step proofs
 
-### Quantum Teleportation
+### Code Progression
 
-**Protocol:**
-1. Alice and Bob share Bell pair
-2. Alice has qubit |ψ⟩ to teleport
-3. Alice measures her qubits
-4. Alice sends classical bits to Bob
-5. Bob applies correction gates
-
-**Circuit:**
-```python
-# code/multi_qubit/teleportation.py
-from qiskit import QuantumCircuit
-
-qc = QuantumCircuit(3)
-# Qubit 0: State to teleport
-# Qubit 1,2: Bell pair (Alice, Bob)
+```
+11_hello_2qubit.py           → Create |00⟩
+12_tensor_product.py         → |0⟩ ⊗ |1⟩
+13_tensor_product_calculator.py → ANY tensor product
+14_create_bell_phi_plus.py   → Create |Φ⁺⟩
+15_all_bell_states.py        → All 4 Bell states
+16_bell_factory.py           → Create ANY Bell state
+17_measure_bell.py           → Measure Bell state
+18_bell_analyzer.py          → Analyze ANY Bell state
+19_ancilla_measurement.py    → Ancilla-assisted measurement
+20_controlled_u_decomposition.py → Universal controlled-U gate
 ```
 
-### Superdense Coding
+### Milestones
 
-Send 2 classical bits using 1 qubit:
-1. Alice and Bob share Bell pair
-2. Alice applies gates based on 2 bits
-3. Alice sends qubit to Bob
-4. Bob measures and decodes 2 bits
-
-### Exercises
-
-1. Implement full teleportation circuit
-2. Verify teleported state matches original
-3. Implement superdense coding protocol
-
----
-
-## Common Questions
-
-### Q: Do I need physics background?
-
-**A:** No! Linear algebra and complex numbers are enough.
-
-### Q: How much time per step?
-
-**A:** Varies by person. Complete each step before moving to the next.
-
-### Q: What if I don't understand entanglement?
-
-**A:** Normal! It's counterintuitive. Focus on the math: Bell states can't be written as $|\psi_1\rangle \otimes |\psi_2\rangle$.
-
-### Q: Should I memorize matrices?
-
-**A:** Understand them. Know what H does (creates superposition), what CNOT does (flips target when control is |1⟩).
-
----
-
-## Tips for Success
-
-### 1. Code Every Concept
-
-Don't just read—implement:
-```python
-# Even simple exercises help
-qc = QuantumCircuit(1)
-qc.h(0)
-```
-
-### 2. Visualize Constantly
-
-Use Bloch sphere:
-```python
-plot_bloch_multivector(qc)
-```
-
-### 3. Track Progress
-
-Update `progress/template.md` after each step.
-
-### 4. Ask Questions
-
-- Quantum Computing Stack Exchange
-- Qiskit Slack: https://qiskit.slack.com
-
----
-
-## Mastery Checklist
-
-After completing all steps, you should be able to:
-
-### Single-Qubit ✅
-- [ ] Represent any state as $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$
-- [ ] Normalize states
-- [ ] Visualize on Bloch sphere
-- [ ] Implement X, Y, Z, H, S, T gates
-- [ ] Measure in X, Y, Z bases
-- [ ] Calculate probabilities
-
-### Multi-Qubit ✅
 - [ ] Compute tensor products
 - [ ] Create all 4 Bell states
-- [ ] Explain entanglement
-- [ ] Implement CNOT, CZ, SWAP
-- [ ] Run teleportation protocol
-- [ ] Run superdense coding
+- [ ] Understand entanglement (non-separable states)
+- [ ] Implement CNOT, CZ, SWAP gates
+- [ ] Run quantum teleportation protocol
+- [ ] Run superdense coding protocol
+
+### Key Equations
+
+**Tensor product:**
+$$|0\rangle \otimes |1\rangle = |01\rangle = \begin{pmatrix} 0 \\ 1 \\ 0 \\ 0 \end{pmatrix}$$
+
+**Bell state:**
+$$|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$$
+
+**CNOT gate:**
+$$\text{CNOT}|00\rangle = |00\rangle, \quad \text{CNOT}|10\rangle = |11\rangle$$
 
 ---
 
-## What's Next?
+## Phase 3: Density Matrix & Decomposition
 
-After mastering foundations:
-- **Quantum Algorithms:** QFT, Grover's, Shor's
-- **Variational Methods:** VQE, QAOA
-- **Quantum Information:** Density matrices, error correction
+**Duration:** 3-4 weeks  
+**PDF:** `docs/quantum-computing-phase3.pdf`  
+**Code:** `code/density_matrix/` (Levels 21-29)
 
-But first, **master these 6 steps**. Don't rush!
+### What You'll Learn
+
+- Density matrix formalism (pure vs. mixed states)
+- Bloch sphere for mixed states
+- Purification
+- Schmidt decomposition
+- Entanglement detection
+
+### Code Progression
+
+```
+21_create_density_matrix.py     → ρ = |ψ⟩⟨ψ|
+22_mixed_state_ensemble.py      → ρ = Σ pᵢ|ψᵢ⟩⟨ψᵢ|
+23_check_valid_density_matrix.py → Verify valid ρ
+24_bloch_vector.py              → Extract Bloch vector
+25_purification.py              → Construct pure state from ρ
+26_schmidt_decomposition.py     → Schmidt coefficients
+27_reduced_density_matrix.py    → Partial trace
+28_entanglement_check.py        → Schmidt rank test
+29_complete_analyzer.py         → Complete analysis
+```
+
+### Milestones
+
+- [ ] Create density matrix from state vector
+- [ ] Create density matrix from ensemble
+- [ ] Verify valid density matrix (Hermitian, trace=1, PSD)
+- [ ] Extract Bloch vector for mixed states
+- [ ] Perform Schmidt decomposition
+- [ ] Detect entanglement (Schmidt rank > 1)
+
+### Key Equations
+
+**Density matrix (pure):**
+$$\rho = |\psi\rangle\langle\psi|$$
+
+**Density matrix (mixed):**
+$$\rho = \sum_i p_i |\psi_i\rangle\langle\psi_i|$$
+
+**Schmidt decomposition:**
+$$|\psi\rangle = \sum_i \lambda_i |u_i\rangle \otimes |v_i\rangle$$
+
+---
+
+## Phase 4: Quantum Algorithms
+
+**Duration:** 4-5 weeks  
+**PDF:** `docs/quantum-computing-phase4.pdf`  
+**Code:** `code/algorithms/` (Levels 30-35)
+
+### What You'll Learn
+
+- Deutsch-Jozsa algorithm (exponential speedup)
+- Grover's search (quadratic speedup)
+- Quantum Fourier Transform
+- Phase estimation
+- Shor's factoring algorithm
+
+### Code Progression
+
+```
+30_oracle_functions.py        → Oracle construction
+31_deutsch_jozsa.py           → Constant vs. balanced
+32_grover_search.py           → Unstructured search
+33_phase_estimation.py        → Eigenvalue extraction
+34_shor_factoring.py          → Integer factorization
+35_quantum_fourier_transform.py → QFT implementation
+```
+
+### Milestones
+
+- [ ] Implement Deutsch-Jozsa with single query
+- [ ] Implement Grover's with optimal iterations
+- [ ] Derive and implement QFT from scratch
+- [ ] Perform phase estimation
+- [ ] Factor integers using Shor's algorithm
+
+### Key Algorithms
+
+**Deutsch-Jozsa:** 1 query vs. $2^{n-1}+1$ classical queries
+
+**Grover's:** $O(\sqrt{N})$ vs. $O(N)$ classical search
+
+**QFT:** $O(n^2)$ gates vs. $O(n 2^n)$ classical FFT
+
+---
+
+## Phase 5: Hamiltonian Simulation
+
+**Duration:** 4-5 weeks  
+**PDF:** `docs/quantum-computing-phase5.pdf`  
+**Code:** `code/hamiltonian_simulation/` (Levels 36-43)
+
+### What You'll Learn
+
+- Time evolution operator $e^{-iHt}$
+- Lie-Trotter product formula
+- First-order Trotterization
+- Second-order (symmetric) Trotter
+- Higher-order Suzuki expansions
+- Heisenberg model simulation
+- Molecular H₂ simulation
+
+### Code Progression
+
+```
+36_time_evolution.py      → U(t) = e^{-iHt}
+37_trotter_introduction.py → Commuting vs. non-commuting
+38_first_order_trotter.py  → O(t²/n) scaling
+39_second_order_trotter.py → O(t³/n²) scaling
+40_suzuki_expansions.py   → 4th-order: O(t⁵/n⁴)
+41_heisenberg_model.py    → Spin correlations
+42_molecular_h2.py        → H₂ dissociation curve
+43_error_analysis.py      → Resource estimation
+```
+
+### Milestones
+
+- [ ] Implement time evolution operator
+- [ ] Understand Trotter-Suzuki decomposition
+- [ ] Simulate Heisenberg spin model
+- [ ] Calculate molecular H₂ ground state
+- [ ] Estimate resources for chemical accuracy
+- [ ] Know when quantum has advantage (~8 qubits)
+
+### Key Formulas
+
+**Lie-Trotter:**
+$$e^{-i(A+B)t} = \lim_{n\to\infty} \left(e^{-iAt/n} e^{-iBt/n}\right)^n$$
+
+**First-order error:**
+$$\text{Error} \leq \frac{t^2}{2n}\|[A,B]\|$$
+
+**Second-order error:**
+$$\text{Error} \leq \frac{t^3}{12n^2}\left(\|[A,[A,B]]\| + \|[B,[B,A]]\|\right)$$
+
+---
+
+## Study Tips
+
+### 1. Read Theory First
+
+Before running code, read the corresponding PDF section. Understand:
+- What problem does this solve?
+- What are the key equations?
+- What is the physical meaning?
+
+### 2. Run Code Step-by-Step
+
+Don't just execute — modify and experiment:
+- Change input states
+- Vary parameters
+- Break things intentionally to understand
+
+### 3. Do the Exercises
+
+Each PDF section has exercises. Complete them before moving on.
+
+### 4. Build Intuition
+
+Use the Bloch sphere visualization. Ask:
+- Where is this state on the sphere?
+- How does this gate move the state?
+- What does measurement do?
+
+### 5. Connect to Physics
+
+Remember what the math represents:
+- Qubits → spin-1/2 particles, photon polarization
+- Gates → magnetic fields, optical elements
+- Measurement → Stern-Gerlach, polarizers
+
+---
+
+## Common Pitfalls
+
+### ❌ Rushing Through Foundations
+
+**Problem:** Jumping to algorithms without mastering basics.
+
+**Solution:** Spend adequate time on Phases 1-2. Everything builds on tensor products and entanglement.
+
+### ❌ Not Doing Exercises
+
+**Problem:** Passive reading without active problem-solving.
+
+**Solution:** Complete ALL exercises. They reinforce understanding.
+
+### ❌ Ignoring the Math
+
+**Problem:** Treating quantum computing as just programming.
+
+**Solution:** Work through derivations. The math IS the physics.
+
+### ❌ Not Visualizing
+
+**Problem:** Abstract states without geometric intuition.
+
+**Solution:** Use Bloch sphere for every single-qubit state.
+
+---
+
+## Next Steps After Phase 5
+
+After completing all 5 phases:
+
+### Phase 6: Quantum Error Correction (Planned)
+- Bit-flip and phase-flip codes
+- Shor code (9-qubit)
+- Steane code (7-qubit)
+- Surface codes
+
+### Advanced Topics
+- Variational algorithms (VQE, QAOA)
+- Quantum machine learning
+- Advanced quantum simulation
+- Quantum communication protocols
+
+---
+
+## Resources
+
+### Textbooks
+- **Nielsen & Chuang:** "Quantum Computation and Quantum Information" (standard reference)
+- **Preskill's Lecture Notes:** Caltech PH219/CS219 (free online)
+
+### Online Tools
+- **IBM Quantum Experience:** Run circuits on real quantum computers
+- **QuTiP:** Quantum toolbox in Python
+- **Qiskit Textbook:** Interactive tutorials
+
+### Communities
+- **Qiskit Slack:** Active community
+- **Quantum Computing Stack Exchange:** Q&A
+- **Discord servers:** Quantum computing channels
+
+---
+
+## Getting Help
+
+1. **Check the PDF:** Most answers are in the theory sections
+2. **Review code comments:** Each file explains what it does
+3. **Run tests:** Verify your setup works
+4. **Ask questions:** Use GitHub Issues or Quantum Stack Exchange
+
+---
+
+*Last Updated: March 2026*
