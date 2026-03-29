@@ -9,7 +9,9 @@ Quantum computer needs only 1 query - exponential speedup.
 Key technique: Phase kickback + interference
 """
 
-from qiskit import QuantumCircuit, Aer, execute
+from qiskit import QuantumCircuit
+from qiskit_aer import Aer
+from qiskit import execute
 
 def deutsch_jozsa(oracle, n):
     """Implement Deutsch-Jozsa algorithm.

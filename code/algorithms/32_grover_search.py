@@ -9,7 +9,9 @@ Quantum computer achieves quadratic speedup.
 Key technique: Amplitude amplification (oracle + diffusion)
 """
 
-from qiskit import QuantumCircuit, Aer, execute
+from qiskit import QuantumCircuit
+from qiskit_aer import Aer
+from qiskit import execute
 import numpy as np
 
 def grover_oracle(winner):

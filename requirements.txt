@@ -9,6 +9,8 @@ matplotlib>=3.7.0
 qiskit>=1.0.0
 qiskit-aer>=0.13.0
 
+# Note: qiskit-aer provides Aer simulator (separate from qiskit core)
+
 # Development tools
 jupyter>=1.0.0
 notebook>=7.0.0

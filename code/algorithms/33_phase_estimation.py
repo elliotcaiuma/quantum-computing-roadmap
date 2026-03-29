@@ -9,7 +9,9 @@ Find: φ to n bits of precision
 Key subroutine in Shor's algorithm and quantum simulation.
 """
 
-from qiskit import QuantumCircuit, Aer, execute
+from qiskit import QuantumCircuit
+from qiskit_aer import Aer
+from qiskit import execute
 from qiskit.circuit.library import QFT
 import numpy as np
 
