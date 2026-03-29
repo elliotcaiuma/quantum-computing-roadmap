@@ -54,11 +54,11 @@ This repository focuses on **quantum computing foundations** — single-qubit an
 ### Phase 4: Quantum Algorithms [COMPLETE]
 - Deutsch-Jozsa algorithm (exponential speedup demonstration)
 - Grover's search algorithm (quadratic speedup, amplitude amplification)
-- Quantum Fourier Transform (QFT)
 - Quantum phase estimation (eigenvalue extraction)
 - Shor's factoring algorithm (cryptanalysis application)
+- Quantum Fourier Transform (QFT) with complete derivation
 
-**Theory:** Read `docs/quantum-computing-phase4.pdf` (22 pages)
+**Theory:** Read `docs/quantum-computing-phase4.pdf` (29 pages)
 
 **Code:** Levels 30-35 in `code/algorithms/`
 
@@ -123,15 +123,15 @@ quantum-computing-roadmap/
 │       ├── 30_oracle_functions.py
 │       ├── 31_deutsch_jozsa.py
 │       ├── 32_grover_search.py
-│       ├── 33_quantum_fourier_transform.py
-│       ├── 34_phase_estimation.py
-│       └── 35_shor_factoring.py
+│       ├── 33_phase_estimation.py
+│       ├── 34_shor_factoring.py
+│       └── 35_quantum_fourier_transform.py
 │
 ├── docs/
 │   ├── quantum-computing-phase1.pdf    (40 pages, single-qubit foundations) [COMPLETE]
 │   ├── quantum-computing-phase2.pdf    (44 pages, multi-qubit systems) [COMPLETE]
 │   ├── quantum-computing-phase3.pdf    (31 pages, density matrix & decomposition) [COMPLETE]
-│   └── quantum-computing-phase4.pdf    (22 pages, quantum algorithms) [COMPLETE]
+│   └── quantum-computing-phase4.pdf    (29 pages, quantum algorithms) [COMPLETE]
 │
 ├── study_guides/
 │   └── getting-started.md
@@ -154,6 +154,12 @@ Code follows **easy → hard, specific → general**:
 | 19 | Ancilla measurement | Physical process |
 | 20 | Controlled-U decomposition | Universal gate construction |
 | 21-29 | Density matrix | Mixed state analysis |
+| 30 | Oracle functions | Black-box abstraction |
+| 31 | Deutsch-Jozsa | Exponential speedup |
+| 32 | Grover's search | Amplitude amplification |
+| 33 | Phase estimation | Eigenvalue extraction |
+| 34 | Shor's algorithm | Order finding |
+| 35 | QFT | Fourier analysis |
 
 See `code/README.md` for details.
 

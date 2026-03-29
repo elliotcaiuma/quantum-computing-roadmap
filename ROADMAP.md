@@ -155,17 +155,52 @@ See `code/README.md` for details.
 | Phase 1 | Single-Qubit Foundations | 40 pages | 1-9 | ✅ COMPLETE |
 | Phase 2 | Multi-Qubit Systems | 44 pages | 11-20 | ✅ COMPLETE |
 | Phase 3 | Density Matrix & Decomposition | 31 pages | 21-29 | ✅ COMPLETE |
+| Phase 4 | Quantum Algorithms | 29 pages | 30-35 | ✅ COMPLETE |
 
-**Total:** 115 pages of theory + 29 code levels
+**Total:** 144 pages of theory + 35 code levels
+
+---
+
+## Phase 4: Quantum Algorithms [COMPLETE]
+
+### Topics
+
+- Oracle model and phase kickback
+- Deutsch-Jozsa algorithm (exponential speedup)
+- Grover's search algorithm (quadratic speedup)
+- Quantum phase estimation (eigenvalue extraction)
+- Shor's factoring algorithm (cryptanalysis)
+- Quantum Fourier Transform (complete derivation from Nielsen & Chuang)
+
+### Code Progression
+
+```
+30_oracle_functions.py        → Construct constant/balanced oracles
+31_deutsch_jozsa.py           → Distinguish constant vs balanced
+32_grover_search.py           → Unstructured search with √N speedup
+33_phase_estimation.py        → Extract eigenvalue phases
+34_shor_factoring.py          → Factor integers via order finding
+35_quantum_fourier_transform.py → QFT with O(n²) gates
+```
+
+### Milestone
+
+✅ Implement Deutsch-Jozsa with single query  
+✅ Implement Grover's with optimal iterations  
+✅ Perform phase estimation on unitaries  
+✅ Factor integers using Shor's algorithm  
+✅ Derive and implement QFT from first principles  
+✅ Analyze quantum vs classical complexity  
 
 ---
 
 ## Next Steps
 
-After mastering foundations:
-- Quantum algorithms (QFT, Grover's, Shor's)
-- Variational methods (VQE, QAOA)
-- Quantum information (error correction)
+After completing all 4 phases:
+- Variational methods (VQE, QAOA) for NISQ devices
+- Quantum error correction (surface codes, fault tolerance)
+- Quantum simulation (chemistry, materials science)
+- Quantum machine learning (QML algorithms)
 
 ---
 
