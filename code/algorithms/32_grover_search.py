@@ -10,8 +10,7 @@ Key technique: Amplitude amplification (oracle + diffusion)
 """
 
 from qiskit import QuantumCircuit
-from qiskit_aer import Aer
-from qiskit import execute
+from qiskit_aer import AerSimulator
 import numpy as np
 
 def grover_oracle(winner):
@@ -100,8 +99,9 @@ def grover_search(winner, n):
     qc.measure(range(n), range(n))
     
     # Execute
-    simulator = Aer.get_backend('qasm_simulator')
-    result = execute(qc, simulator, shots=1024).result()
+    simulator = AerSimulator()
+    job = simulator.run(qc, shots=1024)
+    result = job.result()
     counts = result.get_counts()
     
     return counts

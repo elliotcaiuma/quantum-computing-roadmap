@@ -10,8 +10,7 @@ Key subroutine in Shor's algorithm and quantum simulation.
 """
 
 from qiskit import QuantumCircuit
-from qiskit_aer import Aer
-from qiskit import execute
+from qiskit_aer import AerSimulator
 from qiskit.circuit.library import QFT
 import numpy as np
 
@@ -49,8 +48,9 @@ def phase_estimation(unitary, eigenstate_prep, n_count):
     qc.measure(range(n_count), range(n_count))
     
     # Execute
-    simulator = Aer.get_backend('qasm_simulator')
-    result = execute(qc, simulator, shots=1024).result()
+    simulator = AerSimulator()
+    job = simulator.run(qc, shots=1024)
+    result = job.result()
     counts = result.get_counts()
     
     # Get most likely outcome

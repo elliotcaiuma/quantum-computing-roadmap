@@ -10,8 +10,7 @@ Key technique: Phase kickback + interference
 """
 
 from qiskit import QuantumCircuit
-from qiskit_aer import Aer
-from qiskit import execute
+from qiskit_aer import AerSimulator
 
 def deutsch_jozsa(oracle, n):
     """Implement Deutsch-Jozsa algorithm.
@@ -41,8 +40,9 @@ def deutsch_jozsa(oracle, n):
     qc.measure(range(n), range(n))
     
     # Execute
-    simulator = Aer.get_backend('qasm_simulator')
-    result = execute(qc, simulator, shots=1).result()
+    simulator = AerSimulator()
+    job = simulator.run(qc, shots=1)
+    result = job.result()
     counts = result.get_counts()
     outcome = list(counts.keys())[0]
     
