@@ -43,32 +43,35 @@ def qft_manual(n, inverse=False):
     
     return qc
 
-def phase_estimation(unitary, eigenstate_prep, n_count):
-    """Estimate eigenvalue phase of unitary operator.
+def phase_estimation(gate_name, n_count):
+    """Estimate eigenvalue phase for T, S, or Z gate.
     
     Args:
-        unitary: QuantumCircuit - the unitary U
-        eigenstate_prep: QuantumCircuit - prepares |ψ> where U|ψ> = e^{2πiφ}|ψ>
+        gate_name: str - 'T', 'S', or 'Z'
         n_count: int - number of counting qubits (precision)
     
     Returns:
         float: estimated phase φ
     """
-    n_target = unitary.num_qubits
-    qc = QuantumCircuit(n_count + n_target, n_count)
+    # Create circuit: n_count counting qubits + 1 target qubit
+    qc = QuantumCircuit(n_count + 1, n_count)
     
-    # Step 1: Prepare eigenstate on target qubits
-    qc.compose(eigenstate_prep, qubits=range(n_count, n_count + n_target), inplace=True)
+    # Step 1: Prepare |1> on target (eigenstate of T, S, Z)
+    qc.x(n_count)
     
     # Step 2: Hadamard on counting qubits
     qc.h(range(n_count))
     
-    # Step 3: Controlled-U^{2^j}
+    # Step 3: Controlled-U^{2^j} using controlled gates directly
     for j in range(n_count):
-        # Apply U^{2^j} controlled by qubit j
         power = 2 ** j
         for _ in range(power):
-            qc.compose(unitary.control(), qubits=[j] + list(range(n_count, n_count + n_target)), inplace=True)
+            if gate_name == 'T':
+                qc.cp(np.pi / 4, j, n_count)  # Controlled-T
+            elif gate_name == 'S':
+                qc.cp(np.pi / 2, j, n_count)  # Controlled-S
+            elif gate_name == 'Z':
+                qc.cp(np.pi, j, n_count)  # Controlled-Z
     
     # Step 4: Inverse QFT on counting qubits
     qc.compose(qft_manual(n_count, inverse=True), qubits=range(n_count), inplace=True)
@@ -94,36 +97,21 @@ if __name__ == "__main__":
     
     # Test 1: T gate (φ = 1/8 = 0.125)
     print("Test 1 - T gate (expected φ = 0.125):")
-    eigenstate = QuantumCircuit(1)
-    eigenstate.x(0)  # |1> is eigenstate of T
-    unitary = QuantumCircuit(1)
-    unitary.t(0)
-    
-    phi_est = phase_estimation(unitary, eigenstate, 3)
+    phi_est = phase_estimation('T', 3)
     print(f"Estimated phase: {phi_est:.4f}")
     print(f"Expected phase: 0.1250")
     print(f"Error: {abs(phi_est - 0.125):.4f}\n")
     
     # Test 2: S gate (φ = 1/4 = 0.25)
     print("Test 2 - S gate (expected φ = 0.25):")
-    eigenstate = QuantumCircuit(1)
-    eigenstate.x(0)  # |1> is eigenstate of S
-    unitary = QuantumCircuit(1)
-    unitary.s(0)
-    
-    phi_est = phase_estimation(unitary, eigenstate, 3)
+    phi_est = phase_estimation('S', 3)
     print(f"Estimated phase: {phi_est:.4f}")
     print(f"Expected phase: 0.2500")
     print(f"Error: {abs(phi_est - 0.25):.4f}\n")
     
     # Test 3: Z gate (φ = 1/2 = 0.5)
     print("Test 3 - Z gate (expected φ = 0.5):")
-    eigenstate = QuantumCircuit(1)
-    eigenstate.x(0)  # |1> is eigenstate of Z
-    unitary = QuantumCircuit(1)
-    unitary.z(0)
-    
-    phi_est = phase_estimation(unitary, eigenstate, 3)
+    phi_est = phase_estimation('Z', 3)
     print(f"Estimated phase: {phi_est:.4f}")
     print(f"Expected phase: 0.5000")
     print(f"Error: {abs(phi_est - 0.5):.4f}")
