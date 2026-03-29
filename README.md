@@ -51,6 +51,17 @@ This repository focuses on **quantum computing foundations** — single-qubit an
 
 **Code:** Levels 21-29 in `code/density_matrix/`
 
+### Phase 4: Quantum Algorithms [COMPLETE]
+- Deutsch-Jozsa algorithm (exponential speedup demonstration)
+- Grover's search algorithm (quadratic speedup, amplitude amplification)
+- Quantum Fourier Transform (QFT)
+- Quantum phase estimation (eigenvalue extraction)
+- Shor's factoring algorithm (cryptanalysis application)
+
+**Theory:** Read `docs/quantum-computing-phase4.pdf` (22 pages)
+
+**Code:** Levels 30-35 in `code/algorithms/`
+
 ## Quick Start
 
 ```bash
@@ -108,11 +119,19 @@ quantum-computing-roadmap/
 │       ├── 27_reduced_density_matrix.py
 │       ├── 28_entanglement_check.py
 │       └── 29_complete_analyzer.py
+│   └── algorithms/      # Levels 30-35: Quantum algorithms
+│       ├── 30_oracle_functions.py
+│       ├── 31_deutsch_jozsa.py
+│       ├── 32_grover_search.py
+│       ├── 33_quantum_fourier_transform.py
+│       ├── 34_phase_estimation.py
+│       └── 35_shor_factoring.py
 │
 ├── docs/
 │   ├── quantum-computing-phase1.pdf    (40 pages, single-qubit foundations) [COMPLETE]
 │   ├── quantum-computing-phase2.pdf    (44 pages, multi-qubit systems) [COMPLETE]
-│   └── quantum-computing-phase3.pdf    (31 pages, density matrix & decomposition) [COMPLETE]
+│   ├── quantum-computing-phase3.pdf    (31 pages, density matrix & decomposition) [COMPLETE]
+│   └── quantum-computing-phase4.pdf    (22 pages, quantum algorithms) [COMPLETE]
 │
 ├── study_guides/
 │   └── getting-started.md

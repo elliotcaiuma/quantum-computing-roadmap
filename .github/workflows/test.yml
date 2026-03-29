@@ -52,3 +52,13 @@ jobs:
         python code/density_matrix/21_create_density_matrix.py
         python code/density_matrix/26_schmidt_decomposition.py
         python code/density_matrix/29_complete_analyzer.py
+    
+    - name: Run Phase 4 samples (Algorithms)
+      env:
+        PYTHONUTF8: "1"
+        PYTHONIOENCODING: "utf-8"
+      run: |
+        echo "=== Testing Phase 4: Quantum Algorithms ==="
+        python code/algorithms/30_oracle_functions.py
+        python code/algorithms/31_deutsch_jozsa.py
+        python code/algorithms/32_grover_search.py
