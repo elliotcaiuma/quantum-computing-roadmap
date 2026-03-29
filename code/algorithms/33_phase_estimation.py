@@ -11,8 +11,19 @@ Key subroutine in Shor's algorithm and quantum simulation.
 
 from qiskit import QuantumCircuit
 from qiskit_aer import AerSimulator
-from qiskit.circuit.library import QFT
 import numpy as np
+
+def qft_manual(n):
+    """Manual QFT implementation to avoid deprecated library."""
+    qc = QuantumCircuit(n)
+    for j in range(n):
+        qc.h(j)
+        for k in range(j + 1, n):
+            angle = 2 * np.pi / (2 ** (k - j + 1))
+            qc.cp(angle, k, j)
+    for i in range(n // 2):
+        qc.swap(i, n - 1 - i)
+    return qc
 
 def phase_estimation(unitary, eigenstate_prep, n_count):
     """Estimate eigenvalue phase of unitary operator.
@@ -42,7 +53,7 @@ def phase_estimation(unitary, eigenstate_prep, n_count):
             qc.compose(unitary.control(), qubits=[j] + list(range(n_count, n_count + n_target)), inplace=True)
     
     # Step 4: Inverse QFT on counting qubits
-    qc.append(QFT(n_count, inverse=True).to_gate(), range(n_count))
+    qc.compose(qft_manual(n_count).inverse(), qubits=range(n_count), inplace=True)
     
     # Step 5: Measure counting qubits
     qc.measure(range(n_count), range(n_count))
