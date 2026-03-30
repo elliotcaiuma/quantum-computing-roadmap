@@ -81,6 +81,22 @@ This repository focuses on **quantum computing foundations** — single-qubit an
 - 4th-order Suzuki: Optimal for chemical accuracy (ε ~ 10⁻³)
 - Quantum advantage: Emerges at ~8 qubits for simulation tasks
 
+### Ising Model Project: Mean-Field Theory [COMPLETE]
+- Transverse Ising model Hamiltonian
+- Mean-field approximation and self-consistency
+- Quantum phase transitions and critical phenomena
+- Order parameter, critical temperature, quantum critical point
+- Spin factor $s$ for generality (Pauli vs. true spin-1/2)
+
+**Theory:** Read `projects/ising_model/ising_docs/ising-phase1-mean-field.pdf` (27 pages)
+
+**Code:** `projects/ising_model/code/` (3 educational modules)
+
+**Key Results:**
+- Analytical $T_c(\Gamma)$ formula with full derivation
+- Quantum critical point $\Gamma_c = J_0 z s$
+- Sum rule verification: $\langle \sigma^z \rangle^2 + \langle \sigma^x \rangle^2 = s^2$
+
 ## Quick Start
 
 ```bash
@@ -175,11 +191,12 @@ quantum-computing-roadmap/
 
 | Metric | Count |
 |--------|-------|
-| **PDF Pages** | 174 |
-| **Code Files** | 42 |
-| **Code Levels** | 43 |
+| **PDF Pages** | 201 (174 roadmap + 27 Ising) |
+| **Code Files** | 45 (42 roadmap + 3 Ising) |
+| **Code Levels** | 43 + 3 (Ising modules) |
 | **Algorithms** | 7 (Deutsch-Jozsa, Grover, QFT, Phase Estimation, Shor, Trotter, Suzuki) |
 | **Physical Models** | 3 (Heisenberg, H₂, Transverse Ising) |
+| **Projects** | 2 (Quantum Roadmap, Ising Model) |
 | **Estimated Study Time** | 16-21 weeks |
 
 ## Code Progression
@@ -226,6 +243,22 @@ See `code/README.md` for details.
 **Linear Algebra Done Right** (Axler, 3rd ed.):
 - Chapter 7: Singular Value Decomposition (Section 7.C)
 - Used for Schmidt decomposition derivation (Phase 3)
+
+### Ising Model & Many-Body Physics
+
+**Quantum Ising Phases** - Reference PDF:
+- Location: `C:\Users\Elliot Cai\.openclaw\workspace-learning-agent\quantum-computing\references\ising\Quantum Ising Phases.pdf`
+- Content: Complete derivation of transverse Ising model phase diagram
+- Used for: Mean-field theory, quantum critical point, order parameter analysis
+
+**Sachdev, S. (2011)** - *Quantum Phase Transitions* (2nd ed.), Cambridge University Press:
+- Chapter 1: Quantum Ising model
+- Chapter 4: Mean-field theory
+- Chapter 5: Quantum criticality
+
+**Continentino, M. A. (2017)** - *Quantum Scaling in Many-Body Systems* (2nd ed.), Cambridge University Press:
+- Chapter 2: Mean-field approximation
+- Chapter 3: Quantum phase transitions
 
 ## Resources
 
