@@ -247,11 +247,6 @@ See `code/README.md` for details.
 
 ### Ising Model & Many-Body Physics
 
-**Quantum Ising Phases** - Reference PDF:
-- Location: `C:\Users\Elliot Cai\.openclaw\workspace-learning-agent\quantum-computing\references\ising\Quantum Ising Phases.pdf`
-- Content: Complete derivation of transverse Ising model phase diagram
-- Used for: Mean-field theory, quantum critical point, order parameter analysis
-
 **Sachdev, S. (2011)** - *Quantum Phase Transitions* (2nd ed.), Cambridge University Press:
 - Chapter 1: Quantum Ising model
 - Chapter 4: Mean-field theory
