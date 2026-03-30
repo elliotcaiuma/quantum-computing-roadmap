@@ -14,40 +14,6 @@ This repository contains **quantum computing projects** — from foundational le
 
 ---
 
-## Projects
-
-### Project 1: Ising Model Simulation
-
-Study of the transverse Ising model using mean-field theory and quantum simulation techniques.
-
-#### Phase 1: Mean-Field Theory
-- Transverse Ising model Hamiltonian
-- Mean-field approximation and self-consistency
-- Quantum phase transitions and critical phenomena
-- Order parameter, critical temperature, quantum critical point
-- Spin factor $s$ for generality (Pauli vs. true spin-1/2)
-
-**Theory:** Read `projects/ising_model/ising_docs/ising-phase1-mean-field.pdf` (27 pages)
-
-**Code:** `projects/ising_model/code/` (3 educational modules)
-
-**Key Results:**
-- Analytical $T_c(\Gamma)$ formula with full derivation
-- Quantum critical point $\Gamma_c = J_0 z s$
-- Sum rule verification: $\langle \sigma^z \rangle^2 + \langle \sigma^x \rangle^2 = s^2$
-
-#### Phase 2: Exact Diagonalization (Planned)
-- Full diagonalization for small systems (N ≤ 20)
-- Benchmark mean-field results
-- Finite-size effects analysis
-
-#### Phase 3: Quantum Simulation (Planned)
-- Trotter-Suzuki decomposition
-- Real-time dynamics
-- Quench dynamics and thermalization
-
----
-
 ## Quantum Basics
 
 A structured learning path through quantum computing fundamentals with theory (PDFs) and code (Qiskit).
@@ -121,6 +87,40 @@ A structured learning path through quantum computing fundamentals with theory (P
 
 ---
 
+## Projects
+
+### Project 1: Ising Model Simulation
+
+Study of the transverse Ising model using mean-field theory and quantum simulation techniques.
+
+#### Phase 1: Mean-Field Theory
+- Transverse Ising model Hamiltonian
+- Mean-field approximation and self-consistency
+- Quantum phase transitions and critical phenomena
+- Order parameter, critical temperature, quantum critical point
+- Spin factor $s$ for generality (Pauli vs. true spin-1/2)
+
+**Theory:** Read `projects/ising_model/ising_docs/ising-phase1-mean-field.pdf` (27 pages)
+
+**Code:** `projects/ising_model/code/` (3 educational modules)
+
+**Key Results:**
+- Analytical $T_c(\Gamma)$ formula with full derivation
+- Quantum critical point $\Gamma_c = J_0 z s$
+- Sum rule verification: $\langle \sigma^z \rangle^2 + \langle \sigma^x \rangle^2 = s^2$
+
+#### Phase 2: Exact Diagonalization (Planned)
+- Full diagonalization for small systems (N ≤ 20)
+- Benchmark mean-field results
+- Finite-size effects analysis
+
+#### Phase 3: Quantum Simulation (Planned)
+- Trotter-Suzuki decomposition
+- Real-time dynamics
+- Quench dynamics and thermalization
+
+---
+
 ## Quick Start
 
 ```bash
@@ -133,11 +133,11 @@ python -m venv venv
 .\venv\Scripts\Activate.ps1  # Windows
 pip install -r requirements.txt
 
+# Run Quantum Basics code (start here for learning)
+python code/foundations/01_hello_qubit.py
+
 # Run Ising Model code (Project 1)
 python projects/ising_model/code/ising_01_mean_field_core.py
-
-# Run Quantum Basics code (learning path)
-python code/foundations/01_hello_qubit.py
 ```
 
 ---
@@ -150,17 +150,6 @@ quantum-computing-roadmap/
 ├── ROADMAP.md
 ├── SETUP.md
 ├── requirements.txt
-│
-├── projects/                          # Research projects
-│   └── ising_model/                   # Project 1: Ising Model
-│       ├── README.md
-│       ├── PHASE1_README.md
-│       ├── ising_docs/
-│       │   └── ising-phase1-mean-field.pdf  (27 pages)
-│       └── code/
-│           ├── ising_01_mean_field_core.py
-│           ├── ising_02_phase_diagram.py
-│           └── ising_03_order_parameter.py
 │
 ├── code/                              # Quantum Basics code
 │   ├── foundations/                   # Levels 1-9: Single-qubit
@@ -175,6 +164,16 @@ quantum-computing-roadmap/
 │   ├── quantum-computing-phase3.pdf   (31 pages)
 │   ├── quantum-computing-phase4.pdf   (29 pages)
 │   └── quantum-computing-phase5.pdf   (30 pages)
+│
+├── projects/                          # Research projects
+│   └── ising_model/                   # Project 1: Ising Model
+│       ├── README.md
+│       ├── ising_docs/
+│       │   └── ising-phase1-mean-field.pdf  (27 pages)
+│       └── code/
+│           ├── ising_01_mean_field_core.py
+│           ├── ising_02_phase_diagram.py
+│           └── ising_03_order_parameter.py
 │
 ├── study_guides/
 │   └── getting-started.md
