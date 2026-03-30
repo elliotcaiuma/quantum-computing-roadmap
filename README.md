@@ -16,80 +16,7 @@ This repository contains **quantum computing projects** — from foundational le
 
 ## Projects
 
-### Project 1: Quantum Computing Roadmap
-
-A structured learning path through quantum computing fundamentals with theory (PDFs) and code (Qiskit).
-
-#### Phase 1: Single-Qubit Foundations
-- Dirac notation and bra-ket formalism
-- Qubit representation
-- Bloch sphere visualization
-- Single-qubit gates (X, Y, Z, H, S, T) with geometric interpretations
-- Quantum measurement (complete mathematical treatment)
-
-**Theory:** Read `docs/quantum-computing-phase1.pdf` (40 pages)
-
-**Code:** Levels 1-9 in `code/foundations/`
-
-#### Phase 2: Multi-Qubit Systems
-- Tensor products and composite systems
-- Entanglement and Bell states (all 4 Bell states)
-- Multi-qubit gates (CNOT, CZ, SWAP) with matrix representations
-- Rotation gates (R_x, R_y, R_z) and Z-Y-Z decomposition
-- A-X-B-X-C decomposition for controlled-U gates
-- Quantum teleportation
-- Superdense coding
-
-**Theory:** Read `docs/quantum-computing-phase2.pdf` (44 pages)
-
-**Code:** Levels 11-20 in `code/multi_qubit/`
-
-#### Phase 3: Density Matrix & Decomposition
-- Density matrix formalism (pure vs mixed states)
-- Bloch sphere for mixed states
-- Purification (mixed states as parts of larger pure states)
-- Schmidt decomposition via SVD (complete derivation)
-- Reduced density matrices and partial trace
-- Entanglement detection (Schmidt rank test)
-- Von Neumann entropy and purity measures
-
-**Theory:** Read `docs/quantum-computing-phase3.pdf` (31 pages)
-
-**Code:** Levels 21-29 in `code/density_matrix/`
-
-#### Phase 4: Quantum Algorithms
-- Deutsch-Jozsa algorithm (exponential speedup demonstration)
-- Grover's search algorithm (quadratic speedup, amplitude amplification)
-- Quantum phase estimation (eigenvalue extraction)
-- Shor's factoring algorithm (cryptanalysis application)
-- Quantum Fourier Transform (QFT) with complete derivation
-
-**Theory:** Read `docs/quantum-computing-phase4.pdf` (29 pages)
-
-**Code:** Levels 30-35 in `code/algorithms/`
-
-#### Phase 5: Hamiltonian Simulation
-- Time evolution operator $e^{-iHt}$ and matrix exponential
-- Lie-Trotter product formula (complete derivation)
-- First-order Trotterization (error bound: $O(t^2/n)$)
-- Second-order symmetric Trotter / Strang splitting (error bound: $O(t^3/n^2)$)
-- Higher-order Suzuki expansions (4th-order: $O(t^5/n^4)$)
-- Heisenberg model simulation (spin-spin correlations ⟨XX⟩, ⟨YY⟩, ⟨ZZ⟩)
-- Molecular H₂ simulation (electronic structure, dissociation curve)
-- Error analysis and resource estimation (chemical accuracy, quantum advantage)
-
-**Theory:** Read `docs/quantum-computing-phase5.pdf` (30 pages)
-
-**Code:** Levels 36-43 in `code/hamiltonian_simulation/`
-
-**Key Results:**
-- 2nd-order Trotter: 50-500× better accuracy than 1st-order
-- 4th-order Suzuki: Optimal for chemical accuracy (ε ~ 10⁻³)
-- Quantum advantage: Emerges at ~8 qubits for simulation tasks
-
----
-
-### Project 2: Ising Model Simulation
+### Project 1: Ising Model Simulation
 
 Study of the transverse Ising model using mean-field theory and quantum simulation techniques.
 
@@ -121,6 +48,79 @@ Study of the transverse Ising model using mean-field theory and quantum simulati
 
 ---
 
+## Quantum Basics
+
+A structured learning path through quantum computing fundamentals with theory (PDFs) and code (Qiskit).
+
+### Phase 1: Single-Qubit Foundations
+- Dirac notation and bra-ket formalism
+- Qubit representation
+- Bloch sphere visualization
+- Single-qubit gates (X, Y, Z, H, S, T) with geometric interpretations
+- Quantum measurement (complete mathematical treatment)
+
+**Theory:** Read `docs/quantum-computing-phase1.pdf` (40 pages)
+
+**Code:** Levels 1-9 in `code/foundations/`
+
+### Phase 2: Multi-Qubit Systems
+- Tensor products and composite systems
+- Entanglement and Bell states (all 4 Bell states)
+- Multi-qubit gates (CNOT, CZ, SWAP) with matrix representations
+- Rotation gates (R_x, R_y, R_z) and Z-Y-Z decomposition
+- A-X-B-X-C decomposition for controlled-U gates
+- Quantum teleportation
+- Superdense coding
+
+**Theory:** Read `docs/quantum-computing-phase2.pdf` (44 pages)
+
+**Code:** Levels 11-20 in `code/multi_qubit/`
+
+### Phase 3: Density Matrix & Decomposition
+- Density matrix formalism (pure vs mixed states)
+- Bloch sphere for mixed states
+- Purification (mixed states as parts of larger pure states)
+- Schmidt decomposition via SVD (complete derivation)
+- Reduced density matrices and partial trace
+- Entanglement detection (Schmidt rank test)
+- Von Neumann entropy and purity measures
+
+**Theory:** Read `docs/quantum-computing-phase3.pdf` (31 pages)
+
+**Code:** Levels 21-29 in `code/density_matrix/`
+
+### Phase 4: Quantum Algorithms
+- Deutsch-Jozsa algorithm (exponential speedup demonstration)
+- Grover's search algorithm (quadratic speedup, amplitude amplification)
+- Quantum phase estimation (eigenvalue extraction)
+- Shor's factoring algorithm (cryptanalysis application)
+- Quantum Fourier Transform (QFT) with complete derivation
+
+**Theory:** Read `docs/quantum-computing-phase4.pdf` (29 pages)
+
+**Code:** Levels 30-35 in `code/algorithms/`
+
+### Phase 5: Hamiltonian Simulation
+- Time evolution operator $e^{-iHt}$ and matrix exponential
+- Lie-Trotter product formula (complete derivation)
+- First-order Trotterization (error bound: $O(t^2/n)$)
+- Second-order symmetric Trotter / Strang splitting (error bound: $O(t^3/n^2)$)
+- Higher-order Suzuki expansions (4th-order: $O(t^5/n^4)$)
+- Heisenberg model simulation (spin-spin correlations ⟨XX⟩, ⟨YY⟩, ⟨ZZ⟩)
+- Molecular H₂ simulation (electronic structure, dissociation curve)
+- Error analysis and resource estimation (chemical accuracy, quantum advantage)
+
+**Theory:** Read `docs/quantum-computing-phase5.pdf` (30 pages)
+
+**Code:** Levels 36-43 in `code/hamiltonian_simulation/`
+
+**Key Results:**
+- 2nd-order Trotter: 50-500× better accuracy than 1st-order
+- 4th-order Suzuki: Optimal for chemical accuracy (ε ~ 10⁻³)
+- Quantum advantage: Emerges at ~8 qubits for simulation tasks
+
+---
+
 ## Quick Start
 
 ```bash
@@ -133,11 +133,11 @@ python -m venv venv
 .\venv\Scripts\Activate.ps1  # Windows
 pip install -r requirements.txt
 
-# Run first code (Roadmap Project)
-python code/foundations/01_hello_qubit.py
-
-# Run Ising Model code (Ising Project)
+# Run Ising Model code (Project 1)
 python projects/ising_model/code/ising_01_mean_field_core.py
+
+# Run Quantum Basics code (learning path)
+python code/foundations/01_hello_qubit.py
 ```
 
 ---
@@ -151,22 +151,8 @@ quantum-computing-roadmap/
 ├── SETUP.md
 ├── requirements.txt
 │
-├── code/                              # Roadmap Project code
-│   ├── foundations/                   # Levels 1-9: Single-qubit
-│   ├── multi_qubit/                   # Levels 11-20: Multi-qubit
-│   ├── density_matrix/                # Levels 21-29: Density matrix
-│   ├── algorithms/                    # Levels 30-35: Quantum algorithms
-│   └── hamiltonian_simulation/        # Levels 36-43: Hamiltonian sim
-│
-├── docs/                              # Roadmap Project PDFs
-│   ├── quantum-computing-phase1.pdf   (40 pages)
-│   ├── quantum-computing-phase2.pdf   (44 pages)
-│   ├── quantum-computing-phase3.pdf   (31 pages)
-│   ├── quantum-computing-phase4.pdf   (29 pages)
-│   └── quantum-computing-phase5.pdf   (30 pages)
-│
-├── projects/                          # Additional projects
-│   └── ising_model/                   # Ising Model Project
+├── projects/                          # Research projects
+│   └── ising_model/                   # Project 1: Ising Model
 │       ├── README.md
 │       ├── PHASE1_README.md
 │       ├── ising_docs/
@@ -175,6 +161,20 @@ quantum-computing-roadmap/
 │           ├── ising_01_mean_field_core.py
 │           ├── ising_02_phase_diagram.py
 │           └── ising_03_order_parameter.py
+│
+├── code/                              # Quantum Basics code
+│   ├── foundations/                   # Levels 1-9: Single-qubit
+│   ├── multi_qubit/                   # Levels 11-20: Multi-qubit
+│   ├── density_matrix/                # Levels 21-29: Density matrix
+│   ├── algorithms/                    # Levels 30-35: Quantum algorithms
+│   └── hamiltonian_simulation/        # Levels 36-43: Hamiltonian sim
+│
+├── docs/                              # Quantum Basics PDFs
+│   ├── quantum-computing-phase1.pdf   (40 pages)
+│   ├── quantum-computing-phase2.pdf   (44 pages)
+│   ├── quantum-computing-phase3.pdf   (31 pages)
+│   ├── quantum-computing-phase4.pdf   (29 pages)
+│   └── quantum-computing-phase5.pdf   (30 pages)
 │
 ├── study_guides/
 │   └── getting-started.md
@@ -189,12 +189,12 @@ quantum-computing-roadmap/
 
 | Metric | Count |
 |--------|-------|
-| **PDF Pages** | 201 (174 Roadmap + 27 Ising) |
-| **Code Files** | 45 (42 Roadmap + 3 Ising) |
+| **PDF Pages** | 201 (174 Basics + 27 Ising) |
+| **Code Files** | 45 (42 Basics + 3 Ising) |
 | **Code Levels** | 43 + 3 (Ising modules) |
 | **Algorithms** | 7 (Deutsch-Jozsa, Grover, QFT, Phase Estimation, Shor, Trotter, Suzuki) |
 | **Physical Models** | 3 (Heisenberg, H₂, Transverse Ising) |
-| **Projects** | 2 (Quantum Roadmap, Ising Model) |
+| **Projects** | 1 (Ising Model) + Quantum Basics learning path |
 | **Estimated Study Time** | 16-21 weeks |
 
 ---
