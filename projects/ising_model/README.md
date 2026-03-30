@@ -61,7 +61,11 @@ projects/ising_model/
 ├── code/                        # Python code modules
 │   ├── ising_01_mean_field_core.py    # Core functions (self-consistency, T_c, Γ_c)
 │   ├── ising_02_phase_diagram.py      # Phase boundary visualization
-│   └── ising_03_order_parameter.py    # Order parameter plots
+│   ├── ising_03_order_parameter.py    # Order parameter plots
+│   ├── ising_04_jw_operators.py       # JW fermionic operators
+│   ├── ising_05_verify_anticommutation.py  # Verify fermionic statistics
+│   ├── ising_06_jw_hamiltonian.py     # Fermionic Hamiltonian
+│   └── ising_07_compare_representations.py  # Spin vs. fermion comparison
 │
 ├── scripts/                     # Utility scripts (Phase 2+)
 │   └── (to be added)
