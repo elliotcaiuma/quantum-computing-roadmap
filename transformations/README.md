@@ -26,6 +26,27 @@ Maps spin-1/2 systems to fermionic systems, enabling simulation of spin chains o
 - `03_inverse_transformation.py` - Construct spin operators from fermions
 - `04_jw_hamiltonian.py` - Build Ising, XY, Heisenberg Hamiltonians
 
+### Quantum Fourier Transform
+
+Quantum algorithm for Fourier transform with exponential speedup over classical FFT.
+
+**Documentation:** `quantum-fourier-transform/qft.pdf` (15 pages), `quantum-fourier-transform/fqft.pdf` (13 pages)
+
+**Code:** `quantum-fourier-transform/code/` - 3 Python modules
+
+**Topics Covered:**
+- Classical DFT definition and properties
+- QFT mathematical formulation
+- Circuit decomposition (Hadamard + controlled phase gates)
+- Gate complexity analysis: O(n²) vs O(2ⁿ n)
+- Fermionic QFT via determinant lifting
+- Block-diagonal structure by particle number
+
+**Code Modules:**
+- `01_dft_matrix.py` - DFT/QFT matrix construction, unitarity verification
+- `02_circuit_builder.py` - Manual QFT circuit from H + controlled phases
+- `03_fqft_matrix.py` - FQFT matrix via determinant lifting
+
 ### Bogoliubov Transformation
 
 Diagonalizes quadratic fermionic Hamiltonians in momentum space.

@@ -107,6 +107,22 @@ Maps spin systems to fermionic systems, enabling simulation of spin chains on qu
 - Application to transverse Ising model
 - Bridge to Fourier transform and Bogoliubov transformation
 
+### Quantum Fourier Transform
+
+Quantum algorithm for Fourier transform with exponential speedup over classical FFT.
+
+**Theory:** Read `transformations/quantum-fourier-transform/qft.pdf` (15 pages) and `fqft.pdf` (13 pages)
+
+**Code:** See `transformations/quantum-fourier-transform/code/` for Python implementations
+
+**Key Topics:**
+- Classical DFT definition and properties
+- QFT mathematical formulation
+- Circuit decomposition (Hadamard + controlled phase gates)
+- Gate complexity: O(n²) vs classical O(2ⁿ n)
+- Fermionic QFT via determinant lifting
+- Block-diagonal structure by particle number
+
 ---
 
 ## Quick Start
@@ -157,8 +173,11 @@ quantum-computing-roadmap/
 │   ├── jordan-wigner/                 # Spin ↔ Fermion mapping
 │   │   ├── jordan-wigner.pdf          (25 pages)
 │   │   └── code/                      # Python implementations
-│   ├── bogoliubov-transform/          # Momentum space diagonalization
-│   └── quantum-fourier-transform/     # QFT for algorithms
+│   ├── quantum-fourier-transform/     # QFT for algorithms
+│   │   ├── qft.pdf                    (15 pages)
+│   │   ├── fqft.pdf                   (13 pages)
+│   │   └── code/                      # Python implementations
+│   └── bogoliubov-transform/          # Momentum space diagonalization
 │
 ├── study_guides/
 │   └── getting-started.md
@@ -173,12 +192,12 @@ quantum-computing-roadmap/
 
 | Metric | Count |
 |--------|-------|
-| **PDF Pages** | 203 (174 Basics + 29 Transformations) |
-| **Code Files** | 43 |
+| **PDF Pages** | 231 (174 Basics + 57 Transformations) |
+| **Code Files** | 46 |
 | **Code Levels** | 43 |
 | **Algorithms** | 7 (Deutsch-Jozsa, Grover, QFT, Phase Estimation, Shor, Trotter, Suzuki) |
 | **Physical Models** | 2 (Heisenberg, H₂) |
-| **Transformations** | 1 (Jordan-Wigner with code) + Quantum Basics learning path |
+| **Transformations** | 2 (Jordan-Wigner + QFT/FQFT with code) + Quantum Basics learning path |
 | **Estimated Study Time** | 16-21 weeks |
 
 ---
