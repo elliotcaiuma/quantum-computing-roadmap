@@ -25,10 +25,10 @@ jobs:
     
     - name: Run pylint
       run: |
-        # Run pylint on all Python files in code/
+        # Run pylint on all Python files in main/code/
         # Disable missing docstring warnings for module/class/function (C0114, C0115, C0116)
         # These are educational scripts, not a library
-        pylint code/**/*.py --disable=C0114,C0115,C0116,R0801 --exit-zero
+        pylint main/code/**/*.py --disable=C0114,C0115,C0116,R0801 --exit-zero
         
         # R0801 = duplicate code (expected in educational progression)
         # --exit-zero = don't fail CI, just report warnings
