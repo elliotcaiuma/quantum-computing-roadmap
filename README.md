@@ -123,6 +123,55 @@ Quantum algorithm for Fourier transform with exponential speedup over classical 
 - Fermionic QFT via determinant lifting
 - Block-diagonal structure by particle number
 
+### Quantum Fourier Transform
+
+Quantum algorithm for Fourier transform with exponential speedup over classical FFT.
+
+**Theory:** Read `transformations/quantum-fourier-transform/qft.pdf` (15 pages) and `fqft.pdf` (13 pages)
+
+**Code:** See `transformations/quantum-fourier-transform/code/` for Python implementations
+
+**Key Topics:**
+- Classical DFT definition and properties
+- QFT mathematical formulation
+- Circuit decomposition (Hadamard + controlled phase gates)
+- Gate complexity: O(n²) vs classical O(2ⁿ n)
+- Fermionic QFT via determinant lifting
+- Block-diagonal structure by particle number
+
+---
+
+## Conformal Field Theory
+
+Universal results for entanglement and critical phenomena in 1+1D quantum systems.
+
+### Entanglement Entropy
+
+Derivation of universal entanglement entropy formula in 1+1D CFT using replica trick and twist fields.
+
+**Theory:** Read `conformal_field_theory/entanglement-entropy/entanglement-entropy.pdf` (29 pages)
+
+**Code:** See `conformal_field_theory/entanglement-entropy/code/` for correlation matrix method
+
+**Main result:** For 1+1D CFT with central charge \(c\):
+\[
+S_A = \frac{c}{3} \ln\left(\frac{L}{a}\right) + \text{const}
+\]
+
+**For Ising model (\(c = 1/2\)):**
+\[
+S_A = \frac{1}{6} \ln\left(\frac{L}{a}\right) + \text{const}
+\]
+
+**Key derivations:**
+- Replica trick: avoiding direct diagonalization via Rényi entropies
+- Path integral representation on \(n\)-sheeted Riemann surface
+- Twist fields and their scaling dimension \(\Delta_n = \frac{c}{12}(n - 1/n)\)
+- Complete derivation via Schwarzian derivative
+- Position-momentum overlap \(\langle p | q \rangle = e^{-ipq}\) from first principles
+- Matrix element derivations for path integral propagator
+- Numerical verification using correlation matrix method
+
 ---
 
 ## Quick Start
@@ -175,12 +224,18 @@ quantum-computing-roadmap/
 │   │   ├── jordan-wigner.pdf          (25 pages)
 │   │   ├── README.md
 │   │   └── code/                      # Python implementations (4 modules)
-│   ├── quantum-fourier-transform/     # QFT for algorithms
-│   │   ├── qft.pdf                    (14 pages)
-│   │   ├── fqft.pdf                   (14 pages)
+│   └── quantum-fourier-transform/     # QFT for algorithms
+│       ├── qft.pdf                    (14 pages)
+│       ├── fqft.pdf                   (14 pages)
+│       ├── README.md
+│       └── code/                      # Python implementations (3 modules)
+│
+├── conformal_field_theory/            # CFT and entanglement
+│   ├── entanglement-entropy/          # Replica trick derivation
+│   │   ├── entanglement-entropy.pdf   (29 pages)
 │   │   ├── README.md
-│   │   └── code/                      # Python implementations (3 modules)
-│   └── bogoliubov-transform/          # Momentum space diagonalization (coming soon)
+│   │   └── code/                      # Correlation matrix method
+│   └── bogoliubov-transform/          # Coming soon
 │
 ├── study_guides/
 │   └── getting-started.md
@@ -195,12 +250,13 @@ quantum-computing-roadmap/
 
 | Metric | Count |
 |--------|-------|
-| **PDF Pages** | 231 (174 Basics + 57 Transformations) |
-| **Code Files** | 46 |
+| **PDF Pages** | 231 (174 Basics + 54 Transformations + 29 CFT) |
+| **Code Files** | 47 |
 | **Code Levels** | 43 |
 | **Algorithms** | 7 (Deutsch-Jozsa, Grover, QFT, Phase Estimation, Shor, Trotter, Suzuki) |
 | **Physical Models** | 2 (Heisenberg, H₂) |
-| **Transformations** | 2 (Jordan-Wigner + QFT/FQFT with code) + Quantum Basics learning path |
+| **Transformations** | 2 (Jordan-Wigner + QFT/FQFT with code) |
+| **CFT** | 1 (Entanglement Entropy with replica trick) |
 | **Estimated Study Time** | 16-21 weeks |
 
 ---
