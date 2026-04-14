@@ -95,14 +95,17 @@ Key mathematical transformations used throughout quantum computing and many-body
 
 Maps spin systems to fermionic systems, enabling simulation of spin chains on quantum computers.
 
-**Theory:** Read `transformations/jordan-wigner/jordan-wigner.pdf` (29 pages)
+**Theory:** Read `transformations/jordan-wigner/jordan-wigner.pdf` (25 pages)
+
+**Code:** See `transformations/jordan-wigner/code/` for Python implementations
 
 **Key Topics:**
-- Complete derivation from first principles
-- Fermionic anticommutation relations
+- Pauli spin operators and raising/lowering operators
+- Jordan-Wigner transformation derivation from first principles
+- Fermionic anticommutation relations (verified numerically)
 - Inverse transformation: spins in terms of fermions
 - Application to transverse Ising model
-- Bogoliubov transformation (momentum space diagonalization)
+- Bridge to Fourier transform and Bogoliubov transformation
 
 ---
 
@@ -152,7 +155,8 @@ quantum-computing-roadmap/
 │
 ├── transformations/                   # Key transformations
 │   ├── jordan-wigner/                 # Spin ↔ Fermion mapping
-│   │   └── jordan-wigner.pdf          (29 pages)
+│   │   ├── jordan-wigner.pdf          (25 pages)
+│   │   └── code/                      # Python implementations
 │   ├── bogoliubov-transform/          # Momentum space diagonalization
 │   └── quantum-fourier-transform/     # QFT for algorithms
 │
@@ -174,7 +178,7 @@ quantum-computing-roadmap/
 | **Code Levels** | 43 |
 | **Algorithms** | 7 (Deutsch-Jozsa, Grover, QFT, Phase Estimation, Shor, Trotter, Suzuki) |
 | **Physical Models** | 2 (Heisenberg, H₂) |
-| **Transformations** | 1 (Jordan-Wigner) + Quantum Basics learning path |
+| **Transformations** | 1 (Jordan-Wigner with code) + Quantum Basics learning path |
 | **Estimated Study Time** | 16-21 weeks |
 
 ---

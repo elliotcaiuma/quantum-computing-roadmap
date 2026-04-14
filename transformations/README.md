@@ -8,14 +8,23 @@ Key mathematical transformations used throughout quantum computing and many-body
 
 Maps spin-1/2 systems to fermionic systems, enabling simulation of spin chains on quantum computers.
 
-**Documentation:** `jordan-wigner/jordan-wigner.pdf` (29 pages)
+**Documentation:** `jordan-wigner/jordan-wigner.pdf` (25 pages)
+
+**Code:** `jordan-wigner/code/` - 4 Python modules
 
 **Topics Covered:**
-- Complete derivation from first principles
-- Fermionic anticommutation relations
+- Pauli spin operators and raising/lowering operators
+- Jordan-Wigner transformation derivation from first principles
+- Fermionic anticommutation relations (verified numerically)
 - Inverse transformation: spins in terms of fermions
 - Application to transverse Ising model
-- Bogoliubov transformation (momentum space diagonalization)
+- Bridge to Fourier transform and Bogoliubov transformation
+
+**Code Modules:**
+- `01_pauli_utils.py` - Pauli matrices, Kronecker products, commutators
+- `02_jw_operators.py` - Build fermionic operators, verify anticommutation
+- `03_inverse_transformation.py` - Construct spin operators from fermions
+- `04_jw_hamiltonian.py` - Build Ising, XY, Heisenberg Hamiltonians
 
 ### Bogoliubov Transformation
 

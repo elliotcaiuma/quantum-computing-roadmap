@@ -4,9 +4,9 @@ The Jordan-Wigner transformation maps spin-1/2 operators to fermionic creation a
 
 ## Documentation
 
-**Full Derivation:** [jordan-wigner.pdf](./jordan-wigner.pdf) (24 pages)
+**Full Derivation:** [jordan-wigner.pdf](./jordan-wigner.pdf) (25 pages)
 
-**Code Integration:** Python code modules are embedded throughout the PDF after each theory section, following the Phase 1 baseline format.
+**Code Modules:** `code/` folder - 4 Python implementations
 
 ## Key Results
 
@@ -70,11 +70,12 @@ Result: free fermions with dispersion $\epsilon_k = 2\sqrt{(\Gamma - J\cos k)^2 
 
 ## Code Modules
 
-Code is **integrated throughout the PDF** after each theory section:
+Code is **integrated throughout the PDF** after each theory section, with additional standalone modules in `code/`:
 
 - **Module 1:** `jw_01_pauli_utils.py` - Pauli matrices, Kronecker products, (anti)commutators (after Section 2)
 - **Module 2:** `jw_02_build_operators.py` - Build JW fermionic operators (after Section 3)
 - **Module 3:** `jw_03_verify_anticommutation.py` - Verify fermionic anticommutation relations (after Section 4)
+- **Module 4:** `jw_04_jw_hamiltonian.py` - Build Ising, XY, Heisenberg Hamiltonians
 
 See the PDF for complete code listings with line-by-line explanations.
 
