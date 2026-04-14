@@ -188,19 +188,20 @@ quantum-computing-roadmap/
 ├── SETUP.md
 ├── requirements.txt
 │
-├── code/                              # Quantum Basics code
-│   ├── foundations/                   # Levels 1-9: Single-qubit
-│   ├── multi_qubit/                   # Levels 11-20: Multi-qubit
-│   ├── density_matrix/                # Levels 21-29: Density matrix
-│   ├── algorithms/                    # Levels 30-35: Quantum algorithms
-│   └── hamiltonian_simulation/        # Levels 36-43: Hamiltonian sim
-│
-├── docs/                              # Quantum Basics PDFs
-│   ├── quantum-computing-phase1.pdf   (40 pages)
-│   ├── quantum-computing-phase2.pdf   (44 pages)
-│   ├── quantum-computing-phase3.pdf   (31 pages)
-│   ├── quantum-computing-phase4.pdf   (29 pages)
-│   └── quantum-computing-phase5.pdf   (30 pages)
+├── main/                                # Main content
+│   ├── code/                            # Quantum Basics code
+│   │   ├── foundations/                 # Levels 1-9: Single-qubit
+│   │   ├── multi_qubit/                 # Levels 11-20: Multi-qubit
+│   │   ├── density_matrix/              # Levels 21-29: Density matrix
+│   │   ├── algorithms/                  # Levels 30-35: Quantum algorithms
+│   │   └── hamiltonian_simulation/      # Levels 36-43: Hamiltonian sim
+│   │
+│   └── docs/                            # Quantum Basics PDFs
+│       ├── quantum-computing-phase1.pdf   (40 pages)
+│       ├── quantum-computing-phase2.pdf   (44 pages)
+│       ├── quantum-computing-phase3.pdf   (31 pages)
+│       ├── quantum-computing-phase4.pdf   (29 pages)
+│       └── quantum-computing-phase5.pdf   (30 pages)
 │
 ├── transformations/                   # Key transformations
 │   ├── README.md
