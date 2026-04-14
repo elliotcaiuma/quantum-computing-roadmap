@@ -220,6 +220,7 @@ quantum-computing-roadmap/
 ├── conformal_field_theory/            # CFT and entanglement
 │   ├── entanglement-entropy/          # Replica trick derivation
 │   │   ├── entanglement-entropy.pdf   (32 pages)
+│   │   ├── entanglement-entropy-interactive.html
 │   │   ├── README.md
 │   │   └── code/                      # Correlation matrix method
 │   └── bogoliubov-transform/          # Coming soon
@@ -239,6 +240,7 @@ quantum-computing-roadmap/
 |--------|-------|
 | **PDF Pages** | 238 (174 Basics + 54 Transformations + 32 CFT) |
 | **Code Files** | 48 |
+| **Interactive Visualizations** | 1 (Entanglement Entropy replica trick) |
 | **Code Levels** | 43 |
 | **Algorithms** | 7 (Deutsch-Jozsa, Grover, QFT, Phase Estimation, Shor, Trotter, Suzuki) |
 | **Physical Models** | 2 (Heisenberg, H₂) |
