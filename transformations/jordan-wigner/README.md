@@ -4,7 +4,7 @@ The Jordan-Wigner transformation maps spin-1/2 operators to fermionic creation a
 
 ## Documentation
 
-**Full Derivation:** [jordan-wigner.pdf](./jordan-wigner.pdf) (29 pages)
+**Full Derivation:** [jordan-wigner.pdf](./jordan-wigner.pdf) (30 pages)
 
 ## Key Results
 
@@ -12,8 +12,13 @@ The Jordan-Wigner transformation maps spin-1/2 operators to fermionic creation a
 
 For a 1D spin chain, the Jordan-Wigner transformation is:
 
-$$c_i = \left(\prod_{j<i} Z_j\right) \sigma_i^-$$
-$$c_i^\dagger = \left(\prod_{j<i} Z_j\right) \sigma_i^+$$
+\[
+c_i = \left(\prod_{j<i} Z_j\right) \sigma_i^-
+\]
+
+\[
+c_i^\dagger = \left(\prod_{j<i} Z_j\right) \sigma_i^+
+\]
 
 where:
 - $c_i, c_i^\dagger$ are fermionic annihilation/creation operators
@@ -25,12 +30,19 @@ where:
 
 Spins in terms of fermions:
 
-$$\sigma_i^x = (c_i^\dagger + c_i) S_i$$
-$$\sigma_i^z = I - 2c_i^\dagger c_i$$
+\[
+\sigma_i^x = (c_i^\dagger + c_i) S_i
+\]
+
+\[
+\sigma_i^z = I - 2c_i^\dagger c_i
+\]
 
 ### Critical Identity
 
-$$(c_i^\dagger + c_i) Z_i = c_i^\dagger - c_i$$
+\[
+(c_i^\dagger + c_i) Z_i = c_i^\dagger - c_i
+\]
 
 This identity is essential for transforming the transverse field term.
 
@@ -38,11 +50,15 @@ This identity is essential for transforming the transverse field term.
 
 The transverse Ising Hamiltonian:
 
-$$H = -J \sum_i \sigma_i^x \sigma_{i+1}^x - \Gamma \sum_i \sigma_i^z$$
+\[
+H = -J \sum_i \sigma_i^x \sigma_{i+1}^x - \Gamma \sum_i \sigma_i^z
+\]
 
 becomes (after JW transformation):
 
-$$H = -J \sum_i (c_i^\dagger - c_i)(c_{i+1}^\dagger + c_{i+1}) - \Gamma \sum_i (I - 2c_i^\dagger c_i)$$
+\[
+H = -J \sum_i (c_i^\dagger - c_i)(c_{i+1}^\dagger + c_{i+1}) - \Gamma \sum_i (I - 2c_i^\dagger c_i)
+\]
 
 This quadratic fermionic Hamiltonian can be diagonalized via:
 1. Fourier transform to momentum space
@@ -50,16 +66,16 @@ This quadratic fermionic Hamiltonian can be diagonalized via:
 
 Result: free fermions with dispersion $\epsilon_k = 2\sqrt{(\Gamma - J\cos k)^2 + (J\sin k)^2}$
 
-## Code (Coming Soon)
+## Code Modules
 
-```
-code/
-├── 01_jw_mapping.py           # Basic JW transformation
-├── 02_anticommutation_check.py # Verify fermionic relations
-├── 03_inverse_transform.py    # Spins from fermions
-├── 04_ising_fermionization.py # Transform Ising Hamiltonian
-└── 05_bogoliubov_diagonalization.py # Momentum space diagonalization
-```
+Located in `code/` folder:
+
+- `01_pauli_utils.py` - Pauli matrices, Kronecker products, commutators
+- `02_jw_operators.py` - Build JW fermionic operators, verify anticommutation
+- `03_inverse_transformation.py` - Construct spin operators from fermions
+- `04_jw_hamiltonian.py` - Build Ising, XY, Heisenberg Hamiltonians
+
+See [code/README.md](./code/README.md) for usage instructions.
 
 ## Prerequisites
 
