@@ -232,6 +232,37 @@ See `code/README.md` for details.
 
 ---
 
+## Transformations [NEW]
+
+### Jordan-Wigner Transformation
+
+Maps spin-1/2 systems to fermionic systems, enabling simulation of spin chains on quantum computers.
+
+### Topics
+
+- Spin operators in terms of Pauli matrices
+- Fermionic creation/annihilation operators
+- String operator: $S_i = \prod_{j<i} Z_j$
+- Jordan-Wigner mapping:
+  - $c_i = S_i \sigma_i^-$
+  - $c_i^\dagger = S_i \sigma_i^+$
+- Proof of fermionic anticommutation relations
+- Inverse transformation: $\sigma_i^x, \sigma_i^z$ in terms of fermions
+- Critical identity: $(c_i^\dagger + c_i) Z_i = c_i^\dagger - c_i$
+- Application to transverse Ising model
+- Bogoliubov transformation (momentum space diagonalization)
+
+### Milestone
+
+✅ Understand why we need fermionization  
+✅ Derive JW transformation from first principles  
+✅ Prove anticommutation relations  
+✅ Transform Ising Hamiltonian to fermionic form  
+✅ Diagonalize via Bogoliubov transform  
+✅ Extract dispersion relation  
+
+---
+
 ## Next Steps
 
 After completing all 5 phases:

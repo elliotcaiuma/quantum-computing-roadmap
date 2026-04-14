@@ -119,6 +119,11 @@ After completing all 17 levels:
 - Entanglement detector
 - Teleportation protocol
 
+### Explore Transformations
+- Jordan-Wigner transformation (see `../transformations/jordan-wigner/`)
+- Bogoliubov transformation
+- Quantum Fourier Transform
+
 ### Contribute Back
 - Add new levels (teleportation, superdense coding)
 - Improve documentation

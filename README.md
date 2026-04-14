@@ -87,37 +87,22 @@ A structured learning path through quantum computing fundamentals with theory (P
 
 ---
 
-## Projects
+## Transformations
 
-### Project 1: Ising Model Simulation
+Key mathematical transformations used throughout quantum computing and many-body physics.
 
-Study of the transverse Ising model using mean-field theory and quantum simulation techniques.
+### Jordan-Wigner Transformation
 
-#### Phase 1: Mean-Field Theory
-- Transverse Ising model Hamiltonian
-- Mean-field approximation and self-consistency
-- Quantum phase transitions and critical phenomena
-- Order parameter, critical temperature, quantum critical point
-- Spin factor $s$ for generality (Pauli vs. true spin-1/2)
+Maps spin systems to fermionic systems, enabling simulation of spin chains on quantum computers.
 
-**Theory:** Read `projects/ising_model/ising_docs/ising-phase1-mean-field.pdf` (27 pages)
+**Theory:** Read `transformations/jordan-wigner/jordan-wigner.pdf` (29 pages)
 
-**Code:** `projects/ising_model/code/` (3 educational modules)
-
-**Key Results:**
-- Analytical $T_c(\Gamma)$ formula with full derivation
-- Quantum critical point $\Gamma_c = J_0 z s$
-- Sum rule verification: $\langle \sigma^z \rangle^2 + \langle \sigma^x \rangle^2 = s^2$
-
-#### Phase 2: Exact Diagonalization (Planned)
-- Full diagonalization for small systems (N ≤ 20)
-- Benchmark mean-field results
-- Finite-size effects analysis
-
-#### Phase 3: Quantum Simulation (Planned)
-- Trotter-Suzuki decomposition
-- Real-time dynamics
-- Quench dynamics and thermalization
+**Key Topics:**
+- Complete derivation from first principles
+- Fermionic anticommutation relations
+- Inverse transformation: spins in terms of fermions
+- Application to transverse Ising model
+- Bogoliubov transformation (momentum space diagonalization)
 
 ---
 
@@ -136,8 +121,8 @@ pip install -r requirements.txt
 # Run Quantum Basics code (start here for learning)
 python code/foundations/01_hello_qubit.py
 
-# Run Ising Model code (Project 1)
-python projects/ising_model/code/ising_01_mean_field_core.py
+# Run transformation examples (coming soon)
+# python transformations/jordan-wigner/code/jw_01_demo.py
 ```
 
 ---
@@ -165,15 +150,11 @@ quantum-computing-roadmap/
 │   ├── quantum-computing-phase4.pdf   (29 pages)
 │   └── quantum-computing-phase5.pdf   (30 pages)
 │
-├── projects/                          # Research projects
-│   └── ising_model/                   # Project 1: Ising Model
-│       ├── README.md
-│       ├── ising_docs/
-│       │   └── ising-phase1-mean-field.pdf  (27 pages)
-│       └── code/
-│           ├── ising_01_mean_field_core.py
-│           ├── ising_02_phase_diagram.py
-│           └── ising_03_order_parameter.py
+├── transformations/                   # Key transformations
+│   ├── jordan-wigner/                 # Spin ↔ Fermion mapping
+│   │   └── jordan-wigner.pdf          (29 pages)
+│   ├── bogoliubov-transform/          # Momentum space diagonalization
+│   └── quantum-fourier-transform/     # QFT for algorithms
 │
 ├── study_guides/
 │   └── getting-started.md
@@ -188,12 +169,12 @@ quantum-computing-roadmap/
 
 | Metric | Count |
 |--------|-------|
-| **PDF Pages** | 201 (174 Basics + 27 Ising) |
-| **Code Files** | 45 (42 Basics + 3 Ising) |
-| **Code Levels** | 43 + 3 (Ising modules) |
+| **PDF Pages** | 203 (174 Basics + 29 Transformations) |
+| **Code Files** | 43 |
+| **Code Levels** | 43 |
 | **Algorithms** | 7 (Deutsch-Jozsa, Grover, QFT, Phase Estimation, Shor, Trotter, Suzuki) |
-| **Physical Models** | 3 (Heisenberg, H₂, Transverse Ising) |
-| **Projects** | 1 (Ising Model) + Quantum Basics learning path |
+| **Physical Models** | 2 (Heisenberg, H₂) |
+| **Transformations** | 1 (Jordan-Wigner) + Quantum Basics learning path |
 | **Estimated Study Time** | 16-21 weeks |
 
 ---
@@ -245,16 +226,19 @@ See `code/README.md` for details.
 - Chapter 7: Singular Value Decomposition (Section 7.C)
 - Used for Schmidt decomposition derivation (Phase 3)
 
-### Ising Model & Many-Body Physics
+### Transformations & Many-Body Physics
 
 **Sachdev, S. (2011)** - *Quantum Phase Transitions* (2nd ed.), Cambridge University Press:
 - Chapter 1: Quantum Ising model
 - Chapter 4: Mean-field theory
 - Chapter 5: Quantum criticality
+- Jordan-Wigner transformation
+- Bogoliubov transformation
 
 **Continentino, M. A. (2017)** - *Quantum Scaling in Many-Body Systems* (2nd ed.), Cambridge University Press:
 - Chapter 2: Mean-field approximation
 - Chapter 3: Quantum phase transitions
+- Fermionization of spin chains
 
 ---
 
