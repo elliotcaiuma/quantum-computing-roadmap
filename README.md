@@ -170,14 +170,17 @@ quantum-computing-roadmap/
 │   └── quantum-computing-phase5.pdf   (30 pages)
 │
 ├── transformations/                   # Key transformations
+│   ├── README.md
 │   ├── jordan-wigner/                 # Spin ↔ Fermion mapping
 │   │   ├── jordan-wigner.pdf          (25 pages)
-│   │   └── code/                      # Python implementations
+│   │   ├── README.md
+│   │   └── code/                      # Python implementations (4 modules)
 │   ├── quantum-fourier-transform/     # QFT for algorithms
-│   │   ├── qft.pdf                    (15 pages)
-│   │   ├── fqft.pdf                   (13 pages)
-│   │   └── code/                      # Python implementations
-│   └── bogoliubov-transform/          # Momentum space diagonalization
+│   │   ├── qft.pdf                    (14 pages)
+│   │   ├── fqft.pdf                   (14 pages)
+│   │   ├── README.md
+│   │   └── code/                      # Python implementations (3 modules)
+│   └── bogoliubov-transform/          # Momentum space diagonalization (coming soon)
 │
 ├── study_guides/
 │   └── getting-started.md

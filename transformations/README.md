@@ -30,7 +30,7 @@ Maps spin-1/2 systems to fermionic systems, enabling simulation of spin chains o
 
 Quantum algorithm for Fourier transform with exponential speedup over classical FFT.
 
-**Documentation:** `quantum-fourier-transform/qft.pdf` (15 pages), `quantum-fourier-transform/fqft.pdf` (13 pages)
+**Documentation:** `quantum-fourier-transform/qft.pdf` (14 pages), `quantum-fourier-transform/fqft.pdf` (14 pages)
 
 **Code:** `quantum-fourier-transform/code/` - 3 Python modules
 
@@ -38,7 +38,7 @@ Quantum algorithm for Fourier transform with exponential speedup over classical 
 - Classical DFT definition and properties
 - QFT mathematical formulation
 - Circuit decomposition (Hadamard + controlled phase gates)
-- Gate complexity analysis: O(n²) vs O(2ⁿ n)
+- Gate complexity: O(n²) vs classical O(2ⁿ n)
 - Fermionic QFT via determinant lifting
 - Block-diagonal structure by particle number
 
@@ -53,12 +53,6 @@ Diagonalizes quadratic fermionic Hamiltonians in momentum space.
 
 **Documentation:** _Coming soon_
 
-### Quantum Fourier Transform
-
-Fundamental transformation for quantum algorithms (Shor's, phase estimation).
-
-**Documentation:** _Coming soon_
-
 ---
 
 ## Code Structure
@@ -68,7 +62,7 @@ Each transformation folder contains:
 ```
 transformation-name/
 ├── transformation-name.pdf    # Full derivation and theory
-├── code/                      # Implementation examples (coming soon)
+├── code/                      # Implementation examples
 │   ├── 01_intro.py
 │   └── ...
 └── README.md                  # This file

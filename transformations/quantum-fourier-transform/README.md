@@ -4,9 +4,9 @@ The Quantum Fourier Transform is one of the most important quantum algorithms, p
 
 ## Documentation
 
-**QFT (Standard):** [qft.pdf](./qft.pdf) (15 pages)
+**QFT (Standard):** [qft.pdf](./qft.pdf) (14 pages)
 
-**FQFT (Fermionic):** [fqft.pdf](./fqft.pdf) (13 pages)
+**FQFT (Fermionic):** [fqft.pdf](./fqft.pdf) (14 pages)
 
 **Code:** `code/` folder - 3 Python implementations
 
@@ -19,6 +19,12 @@ For $n$ qubits with $N = 2^n$:
 \[
 \text{QFT} \ket{j} = \frac{1}{\sqrt{N}} \sum_{k=0}^{N-1} e^{2\pi i j k / N} \ket{k}
 \]
+
+**Complete derivations included:**
+- Proof of DFT unitarity (geometric series)
+- Product state representation derivation
+- Step-by-step 2-qubit circuit construction
+- Numerical examples for all 2-qubit basis states
 
 **Circuit decomposition:**
 - $n$ Hadamard gates
@@ -41,6 +47,12 @@ c_j^\dagger \to \tilde{c}_k^\dagger = \frac{1}{\sqrt{n}} \sum_{j=0}^{n-1} e^{2\p
 \]
 
 **Block structure:** Diagonal by particle number, blocks are $\Lambda^p(u)$
+
+**Complete derivations included:**
+- Bitstring to occupied sites mapping
+- Determinant formula for many-body states
+- Block-diagonal structure proof
+- Numerical examples for 3-mode FQFT
 
 ## Code Modules
 
