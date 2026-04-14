@@ -111,23 +111,7 @@ Maps spin systems to fermionic systems, enabling simulation of spin chains on qu
 
 Quantum algorithm for Fourier transform with exponential speedup over classical FFT.
 
-**Theory:** Read `transformations/quantum-fourier-transform/qft.pdf` (15 pages) and `fqft.pdf` (13 pages)
-
-**Code:** See `transformations/quantum-fourier-transform/code/` for Python implementations
-
-**Key Topics:**
-- Classical DFT definition and properties
-- QFT mathematical formulation
-- Circuit decomposition (Hadamard + controlled phase gates)
-- Gate complexity: O(n²) vs classical O(2ⁿ n)
-- Fermionic QFT via determinant lifting
-- Block-diagonal structure by particle number
-
-### Quantum Fourier Transform
-
-Quantum algorithm for Fourier transform with exponential speedup over classical FFT.
-
-**Theory:** Read `transformations/quantum-fourier-transform/qft.pdf` (15 pages) and `fqft.pdf` (13 pages)
+**Theory:** Read `transformations/quantum-fourier-transform/qft.pdf` (14 pages) and `fqft.pdf` (14 pages)
 
 **Code:** See `transformations/quantum-fourier-transform/code/` for Python implementations
 
@@ -149,7 +133,7 @@ Universal results for entanglement and critical phenomena in 1+1D quantum system
 
 Derivation of universal entanglement entropy formula in 1+1D CFT using replica trick and twist fields.
 
-**Theory:** Read `conformal_field_theory/entanglement-entropy/entanglement-entropy.pdf` (29 pages)
+**Theory:** Read `conformal_field_theory/entanglement-entropy/entanglement-entropy.pdf` (32 pages)
 
 **Code:** See `conformal_field_theory/entanglement-entropy/code/` for correlation matrix method
 
@@ -232,7 +216,7 @@ quantum-computing-roadmap/
 │
 ├── conformal_field_theory/            # CFT and entanglement
 │   ├── entanglement-entropy/          # Replica trick derivation
-│   │   ├── entanglement-entropy.pdf   (29 pages)
+│   │   ├── entanglement-entropy.pdf   (32 pages)
 │   │   ├── README.md
 │   │   └── code/                      # Correlation matrix method
 │   └── bogoliubov-transform/          # Coming soon
@@ -250,13 +234,13 @@ quantum-computing-roadmap/
 
 | Metric | Count |
 |--------|-------|
-| **PDF Pages** | 231 (174 Basics + 54 Transformations + 29 CFT) |
-| **Code Files** | 47 |
+| **PDF Pages** | 238 (174 Basics + 54 Transformations + 32 CFT) |
+| **Code Files** | 48 |
 | **Code Levels** | 43 |
 | **Algorithms** | 7 (Deutsch-Jozsa, Grover, QFT, Phase Estimation, Shor, Trotter, Suzuki) |
 | **Physical Models** | 2 (Heisenberg, H₂) |
 | **Transformations** | 2 (Jordan-Wigner + QFT/FQFT with code) |
-| **CFT** | 1 (Entanglement Entropy with replica trick) |
+| **CFT** | 1 (Entanglement Entropy with replica trick, 32 pages) |
 | **Estimated Study Time** | 16-21 weeks |
 
 ---
