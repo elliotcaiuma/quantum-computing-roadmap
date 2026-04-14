@@ -137,6 +137,8 @@ Derivation of universal entanglement entropy formula in 1+1D CFT using replica t
 
 **Code:** See `conformal_field_theory/entanglement-entropy/code/` for correlation matrix method
 
+**Interactive:** See `conformal_field_theory/entanglement-entropy/entanglement-entropy-interactive.html` for visual exploration
+
 **Main result:** For 1+1D CFT with central charge \(c\):
 \[
 S_A = \frac{c}{3} \ln\left(\frac{L}{a}\right) + \text{const}

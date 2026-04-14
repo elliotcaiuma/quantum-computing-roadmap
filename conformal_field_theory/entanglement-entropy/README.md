@@ -4,9 +4,11 @@ Replica trick, twist fields, and the universal formula $S = \frac{c}{3} \ln L$.
 
 ## Documentation
 
-**Theory:** `entanglement-entropy.pdf` (29 pages)
+**Theory:** `entanglement-entropy.pdf` (32 pages)
 
 **Code:** `code/01_correlation_matrix.py` - Correlation matrix method for numerical verification
+
+**Interactive:** `entanglement-entropy-interactive.html` - Visual exploration of replica trick and entanglement scaling
 
 ## Overview
 
@@ -125,7 +127,8 @@ Fit results:
 
 ```
 entanglement-entropy/
-├── entanglement-entropy.pdf   (29 pages)
+├── entanglement-entropy.pdf          (32 pages)
+├── entanglement-entropy-interactive.html
 ├── README.md
 └── code/
     └── 01_correlation_matrix.py

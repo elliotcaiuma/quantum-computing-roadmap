@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entanglement Entropy & The Replica Trick</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    typography: {
+                        DEFAULT: {
+                            css: {
+                                color: '#cbd5e1',
+                                a: { color: '#818cf8' },
+                                strong: { color: '#f8fafc' },
+                                h1: { color: '#f8fafc' },
+                                h2: { color: '#f8fafc' },
+                                h3: { color: '#f8fafc' },
+                                p: { marginBottom: '1em', lineHeight: '1.6' }
+                            },
+                        },
+                    },
+                },
+            },
+        }
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #020617; color: #f8fafc; }
+        
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            border-radius: 1rem;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: #334155;
+            border-radius: 9999px;
+            outline: none;
+            transition: background 0.2s;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #6366f1;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            transition: transform 0.1s;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            cursor: grab;
+        }
+        
+        canvas:active {
+            cursor: grabbing;
+        }
+
+        /* Custom scrollbar for text area (Dark Mode) */
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #0f172a; border-radius: 10px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        .custom-scroll::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden">
+
+    <!-- Header -->
+    <header class="bg-slate-900 border-b border-slate-800 px-6 py-4 flex-shrink-0 z-10 flex justify-between items-center">
+        <div>
+            <h1 class="text-2xl font-extrabold tracking-tight text-slate-100">Entanglement Entropy & The Replica Trick</h1>
+            <p class="text-sm font-medium text-slate-400">Based on Calabrese & Cardy, "Entanglement entropy and conformal field theory"</p>
+        </div>
+        <div class="hidden md:block">
+            <span class="inline-flex items-center rounded-md bg-indigo-900/50 px-2 py-1 text-xs font-medium text-indigo-300 ring-1 ring-inset ring-indigo-700/50">Interactive 3D Visualizer</span>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col lg:flex-row overflow-hidden">
+        
+        <!-- Left: Educational Content & Controls -->
+        <div class="w-full lg:w-5/12 xl:w-1/3 h-full flex flex-col bg-slate-950 border-r border-slate-800 z-10">
+            
+            <!-- Controls Area -->
+            <div class="p-6 bg-slate-900 border-b border-slate-800 flex-shrink-0">
+                <h2 class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">Geometry Controls</h2>
+                
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <label class="text-sm font-semibold text-slate-300">Number of Replicas ($n$)</label>
+                            <span id="n-val" class="text-sm font-bold text-indigo-300 bg-indigo-900/60 px-2 py-0.5 rounded">3</span>
+                        </div>
+                        <input type="range" id="replicas" min="1" max="6" step="1" value="3" class="slider">
+                        <p class="text-xs text-slate-500 mt-1">Controls the number of sheets in the Riemann surface $\mathcal{R}_{n,1}$.</p>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <label class="text-sm font-semibold text-slate-300">Interval Length ($\ell$)</label>
+                            <span id="l-val" class="text-sm font-bold text-indigo-300 bg-indigo-900/60 px-2 py-0.5 rounded">2.0</span>
+                        </div>
+                        <input type="range" id="length" min="0.5" max="4" step="0.1" value="2.0" class="slider">
+                        <p class="text-xs text-slate-500 mt-1">The size of subsystem $A$ (the cut).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Educational Text Area -->
+            <div class="p-6 overflow-y-auto custom-scroll flex-1 text-sm text-slate-300 leading-relaxed">
+                
+                <div id="edu-intro" class="mb-6">
+                    <h3 class="text-lg font-bold text-slate-100 mb-2">1. The Density Matrix & The Cut</h3>
+                    <p class="mb-3">In 1+1 dimensional quantum field theory, the density matrix $\rho$ of a ground state can be represented as an unconstrained path integral over imaginary time $\tau$. To find the <strong>reduced density matrix</strong> $\rho_A$ for a spatial subsystem $A$ of length $\ell$, we trace out the environment $B$.</p>
+                    
+                    <div class="bg-slate-900 border border-slate-800 p-3 rounded-lg my-3">
+                        <p class="text-xs font-semibold text-slate-400 uppercase mb-1">Numerical Example</p>
+                        <p class="text-sm text-slate-300">
+                            Imagine a 1D lattice of $M=6$ spins. Region $A$ is the interval containing spins $\{3, 4\}$, and Region $B$ is the rest $\{1, 2, 5, 6\}$. The total Hilbert space dimension is $2^6 = 64$. The full density matrix $\rho$ is a $64 \times 64$ matrix. 
+                            <br><br>
+                            Tracing out $B$ means we sum over the identical bra and ket states of spins $\{1, 2, 5, 6\}$, leaving the reduced density matrix $\rho_A$ of size $2^2 \times 2^2 = 4 \times 4$. In the path integral, the states at $\tau=0^+$ and $\tau=0^-$ for $x \in B$ are forced to be equal (sewn together). For $x \in A$, they are left unconstrained, creating an open "cut" representing the row and column indices of $\rho_A$.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="edu-replica" class="bg-indigo-950/30 border border-indigo-900/50 p-4 rounded-lg mb-6">
+                    <h3 class="text-lg font-bold text-indigo-200 mb-2 mt-0">2. The Replica Trick</h3>
+                    <p class="text-indigo-100 mb-3">Calculating the von Neumann entropy $S_A = -\text{Tr}(\rho_A \ln \rho_A)$ directly is extremely difficult. Instead, we use the replica trick:</p>
+                    <div class="text-center font-bold text-indigo-300 my-2 text-base">
+                        $S_A = -\lim_{n \to 1} \frac{\partial}{\partial n} \text{Tr}(\rho_A^n)$
+                    </div>
+                    <p class="text-indigo-100 mt-3 mb-2">To compute the trace of the density matrix to the $n$-th power, we evaluate the path integral over <span class="font-bold bg-indigo-800 text-indigo-100 px-1 rounded" id="text-n">n=3</span> identical copies, glued together cyclically along the cut $A$:</p>
+                    <div class="text-center font-bold text-indigo-300 my-2 overflow-x-auto pb-2">
+                        $\text{Tr}(\rho_A^n) = \int \mathcal{D}\phi_1 \dots \mathcal{D}\phi_n \prod_{j=1}^n \langle \phi_j | \rho_A | \phi_{j+1} \rangle$
+                    </div>
+                    <p class="text-indigo-200/70 text-xs text-center mt-1">(with $\phi_{n+1} \equiv \phi_1$)</p>
+                </div>
+
+                <div id="edu-cft">
+                    <h3 class="text-lg font-bold text-slate-100 mb-2">3. Twist Fields & CFT</h3>
+                    <p class="mb-3">The resulting geometry is an $n$-sheeted Riemann surface, $\mathcal{R}_{n,1}$. The curvature is zero everywhere <em>except</em> at the two endpoints of the interval $A$, where there are conical singularities.</p>
+                    <p class="mb-3">By moving the multi-sheeted topology to the target space, the partition function becomes a correlation function of <strong>Branch-Point Twist Fields</strong> ($\mathcal{T}_n, \tilde{\mathcal{T}}_n$) in the standard complex plane:</p>
+                    <div class="text-center font-bold text-slate-200 my-3 text-base bg-slate-900 py-2 rounded">
+                        $\frac{Z_n}{(Z_1)^n} = \langle \mathcal{T}_n(u)\tilde{\mathcal{T}}_n(v) \rangle$
+                    </div>
+                    <p class="mb-3">The scaling dimension of $\mathcal{T}_n$ is dictated by the transformation of the stress tensor $T(z)$, yielding $d_n = \frac{c}{12}\left(n - \frac{1}{n}\right)$. Evaluating the correlation function and taking the $n \to 1$ limit gives the universal scaling law:</p>
+                    <div class="bg-slate-900 p-3 rounded-lg text-center shadow-inner border border-slate-700">
+                        <span class="text-lg font-bold text-emerald-400">$S_A = \frac{c}{3} \ln \frac{\ell}{a} + c'_1$</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500 text-center">Where $c$ is the central charge, $\ell = |u-v|$ is the interval length, and $a$ is the UV cutoff.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: 3D Canvas Area -->
+        <div class="w-full lg:w-7/12 xl:w-2/3 h-[50vh] lg:h-full relative bg-[#09090b] overflow-hidden" id="canvas-container">
+            
+            <div class="absolute top-4 left-4 z-20 pointer-events-none">
+                <div class="glass-panel px-4 py-2 text-slate-200 text-sm font-semibold flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.8)]"></div>
+                    Riemann Surface $\mathcal{R}_{n,1}$
+                </div>
+            </div>
+            
+            <div class="absolute bottom-4 left-4 z-20 pointer-events-none hidden md:block">
+                <div class="glass-panel px-4 py-3 text-xs text-slate-300">
+                    <p class="mb-1"><strong class="text-slate-100">Interaction:</strong></p>
+                    <ul class="list-disc pl-4 space-y-1">
+                        <li>Click and drag to rotate the view.</li>
+                        <li>Scroll to zoom in/out.</li>
+                        <li>Use left panel sliders to alter geometry.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Legend -->
+            <div class="absolute top-4 right-4 z-20 pointer-events-none">
+                <div class="glass-panel px-4 py-3 text-xs text-slate-300 space-y-2">
+                    <div class="flex items-center gap-2">
+                        <div class="w-4 h-4 bg-indigo-500/20 border border-indigo-500/40 rounded-sm"></div>
+                        <span>Path Integral Sheet ($x, \tau$)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-4 h-1 bg-orange-500 rounded-sm shadow-[0_0_5px_rgba(249,115,22,0.8)]"></div>
+                        <span>Subsystem $A$ (The Cut)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 14 C 2 8, 14 8, 14 2" fill="none" stroke="#22d3ee" stroke-width="2" stroke-dasharray="2 2"/></svg>
+                        <span>Cyclic Sewing ($\tau=0^+$ to $\tau=0^-$)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full bg-rose-500 ml-1 mr-1 shadow-[0_0_5px_rgba(244,63,94,0.8)]"></div>
+                        <span>Conical Singularity ($\mathcal{T}_n$)</span>
+                    </div>
+                </div>
+            </div>
+
+            <canvas id="viewCanvas" class="absolute inset-0 z-10"></canvas>
+        </div>
+    </main>
+
+    <script>
+        // --- 3D Engine & State ---
+        const canvas = document.getElementById('viewCanvas');
+        const ctx = canvas.getContext('2d');
+        const container = document.getElementById('canvas-container');
+
+        let width = canvas.width = container.clientWidth;
+        let height = canvas.height = container.clientHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = container.clientWidth;
+            height = canvas.height = container.clientHeight;
+            draw();
+        });
+
+        // App State
+        const state = {
+            n: 3,         // Replicas
+            l: 2.0,       // Length of cut
+            pitch: 0.45,  // Camera rotation X
+            yaw: -0.55,   // Camera rotation Y
+            scale: 130,   // Zoom
+            cx: width / 2,
+            cy: height / 2 + 50
+        };
+
+        // DOM Elements
+        const nSlider = document.getElementById('replicas');
+        const lSlider = document.getElementById('length');
+        const nVal = document.getElementById('n-val');
+        const lVal = document.getElementById('l-val');
+        const textN = document.getElementById('text-n');
+
+        // Inputs
+        nSlider.addEventListener('input', (e) => {
+            state.n = parseInt(e.target.value);
+            nVal.innerText = state.n;
+            textN.innerText = `n=${state.n}`;
+            draw();
+        });
+
+        lSlider.addEventListener('input', (e) => {
+            state.l = parseFloat(e.target.value);
+            lVal.innerText = state.l.toFixed(1);
+            draw();
+        });
+
+        // Mouse interaction
+        let isDragging = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        canvas.addEventListener('mousedown', (e) => { isDragging = true; lastX = e.clientX; lastY = e.clientY; });
+        window.addEventListener('mouseup', () => { isDragging = false; });
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const dx = e.clientX - lastX;
+            const dy = e.clientY - lastY;
+            state.yaw += dx * 0.01;
+            state.pitch += dy * 0.01;
+            
+            // Clamp pitch to avoid turning upside down
+            state.pitch = Math.max(-0.2, Math.min(1.2, state.pitch));
+            
+            lastX = e.clientX;
+            lastY = e.clientY;
+            draw();
+        });
+
+        canvas.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            state.scale *= Math.pow(0.999, e.deltaY);
+            state.scale = Math.max(50, Math.min(300, state.scale));
+            draw();
+        });
+
+        // Touch support
+        canvas.addEventListener('touchstart', (e) => {
+            if(e.touches.length === 1) {
+                isDragging = true;
+                lastX = e.touches[0].clientX;
+                lastY = e.touches[0].clientY;
+            }
+        }, {passive: false});
+        window.addEventListener('touchend', () => { isDragging = false; });
+        window.addEventListener('touchmove', (e) => {
+            if (!isDragging || e.touches.length !== 1) return;
+            e.preventDefault();
+            const dx = e.touches[0].clientX - lastX;
+            const dy = e.touches[0].clientY - lastY;
+            state.yaw += dx * 0.01;
+            state.pitch += dy * 0.01;
+            state.pitch = Math.max(-0.2, Math.min(1.2, state.pitch));
+            lastX = e.touches[0].clientX;
+            lastY = e.touches[0].clientY;
+            draw();
+        }, {passive: false});
+
+        // --- 3D Math Functions ---
+        function project(x, y, z) {
+            // Apply yaw (rotation around Z axis)
+            const cosY = Math.cos(state.yaw);
+            const sinY = Math.sin(state.yaw);
+            let x1 = x * cosY - y * sinY;
+            let y1 = x * sinY + y * cosY;
+
+            // Apply pitch (rotation around X axis)
+            const cosP = Math.cos(state.pitch);
+            const sinP = Math.sin(state.pitch);
+            let y2 = y1 * cosP - z * sinP;
+            let z2 = y1 * sinP + z * cosP;
+
+            // Scale and translate
+            return {
+                x: state.cx + x1 * state.scale,
+                y: state.cy - z2 * state.scale,
+                depth: y2 // For z-sorting if needed
+            };
+        }
+
+        function drawPoly(ctx, points, fillColor, strokeColor, lineWidth = 1) {
+            if (points.length === 0) return;
+            ctx.beginPath();
+            ctx.moveTo(points[0].x, points[0].y);
+            for (let i = 1; i < points.length; i++) {
+                ctx.lineTo(points[i].x, points[i].y);
+            }
+            ctx.closePath();
+            if (fillColor) { ctx.fillStyle = fillColor; ctx.fill(); }
+            if (strokeColor) { ctx.strokeStyle = strokeColor; ctx.lineWidth = lineWidth; ctx.stroke(); }
+        }
+
+        function drawCurve3D(ctx, p1, p2, p3, p4, color, width, dash = []) {
+            const proj1 = project(p1[0], p1[1], p1[2]);
+            const proj2 = project(p2[0], p2[1], p2[2]);
+            const proj3 = project(p3[0], p3[1], p3[2]);
+            const proj4 = project(p4[0], p4[1], p4[2]);
+            
+            ctx.beginPath();
+            ctx.moveTo(proj1.x, proj1.y);
+            ctx.bezierCurveTo(proj2.x, proj2.y, proj3.x, proj3.y, proj4.x, proj4.y);
+            
+            ctx.strokeStyle = color;
+            ctx.lineWidth = width;
+            ctx.setLineDash(dash);
+            ctx.stroke();
+            ctx.setLineDash([]);
+        }
+
+
+        // --- Render Logic ---
+        function draw() {
+            // Darker tech background to match theme
+            ctx.fillStyle = '#020617';
+            ctx.fillRect(0, 0, width, height);
+
+            // Center Y adjusts based on n to keep it centered
+            const sheetZSpacing = 1.2;
+            const totalHeight = (state.n - 1) * sheetZSpacing;
+            state.cy = height / 2 + (totalHeight * state.scale * Math.cos(state.pitch)) / 2;
+
+            const planeW = 3.5;
+            const planeD = 2.0;
+            const cutL = state.l;
+
+            // Determine drawing order (simplistic painter's algorithm)
+            const order = [];
+            for (let i = 0; i < state.n; i++) order.push(i);
+            
+            order.sort((a, b) => {
+                let za = project(0,0, a * sheetZSpacing).depth;
+                let zb = project(0,0, b * sheetZSpacing).depth;
+                return za - zb;
+            });
+
+            // Colors tailored for Dark Theme
+            const sheetFill = 'rgba(99, 102, 241, 0.12)'; 
+            const sheetStroke = 'rgba(99, 102, 241, 0.35)';
+            const cutColor = '#f97316'; 
+            const threadColor = 'rgba(34, 211, 238, 0.7)'; 
+
+            // Draw connections FIRST so they sit behind/inside
+            for(let i=0; i<state.n; i++) {
+                const z_curr = i * sheetZSpacing;
+                const next_i = (i + 1) % state.n;
+                const z_next = next_i * sheetZSpacing;
+
+                const threads = Math.floor(cutL * 5);
+                for(let t=0; t<=threads; t++) {
+                    const lx = -cutL/2 + (t/threads)*cutL;
+                    
+                    const p1 = [lx, 0.05, z_curr];
+                    const p4 = [lx, -0.05, z_next];
+                    
+                    let out = 1.5;
+                    if(next_i === 0 && state.n > 1) out = 3.0; // Loop back connection curves wider
+                    
+                    const p2 = [lx, out, z_curr + (z_next-z_curr)*0.2];
+                    const p3 = [lx, -out, z_next - (z_next-z_curr)*0.2];
+
+                    if(next_i === 0 && state.n > 1) {
+                        p2[1] = 2.5; 
+                        p3[1] = 2.5; 
+                        p2[2] = z_curr + 1.0;
+                        p3[2] = z_next - 1.0;
+                    }
+
+                    drawCurve3D(ctx, p1, p2, p3, p4, threadColor, 1.5, [3,3]);
+                }
+            }
+
+            // Draw sheets
+            order.forEach(i => {
+                const z = i * sheetZSpacing;
+
+                // Back half (y < 0)
+                const pBack = [
+                    project(-planeW, -planeD, z),
+                    project(planeW, -planeD, z),
+                    project(planeW, 0, z),
+                    project(-planeW, 0, z)
+                ];
+                drawPoly(ctx, pBack, sheetFill, sheetStroke, 1);
+
+                // Front half (y > 0)
+                const pFront = [
+                    project(-planeW, 0, z),
+                    project(planeW, 0, z),
+                    project(planeW, planeD, z),
+                    project(-planeW, planeD, z)
+                ];
+                drawPoly(ctx, pFront, sheetFill, sheetStroke, 1);
+
+                // Draw the CUT A
+                const cutStart = project(-cutL/2, 0, z);
+                const cutEnd = project(cutL/2, 0, z);
+                
+                ctx.beginPath();
+                ctx.moveTo(cutStart.x, cutStart.y);
+                ctx.lineTo(cutEnd.x, cutEnd.y);
+                ctx.strokeStyle = cutColor;
+                ctx.lineWidth = 4;
+                ctx.shadowColor = cutColor;
+                ctx.shadowBlur = 10;
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+
+                // Draw solid lines for B (sewn together on same sheet)
+                const leftB = [project(-planeW, 0, z), project(-cutL/2, 0, z)];
+                const rightB = [project(cutL/2, 0, z), project(planeW, 0, z)];
+                
+                ctx.strokeStyle = '#475569';
+                ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.moveTo(leftB[0].x, leftB[0].y); ctx.lineTo(leftB[1].x, leftB[1].y); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(rightB[0].x, rightB[0].y); ctx.lineTo(rightB[1].x, rightB[1].y); ctx.stroke();
+
+                // Draw Conical Singularities (Branch Points / Twist fields)
+                ctx.fillStyle = '#f43f5e'; 
+                [cutStart, cutEnd].forEach(pt => {
+                    ctx.beginPath();
+                    ctx.arc(pt.x, pt.y, 4, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = 'rgba(244, 63, 94, 0.4)';
+                    ctx.beginPath();
+                    ctx.arc(pt.x, pt.y, 8, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#f43f5e';
+                });
+
+                // Add label to sheet
+                const labelPos = project(-planeW - 0.5, 0, z);
+                ctx.fillStyle = 'rgba(248, 250, 252, 0.8)';
+                ctx.font = 'bold 12px Inter';
+                ctx.fillText(`Sheet ${i+1}`, labelPos.x, labelPos.y);
+            });
+        }
+
+        // Removed the auto-rotation in animate to keep the figure static
+        function animate() {
+            // Re-render when parameters or dragging updates state
+            // It is kept as a requestAnimationFrame loop so that sliders feel completely smooth
+            draw();
+            requestAnimationFrame(animate);
+        }
+
+        // Initialize
+        draw();
+        animate();
+
+    </script>
+</body>
+</html>
