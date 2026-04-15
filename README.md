@@ -238,7 +238,7 @@ quantum-computing-roadmap/
 
 | Metric | Count |
 |--------|-------|
-| **PDF Pages** | 249 (174 Basics + 54 Transformations + 43 CFT) |
+| **PDF Pages** | 251 (174 Basics + 54 Transformations + 45 CFT) |
 | **Code Files** | 48 |
 | **Interactive Visualizations** | 1 (Entanglement Entropy replica trick) |
 | **Code Levels** | 43 |
