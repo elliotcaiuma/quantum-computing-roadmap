@@ -18,81 +18,103 @@ Entanglement entropy quantifies quantum correlations between a subsystem and its
 
 ## Main Result
 
-For a 1+1D CFT with central charge $c$, the entanglement entropy of an interval of length $L$ is:
+For a 1+1D CFT with central charge `c`, the entanglement entropy of an interval of length `L` is:
 
-$$S_A = \frac{c}{3} \ln\left(\frac{L}{a}\right) + \text{const}$$
+```
+S_A = (c/3) ln(L/a) + const
+```
 
-where $a$ is the UV cutoff (lattice spacing).
+where `a` is the UV cutoff (lattice spacing).
 
-**For the transverse Ising model ($c = 1/2$):**
+**For the transverse Ising model (c = 1/2):**
 
-$$S_A = \frac{1}{6} \ln\left(\frac{L}{a}\right) + \text{const}$$
+```
+S_A = (1/6) ln(L/a) + const
+```
 
 ## Key Derivations
 
 ### 1. Replica Trick
 
-Avoids direct diagonalization of $\rho_A$ by computing Rényi entropies:
+Avoids direct diagonalization of ρ_A by computing Rényi entropies:
 
-$$S^{(n)} = \frac{1}{1-n} \ln \text{Tr}(\rho_A^n)$$
+```
+S^(n) = (1/(1-n)) ln Tr(ρ_A^n)
+```
 
-Then take $n \to 1$ via L'Hôpital's rule to recover von Neumann entropy.
+Then take n → 1 via L'Hôpital's rule to recover von Neumann entropy.
 
 ### 2. Path Integral Representation
 
-The trace $\text{Tr}(\rho_A^n)$ is represented as a path integral on an $n$-sheeted Riemann surface:
+The trace Tr(ρ_A^n) is represented as a path integral on an n-sheeted Riemann surface:
 
-$$\text{Tr}(\rho_A^n) = \frac{Z_n}{(Z_1)^n}$$
+```
+Tr(ρ_A^n) = Z_n / (Z_1)^n
+```
 
-where $Z_n$ is the partition function on the $n$-sheeted surface.
+where Z_n is the partition function on the n-sheeted surface.
 
 ### 3. Twist Fields
 
-The $n$-sheeted geometry is mapped to the complex plane via twist fields $\mathcal{T}_n$:
+The n-sheeted geometry is mapped to the complex plane via twist fields T_n:
 
-$$\text{Tr}(\rho_A^n) = \langle \mathcal{T}_n(u) \tilde{\mathcal{T}}_n(v) \rangle$$
+```
+Tr(ρ_A^n) = ⟨T_n(u) T̃_n(v)⟩
+```
 
 The scaling dimension is derived via the Schwarzian derivative:
 
-$$\Delta_n = \frac{c}{12}\left(n - \frac{1}{n}\right)$$
+```
+Δ_n = (c/12)(n - 1/n)
+```
 
 ### 4. n → 1 Limit
 
-Taking the derivative with respect to $n$ at $n=1$:
+Taking the derivative with respect to n at n=1:
 
-$$\frac{d\Delta_n}{dn}\bigg|_{n=1} = \frac{c}{6}$$
+```
+dΔ_n/dn|_{n=1} = c/6
+```
 
 This gives the entanglement entropy:
 
-$$S_A = \frac{c}{3} \ln\left(\frac{L}{a}\right) + \text{const}$$
+```
+S_A = (c/3) ln(L/a) + const
+```
 
 ## Appendix A: Position-Momentum Overlap
 
-Complete derivation of $\langle p | q \rangle = e^{-ipq}$ from first principles:
+Complete derivation of ⟨p|q⟩ = e^{-ipq} from first principles:
 
-1. Translation operator: $e^{-ia\hat{p}}|q\rangle = |q+a\rangle$
-2. Differential equation: $\frac{\partial}{\partial q}\langle p|q\rangle = -ip\langle p|q\rangle$
-3. Solution: $\langle p|q\rangle = C(p)e^{-ipq}$
-4. Normalization: $|C(p)| = 1$, choose $C(p) = 1$
+1. Translation operator: e^{-ia p̂}|q⟩ = |q+a⟩
+2. Differential equation: ∂/∂q ⟨p|q⟩ = -ip⟨p|q⟩
+3. Solution: ⟨p|q⟩ = C(p)e^{-ipq}
+4. Normalization: |C(p)| = 1, choose C(p) = 1
 
 ## Path Integral Matrix Elements
 
 Complete derivations for the short-time propagator:
 
 **First factor:**
-$$\langle p_k|e^{-\epsilon V(\hat{q})}|q_k\rangle = e^{-\epsilon V(q_k)}e^{-ip_k q_k}$$
 
-**Proof:** $V(\hat{q})$ acts diagonally on position eigenstates via power series expansion.
+```
+⟨p_k|e^{-εV(q̂)}|q_k⟩ = e^{-εV(q_k)}e^{-ip_k q_k}
+```
+
+**Proof:** V(q̂) acts diagonally on position eigenstates via power series expansion.
 
 **Second factor:**
-$$\langle q_{k+1}|e^{-\epsilon \hat{p}^2/(2m)}|p_k\rangle = e^{-\epsilon p_k^2/(2m)}e^{ip_k q_{k+1}}$$
 
-**Proof:** $\hat{p}^2$ acts diagonally on momentum eigenstates.
+```
+⟨q_{k+1}|e^{-εp̂²/(2m)}|p_k⟩ = e^{-εp_k²/(2m)}e^{ip_k q_{k+1}}
+```
 
-**Origin of $1/(2\pi)$:** Comes from momentum completeness relation convention:
-- $\langle p|q\rangle = e^{-ipq}$ (no prefactor)
-- $\langle p|p'\rangle = 2\pi\delta(p-p')$
-- Completeness: $\int \frac{dp}{2\pi}|p\rangle\langle p| = I$
+**Proof:** p̂² acts diagonally on momentum eigenstates.
+
+**Origin of 1/(2π):** Comes from momentum completeness relation convention:
+- ⟨p|q⟩ = e^{-ipq} (no prefactor)
+- ⟨p|p'⟩ = 2πδ(p-p')
+- Completeness: ∫ (dp/2π)|p⟩⟨p| = I$
 
 ## Code Module
 

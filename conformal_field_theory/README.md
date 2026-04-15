@@ -21,17 +21,17 @@ Derivation of universal entanglement entropy formula in 1+1D CFT using replica t
 - Replica trick: avoiding direct diagonalization via Rényi entropies
 - Path integral representation of Tr(ρ_A^n) on n-sheeted Riemann surface
 - Twist fields: mapping curved geometry to flat plane correlation functions
-- Scaling dimension Δ_n = (c/12)(n - 1/n) via Schwarzian derivative
+- Scaling dimension: Δ_n = (c/12)(n - 1/n) via Schwarzian derivative
 - n → 1 limit using L'Hôpital's rule
 - Main result: S = (c/3) ln(L/a) + const
 - Numerical verification via correlation matrix method
 - Connection to Kibble-Zurek mechanism after quantum quench
 
 **Key Derivations:**
-- Position-momentum overlap ⟨p|q⟩ = e^{-ipq} from first principles (Appendix A)
+- Position-momentum overlap: ⟨p\|q⟩ = e^{-ipq} from first principles (Appendix A)
 - Matrix elements for path integral propagator:
-  - ⟨p_k|e^{-εV(q̂)}|q_k⟩ = e^{-εV(q_k)}e^{-ip_k q_k}
-  - ⟨q_{k+1}|e^{-εp̂²/(2m)}|p_k⟩ = e^{-εp_k²/(2m)}e^{ip_k q_{k+1}}
+  - ⟨p_k\|e^{-εV(q̂)}\|q_k⟩ = e^{-εV(q_k)}e^{-ip_k q_k}
+  - ⟨q_{k+1}\|e^{-εp̂²/(2m)}\|p_k⟩ = e^{-εp_k²/(2m)}e^{ip_k q_{k+1}}
 - Origin of 1/(2π) factor in momentum completeness relation
 - Euclidean path integral for ground state preparation
 - Reduced density matrix via partial trace over region B
