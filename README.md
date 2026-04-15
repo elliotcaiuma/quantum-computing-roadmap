@@ -133,7 +133,7 @@ Universal results for entanglement and critical phenomena in 1+1D quantum system
 
 Derivation of universal entanglement entropy formula in 1+1D CFT using replica trick and twist fields.
 
-**Theory:** Read `conformal_field_theory/entanglement-entropy/entanglement-entropy.pdf` (32 pages)
+**Theory:** Read `conformal_field_theory/entanglement-entropy/entanglement-entropy.pdf` (35 pages)
 
 **Code:** See `conformal_field_theory/entanglement-entropy/code/` for correlation matrix method
 
@@ -238,7 +238,7 @@ quantum-computing-roadmap/
 
 | Metric | Count |
 |--------|-------|
-| **PDF Pages** | 238 (174 Basics + 54 Transformations + 32 CFT) |
+| **PDF Pages** | 241 (174 Basics + 54 Transformations + 35 CFT) |
 | **Code Files** | 48 |
 | **Interactive Visualizations** | 1 (Entanglement Entropy replica trick) |
 | **Code Levels** | 43 |
