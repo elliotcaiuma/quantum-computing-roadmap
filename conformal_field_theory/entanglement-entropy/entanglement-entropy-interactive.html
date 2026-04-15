@@ -87,6 +87,21 @@
         .custom-scroll::-webkit-scrollbar-track { background: #0f172a; border-radius: 10px; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
         .custom-scroll::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+        /* Scenario Button Active States */
+        .scenario-btn.active {
+            background-color: #4f46e5;
+            color: white;
+            border-color: #4f46e5;
+        }
+        .scenario-content {
+            display: none;
+        }
+        .scenario-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body class="h-screen flex flex-col overflow-hidden">
@@ -110,72 +125,123 @@
             
             <!-- Controls Area -->
             <div class="p-6 bg-slate-900 border-b border-slate-800 flex-shrink-0">
-                <h2 class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">Geometry Controls</h2>
+                <div class="mb-4">
+                    <h2 class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-2">Physical Scenario</h2>
+                    <div class="flex gap-2 p-1 bg-slate-800 rounded-lg">
+                        <button onclick="setScenario('ground')" id="btn-ground" class="scenario-btn active flex-1 py-1.5 px-3 text-xs font-semibold text-slate-300 rounded-md border border-transparent transition">Ground State</button>
+                        <button onclick="setScenario('global')" id="btn-global" class="scenario-btn flex-1 py-1.5 px-3 text-xs font-semibold text-slate-300 rounded-md border border-transparent transition">Global Quench</button>
+                        <button onclick="setScenario('local')" id="btn-local" class="scenario-btn flex-1 py-1.5 px-3 text-xs font-semibold text-slate-300 rounded-md border border-transparent transition">Local Quench</button>
+                    </div>
+                </div>
                 
-                <div class="space-y-6">
+                <div class="space-y-4">
                     <div>
-                        <div class="flex justify-between mb-2">
+                        <div class="flex justify-between mb-1">
                             <label class="text-sm font-semibold text-slate-300">Number of Replicas ($n$)</label>
-                            <span id="n-val" class="text-sm font-bold text-indigo-300 bg-indigo-900/60 px-2 py-0.5 rounded">3</span>
+                            <span id="n-val" class="text-sm font-bold text-indigo-300 bg-indigo-900/60 px-2 py-0 rounded">3</span>
                         </div>
                         <input type="range" id="replicas" min="1" max="6" step="1" value="3" class="slider">
-                        <p class="text-xs text-slate-500 mt-1">Controls the number of sheets in the Riemann surface $\mathcal{R}_{n,1}$.</p>
                     </div>
 
                     <div>
-                        <div class="flex justify-between mb-2">
-                            <label class="text-sm font-semibold text-slate-300">Interval Length ($\ell$)</label>
-                            <span id="l-val" class="text-sm font-bold text-indigo-300 bg-indigo-900/60 px-2 py-0.5 rounded">2.0</span>
+                        <div class="flex justify-between mb-1">
+                            <label class="text-sm font-semibold text-slate-300">Subsystem Length ($\ell$)</label>
+                            <span id="l-val" class="text-sm font-bold text-indigo-300 bg-indigo-900/60 px-2 py-0 rounded">2.0</span>
                         </div>
                         <input type="range" id="length" min="0.5" max="4" step="0.1" value="2.0" class="slider">
-                        <p class="text-xs text-slate-500 mt-1">The size of subsystem $A$ (the cut).</p>
                     </div>
                 </div>
             </div>
 
             <!-- Educational Text Area -->
-            <div class="p-6 overflow-y-auto custom-scroll flex-1 text-sm text-slate-300 leading-relaxed">
-                
-                <div id="edu-intro" class="mb-6">
+            <div class="p-6 overflow-y-auto custom-scroll flex-1 text-sm text-slate-300 leading-relaxed relative">
+
+                <!-- GROUND STATE CONTENT -->
+                <div id="content-ground" class="scenario-content active">
                     <h3 class="text-lg font-bold text-slate-100 mb-2">1. The Density Matrix & The Cut</h3>
-                    <p class="mb-3">In 1+1 dimensional quantum field theory, the density matrix $\rho$ of a ground state can be represented as an unconstrained path integral over imaginary time $\tau$. To find the <strong>reduced density matrix</strong> $\rho_A$ for a spatial subsystem $A$ of length $\ell$, we trace out the environment $B$.</p>
+                    <p class="mb-3">In 1+1 dimensional QFT, the density matrix $\rho$ of a ground state can be represented as an unconstrained path integral over Euclidean (imaginary) time $\tau \in (-\infty, \infty)$. To find the <strong>reduced density matrix</strong> $\rho_A$ for a spatial subsystem $A$ of length $\ell$, we trace out the environment $B$.</p>
                     
                     <div class="bg-slate-900 border border-slate-800 p-3 rounded-lg my-3">
-                        <p class="text-xs font-semibold text-slate-400 uppercase mb-1">Numerical Example</p>
-                        <p class="text-sm text-slate-300">
-                            Imagine a 1D lattice of $M=6$ spins. Region $A$ is the interval containing spins $\{3, 4\}$, and Region $B$ is the rest $\{1, 2, 5, 6\}$. The total Hilbert space dimension is $2^6 = 64$. The full density matrix $\rho$ is a $64 \times 64$ matrix. 
+                        <p class="text-xs font-semibold text-indigo-400 uppercase mb-1">Numerical Example: How Space is Cut</p>
+                        <p class="text-xs text-slate-300">
+                            Imagine a 1D lattice of $M=6$ spins. Region $A$ contains spins $\{3, 4\}$, and Region $B$ is the rest $\{1, 2, 5, 6\}$. The total Hilbert space dimension is $2^6 = 64$.
                             <br><br>
-                            Tracing out $B$ means we sum over the identical bra and ket states of spins $\{1, 2, 5, 6\}$, leaving the reduced density matrix $\rho_A$ of size $2^2 \times 2^2 = 4 \times 4$. In the path integral, the states at $\tau=0^+$ and $\tau=0^-$ for $x \in B$ are forced to be equal (sewn together). For $x \in A$, they are left unconstrained, creating an open "cut" representing the row and column indices of $\rho_A$.
+                            Tracing out $B$ sums over identical bra and ket states of spins $\{1, 2, 5, 6\}$, giving $\rho_A$ of size $2^2 \times 2^2 = 4 \times 4$. In the path integral, the fields at $\tau=0^+$ and $\tau=0^-$ for $x \in B$ are forced to be equal (sewn together). For $x \in A$, they are left unconstrained, creating an <strong>open "cut"</strong> that acts as the row and column indices of $\rho_A$.
                         </p>
                     </div>
-                </div>
 
-                <div id="edu-replica" class="bg-indigo-950/30 border border-indigo-900/50 p-4 rounded-lg mb-6">
-                    <h3 class="text-lg font-bold text-indigo-200 mb-2 mt-0">2. The Replica Trick</h3>
-                    <p class="text-indigo-100 mb-3">Calculating the von Neumann entropy $S_A = -\text{Tr}(\rho_A \ln \rho_A)$ directly is extremely difficult. Instead, we use the replica trick:</p>
-                    <div class="text-center font-bold text-indigo-300 my-2 text-base">
-                        $S_A = -\lim_{n \to 1} \frac{\partial}{\partial n} \text{Tr}(\rho_A^n)$
+                    <div class="bg-indigo-950/30 border border-indigo-900/50 p-4 rounded-lg my-4">
+                        <h3 class="text-md font-bold text-indigo-200 mb-2 mt-0">2. The Replica Trick</h3>
+                        <p class="text-indigo-100 mb-2">We compute the von Neumann entropy using the replica trick:</p>
+                        <div class="text-center font-bold text-indigo-300 my-2 text-base">
+                            $S_A = -\lim_{n \to 1} \frac{\partial}{\partial n} \text{Tr}(\rho_A^n)$
+                        </div>
+                        <p class="text-indigo-100 mt-2 mb-2">We take $n$ identical copies of the path integral and glue them cyclically along the cut $A$. This forms an $n$-sheeted Riemann surface, $\mathcal{R}_{n,1}$. Notice how the 3D visualizer maps <strong><span id="text-n-ground">n=3</span> sheets</strong>.</p>
                     </div>
-                    <p class="text-indigo-100 mt-3 mb-2">To compute the trace of the density matrix to the $n$-th power, we evaluate the path integral over <span class="font-bold bg-indigo-800 text-indigo-100 px-1 rounded" id="text-n">n=3</span> identical copies, glued together cyclically along the cut $A$:</p>
-                    <div class="text-center font-bold text-indigo-300 my-2 overflow-x-auto pb-2">
-                        $\text{Tr}(\rho_A^n) = \int \mathcal{D}\phi_1 \dots \mathcal{D}\phi_n \prod_{j=1}^n \langle \phi_j | \rho_A | \phi_{j+1} \rangle$
-                    </div>
-                    <p class="text-indigo-200/70 text-xs text-center mt-1">(with $\phi_{n+1} \equiv \phi_1$)</p>
-                </div>
 
-                <div id="edu-cft">
-                    <h3 class="text-lg font-bold text-slate-100 mb-2">3. Twist Fields & CFT</h3>
-                    <p class="mb-3">The resulting geometry is an $n$-sheeted Riemann surface, $\mathcal{R}_{n,1}$. The curvature is zero everywhere <em>except</em> at the two endpoints of the interval $A$, where there are conical singularities.</p>
-                    <p class="mb-3">By moving the multi-sheeted topology to the target space, the partition function becomes a correlation function of <strong>Branch-Point Twist Fields</strong> ($\mathcal{T}_n, \tilde{\mathcal{T}}_n$) in the standard complex plane:</p>
-                    <div class="text-center font-bold text-slate-200 my-3 text-base bg-slate-900 py-2 rounded">
-                        $\frac{Z_n}{(Z_1)^n} = \langle \mathcal{T}_n(u)\tilde{\mathcal{T}}_n(v) \rangle$
-                    </div>
-                    <p class="mb-3">The scaling dimension of $\mathcal{T}_n$ is dictated by the transformation of the stress tensor $T(z)$, yielding $d_n = \frac{c}{12}\left(n - \frac{1}{n}\right)$. Evaluating the correlation function and taking the $n \to 1$ limit gives the universal scaling law:</p>
+                    <h3 class="text-md font-bold text-slate-100 mb-2">3. Twist Fields & CFT</h3>
+                    <p class="mb-2">By mapping this multi-sheeted topology back to the complex plane, the branch points at the boundaries of $A$ correspond to inserting <strong>Branch-Point Twist Fields</strong> ($\mathcal{T}_n, \tilde{\mathcal{T}}_n$). Evaluating their correlation function gives:</p>
                     <div class="bg-slate-900 p-3 rounded-lg text-center shadow-inner border border-slate-700">
                         <span class="text-lg font-bold text-emerald-400">$S_A = \frac{c}{3} \ln \frac{\ell}{a} + c'_1$</span>
                     </div>
-                    <p class="mt-2 text-xs text-slate-500 text-center">Where $c$ is the central charge, $\ell = |u-v|$ is the interval length, and $a$ is the UV cutoff.</p>
                 </div>
+
+                <!-- GLOBAL QUENCH CONTENT -->
+                <div id="content-global" class="scenario-content">
+                    <h3 class="text-lg font-bold text-slate-100 mb-2">Global Quantum Quench</h3>
+                    <p class="mb-3">Suppose we prepare the system in a massive ground state $|\psi_0\rangle$ and unitarily evolve it with a critical CFT Hamiltonian $H$. This imparts an extensive excess of energy throughout the system.</p>
+                    
+                    <div class="bg-slate-900 border border-slate-800 p-3 rounded-lg my-3">
+                        <p class="text-xs font-semibold text-indigo-400 uppercase mb-1">Path Integral Representation</p>
+                        <p class="text-sm text-slate-300 mb-2">The time-dependent expectation value incorporates a small damping factor $e^{-\epsilon H}$ to make the path integral convergent. The density matrix becomes a path integral on a <strong>finite strip</strong> of width $2\epsilon$ in Euclidean time:</p>
+                        <div class="text-center font-bold text-slate-200 overflow-x-auto pb-2">
+                            $\langle \phi'' | \rho(t) | \phi' \rangle = \frac{1}{Z} \int_{\text{strip}} \mathcal{D}\phi e^{-S_E[\phi]}$
+                        </div>
+                        <p class="text-xs text-slate-400 mt-1">Look at the 3D visualizer: The path integral sheets are now finite strips restricted between boundary states $|\psi_0\rangle$ at $\tau = \pm\epsilon$, analytically continued to $t$.</p>
+                    </div>
+
+                    <div class="bg-indigo-950/30 border border-indigo-900/50 p-4 rounded-lg my-4">
+                        <h3 class="text-md font-bold text-indigo-200 mb-2 mt-0">Quasiparticle Picture & Entropy</h3>
+                        <p class="text-indigo-100 text-sm">
+                            The initial state acts as a source of entangled quasiparticle pairs. As they propagate outward at velocity $v$, entanglement between $A$ and $B$ only occurs when one particle reaches $A$ and the other reaches $B$.
+                        </p>
+                        <p class="text-indigo-100 text-sm mt-2">
+                            This leads to a linear growth followed by saturation at $t = \ell/2$:
+                        </p>
+                        <div class="bg-slate-900/50 p-2 mt-2 rounded border border-indigo-500/30 text-center font-bold text-emerald-400 text-sm">
+                            $S_A(t) \simeq \begin{cases} 
+                            \frac{\pi c}{6 \epsilon} t & t < \ell/2 \\
+                            \frac{\pi c}{12 \epsilon} \ell & t > \ell/2 
+                            \end{cases}$
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LOCAL QUENCH CONTENT -->
+                <div id="content-local" class="scenario-content">
+                    <h3 class="text-lg font-bold text-slate-100 mb-2">Local Quantum Quench</h3>
+                    <p class="mb-3">We physically cut a spin chain into two halves, prepare them independently in their respective ground states, and then join them together at $x=0, t=0$. The initial state has only a local difference from the ground state.</p>
+                    
+                    <div class="bg-slate-900 border border-slate-800 p-3 rounded-lg my-3">
+                        <p class="text-xs font-semibold text-indigo-400 uppercase mb-1">Path Integral with Vertical Slits</p>
+                        <p class="text-sm text-slate-300 mb-2">The physical cut corresponds to <strong>slits parallel to the imaginary time axis</strong> in the Euclidean path integral, representing the disconnected chains before $t=0$.</p>
+                        <div class="text-center font-bold text-slate-200">
+                            $\tau_1 \in (-\infty, -\epsilon], \quad \tau_2 \in [\epsilon, \infty)$
+                        </div>
+                        <p class="text-xs text-slate-400 mt-2">In the 3D visualizer: A vertical glowing red gap exists at $x=0$ outside the narrow region $|\tau| < \epsilon$, demonstrating the initially uncoupled nature of the halves.</p>
+                    </div>
+
+                    <div class="bg-indigo-950/30 border border-indigo-900/50 p-4 rounded-lg my-4">
+                        <h3 class="text-md font-bold text-indigo-200 mb-2 mt-0">Logarithmic Entanglement Growth</h3>
+                        <p class="text-indigo-100 text-sm">
+                            A local quench only produces a finite amount of energy and single localized excitation at $r=0$. The entanglement between the two halves (Region $A = (-\infty, 0]$, $B = [0, \infty)$) grows logarithmically over time:
+                        </p>
+                        <div class="bg-slate-900/50 p-2 mt-2 rounded border border-indigo-500/30 text-center font-bold text-emerald-400">
+                            $S_A(t) = \frac{c}{3} \ln \frac{t}{a} + const$
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -185,7 +251,7 @@
             <div class="absolute top-4 left-4 z-20 pointer-events-none">
                 <div class="glass-panel px-4 py-2 text-slate-200 text-sm font-semibold flex items-center gap-2">
                     <div class="w-3 h-3 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.8)]"></div>
-                    Riemann Surface $\mathcal{R}_{n,1}$
+                    <span id="canvas-title">Riemann Surface $\mathcal{R}_{n,1}$ (Ground State)</span>
                 </div>
             </div>
             
@@ -194,31 +260,17 @@
                     <p class="mb-1"><strong class="text-slate-100">Interaction:</strong></p>
                     <ul class="list-disc pl-4 space-y-1">
                         <li>Click and drag to rotate the view.</li>
+                        <li>Right-click or Shift+Drag to pan.</li>
                         <li>Scroll to zoom in/out.</li>
-                        <li>Use left panel sliders to alter geometry.</li>
+                        <li>Use left panel to alter geometry.</li>
                     </ul>
                 </div>
             </div>
 
             <!-- Legend -->
             <div class="absolute top-4 right-4 z-20 pointer-events-none">
-                <div class="glass-panel px-4 py-3 text-xs text-slate-300 space-y-2">
-                    <div class="flex items-center gap-2">
-                        <div class="w-4 h-4 bg-indigo-500/20 border border-indigo-500/40 rounded-sm"></div>
-                        <span>Path Integral Sheet ($x, \tau$)</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <div class="w-4 h-1 bg-orange-500 rounded-sm shadow-[0_0_5px_rgba(249,115,22,0.8)]"></div>
-                        <span>Subsystem $A$ (The Cut)</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 14 C 2 8, 14 8, 14 2" fill="none" stroke="#22d3ee" stroke-width="2" stroke-dasharray="2 2"/></svg>
-                        <span>Cyclic Sewing ($\tau=0^+$ to $\tau=0^-$)</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <div class="w-2 h-2 rounded-full bg-rose-500 ml-1 mr-1 shadow-[0_0_5px_rgba(244,63,94,0.8)]"></div>
-                        <span>Conical Singularity ($\mathcal{T}_n$)</span>
-                    </div>
+                <div class="glass-panel px-4 py-3 text-xs text-slate-300 space-y-2" id="canvas-legend">
+                    <!-- Dynamic legend populated by JS -->
                 </div>
             </div>
 
@@ -232,24 +284,29 @@
         const ctx = canvas.getContext('2d');
         const container = document.getElementById('canvas-container');
 
-        let width = canvas.width = container.clientWidth;
-        let height = canvas.height = container.clientHeight;
+        let width = canvas.width = container.clientWidth || 800;
+        let height = canvas.height = container.clientHeight || 600;
 
         window.addEventListener('resize', () => {
-            width = canvas.width = container.clientWidth;
-            height = canvas.height = container.clientHeight;
-            draw();
+            if (container.clientWidth && container.clientHeight) {
+                width = canvas.width = container.clientWidth;
+                height = canvas.height = container.clientHeight;
+            }
         });
 
         // App State
         const state = {
+            scenario: 'ground', // 'ground', 'global', 'local'
             n: 3,         // Replicas
             l: 2.0,       // Length of cut
             pitch: 0.45,  // Camera rotation X
             yaw: -0.55,   // Camera rotation Y
             scale: 130,   // Zoom
+            panX: 0,      // Camera panning X
+            panY: 0,      // Camera panning Y
             cx: width / 2,
-            cy: height / 2 + 50
+            cy: height / 2 + 50,
+            animTime: 0
         };
 
         // DOM Elements
@@ -257,71 +314,174 @@
         const lSlider = document.getElementById('length');
         const nVal = document.getElementById('n-val');
         const lVal = document.getElementById('l-val');
-        const textN = document.getElementById('text-n');
+        const textNGround = document.getElementById('text-n-ground');
 
         // Inputs
         nSlider.addEventListener('input', (e) => {
             state.n = parseInt(e.target.value);
             nVal.innerText = state.n;
-            textN.innerText = `n=${state.n}`;
-            draw();
+            if(textNGround) textNGround.innerText = `n=${state.n}`;
         });
 
         lSlider.addEventListener('input', (e) => {
             state.l = parseFloat(e.target.value);
             lVal.innerText = state.l.toFixed(1);
-            draw();
         });
+
+        // Setup UI switching
+        function setScenario(scen) {
+            state.scenario = scen;
+            
+            // Update Buttons
+            document.querySelectorAll('.scenario-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`btn-${scen}`).classList.add('active');
+
+            // Update Content
+            document.querySelectorAll('.scenario-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(`content-${scen}`).classList.add('active');
+
+            // Update Canvas Title & Legend
+            const titles = {
+                'ground': 'Riemann Surface $\\mathcal{R}_{n,1}$ (Ground State)',
+                'global': 'Finite Strip Geometry $\\mathcal{R}_{n,1}$ (Global Quench)',
+                'local': 'Path Integral with Initial Slits (Local Quench)'
+            };
+            document.getElementById('canvas-title').innerHTML = titles[scen];
+
+            let legendHtml = `
+                <div class="flex items-center gap-2">
+                    <div class="w-4 h-4 bg-indigo-500/20 border border-indigo-500/40 rounded-sm"></div>
+                    <span>Path Integral Sheet ($x, \\tau$)</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-4 h-1 bg-orange-500 rounded-sm shadow-[0_0_5px_rgba(249,115,22,0.8)]"></div>
+                    <span>Subsystem $A$ (Entanglement Cut)</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 14 C 2 8, 14 8, 14 2" fill="none" stroke="#22d3ee" stroke-width="2" stroke-dasharray="2 2"/></svg>
+                    <span>Cyclic Sewing ($\\tau=0^+$ to $0^-$)</span>
+                </div>
+            `;
+
+            if(scen === 'global') {
+                legendHtml += `
+                    <div class="flex items-center gap-2 mt-1 border-t border-slate-700 pt-1">
+                        <div class="w-4 h-1 bg-fuchsia-500 shadow-[0_0_5px_rgba(217,70,239,0.8)]"></div>
+                        <span>Boundary State $|\\psi_0\\rangle$ ($\\tau = \\pm \\epsilon$)</span>
+                    </div>
+                `;
+            }
+            if(scen === 'local') {
+                legendHtml += `
+                    <div class="flex items-center gap-2 mt-1 border-t border-slate-700 pt-1">
+                        <div class="w-1 h-4 bg-red-600 shadow-[0_0_5px_rgba(220,38,38,0.8)]"></div>
+                        <span>Initial Cut (Decoupled chains)</span>
+                    </div>
+                `;
+            }
+
+            document.getElementById('canvas-legend').innerHTML = legendHtml;
+
+            // Robust safety check to avoid crashing if MathJax isn't fully loaded yet
+            if (window.MathJax && typeof window.MathJax.typesetPromise === 'function') {
+                window.MathJax.typesetPromise([document.getElementById('canvas-title'), document.getElementById('canvas-legend')]).catch(e => console.error(e));
+            }
+        }
+
+        // Initialize Legend on load
+        setScenario('ground');
 
         // Mouse interaction
         let isDragging = false;
+        let isPanning = false;
         let lastX = 0;
         let lastY = 0;
 
-        canvas.addEventListener('mousedown', (e) => { isDragging = true; lastX = e.clientX; lastY = e.clientY; });
-        window.addEventListener('mouseup', () => { isDragging = false; });
+        canvas.addEventListener('contextmenu', e => e.preventDefault()); // Prevent right-click menu
+
+        canvas.addEventListener('mousedown', (e) => { 
+            if (e.button === 0 && !e.shiftKey) {
+                isDragging = true; 
+            } else if (e.button === 2 || (e.button === 0 && e.shiftKey)) {
+                isPanning = true;
+            }
+            lastX = e.clientX; 
+            lastY = e.clientY; 
+        });
+
+        window.addEventListener('mouseup', () => { 
+            isDragging = false; 
+            isPanning = false; 
+        });
+
         window.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
+            if (!isDragging && !isPanning) return;
             const dx = e.clientX - lastX;
             const dy = e.clientY - lastY;
-            state.yaw += dx * 0.01;
-            state.pitch += dy * 0.01;
-            
-            // Clamp pitch to avoid turning upside down
-            state.pitch = Math.max(-0.2, Math.min(1.2, state.pitch));
+
+            if (isDragging) {
+                state.yaw += dx * 0.01;
+                state.pitch += dy * 0.01;
+                // Clamp pitch to avoid turning upside down completely
+                state.pitch = Math.max(-0.2, Math.min(1.2, state.pitch));
+            } else if (isPanning) {
+                state.panX += dx;
+                state.panY += dy;
+            }
             
             lastX = e.clientX;
             lastY = e.clientY;
-            draw();
         });
 
         canvas.addEventListener('wheel', (e) => {
             e.preventDefault();
             state.scale *= Math.pow(0.999, e.deltaY);
             state.scale = Math.max(50, Math.min(300, state.scale));
-            draw();
         });
 
-        // Touch support
+        // Touch support (Two fingers = pan, One finger = rotate)
         canvas.addEventListener('touchstart', (e) => {
             if(e.touches.length === 1) {
                 isDragging = true;
                 lastX = e.touches[0].clientX;
                 lastY = e.touches[0].clientY;
+            } else if (e.touches.length === 2) {
+                isPanning = true;
+                lastX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                lastY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
             }
         }, {passive: false});
-        window.addEventListener('touchend', () => { isDragging = false; });
+
+        window.addEventListener('touchend', () => { 
+            isDragging = false; 
+            isPanning = false; 
+        });
+
         window.addEventListener('touchmove', (e) => {
-            if (!isDragging || e.touches.length !== 1) return;
+            if (!isDragging && !isPanning) return;
             e.preventDefault();
-            const dx = e.touches[0].clientX - lastX;
-            const dy = e.touches[0].clientY - lastY;
-            state.yaw += dx * 0.01;
-            state.pitch += dy * 0.01;
-            state.pitch = Math.max(-0.2, Math.min(1.2, state.pitch));
-            lastX = e.touches[0].clientX;
-            lastY = e.touches[0].clientY;
-            draw();
+            
+            let currentX = 0;
+            let currentY = 0;
+
+            if (isDragging && e.touches.length === 1) {
+                currentX = e.touches[0].clientX;
+                currentY = e.touches[0].clientY;
+                const dx = currentX - lastX;
+                const dy = currentY - lastY;
+                state.yaw += dx * 0.01;
+                state.pitch += dy * 0.01;
+                state.pitch = Math.max(-0.2, Math.min(1.2, state.pitch));
+            } else if (isPanning && e.touches.length === 2) {
+                currentX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                currentY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+                const dx = currentX - lastX;
+                const dy = currentY - lastY;
+                state.panX += dx;
+                state.panY += dy;
+            }
+            lastX = currentX;
+            lastY = currentY;
         }, {passive: false});
 
         // --- 3D Math Functions ---
@@ -338,11 +498,10 @@
             let y2 = y1 * cosP - z * sinP;
             let z2 = y1 * sinP + z * cosP;
 
-            // Scale and translate
             return {
                 x: state.cx + x1 * state.scale,
                 y: state.cy - z2 * state.scale,
-                depth: y2 // For z-sorting if needed
+                depth: y2
             };
         }
 
@@ -370,28 +529,69 @@
             
             ctx.strokeStyle = color;
             ctx.lineWidth = width;
-            ctx.setLineDash(dash);
+            if (dash.length > 0) ctx.setLineDash(dash);
             ctx.stroke();
             ctx.setLineDash([]);
         }
 
+        // Cubic Bezier Evaluation
+        function getBezierPoint(p1, p2, p3, p4, t) {
+            const mt = 1 - t;
+            return [
+                mt*mt*mt*p1[0] + 3*mt*mt*t*p2[0] + 3*mt*t*t*p3[0] + t*t*t*p4[0],
+                mt*mt*mt*p1[1] + 3*mt*mt*t*p2[1] + 3*mt*t*t*p3[1] + t*t*t*p4[1],
+                mt*mt*mt*p1[2] + 3*mt*mt*t*p2[2] + 3*mt*t*t*p3[2] + t*t*t*p4[2]
+            ];
+        }
+
+        // Drawing a directional arrow in 2D
+        function drawArrow(ctx, x, y, angle, size, color) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(angle);
+            ctx.fillStyle = color;
+            ctx.shadowColor = color;
+            ctx.shadowBlur = 8;
+            ctx.beginPath();
+            ctx.moveTo(size/2, 0); // Tip
+            ctx.lineTo(-size, -size/1.5); // Bottom left
+            ctx.lineTo(-size/2, 0); // Inner center
+            ctx.lineTo(-size, size/1.5); // Bottom right
+            ctx.fill();
+            ctx.restore();
+        }
 
         // --- Render Logic ---
         function draw() {
-            // Darker tech background to match theme
+            // Keep variables in sync cleanly to prevent weird resizing issues
+            if (canvas.width !== container.clientWidth || canvas.height !== container.clientHeight) {
+                width = canvas.width = container.clientWidth;
+                height = canvas.height = container.clientHeight;
+            }
+
+            if(width === 0 || height === 0) return;
+
             ctx.fillStyle = '#020617';
             ctx.fillRect(0, 0, width, height);
 
-            // Center Y adjusts based on n to keep it centered
             const sheetZSpacing = 1.2;
             const totalHeight = (state.n - 1) * sheetZSpacing;
-            state.cy = height / 2 + (totalHeight * state.scale * Math.cos(state.pitch)) / 2;
+            
+            // Adjust Center based on pan and calculated base alignment
+            const baseY = height / 2 + (totalHeight * state.scale * Math.cos(state.pitch)) / 2;
+            state.cx = width / 2 + state.panX;
+            state.cy = baseY + state.panY;
 
             const planeW = 3.5;
-            const planeD = 2.0;
+            
+            // Adjust depth based on scenario
+            let planeD = 2.0; 
+            if(state.scenario === 'global') {
+                planeD = 0.5; // Narrow strip
+            }
+
             const cutL = state.l;
 
-            // Determine drawing order (simplistic painter's algorithm)
             const order = [];
             for (let i = 0; i < state.n; i++) order.push(i);
             
@@ -401,13 +601,28 @@
                 return za - zb;
             });
 
-            // Colors tailored for Dark Theme
             const sheetFill = 'rgba(99, 102, 241, 0.12)'; 
             const sheetStroke = 'rgba(99, 102, 241, 0.35)';
             const cutColor = '#f97316'; 
             const threadColor = 'rgba(34, 211, 238, 0.7)'; 
 
-            // Draw connections FIRST so they sit behind/inside
+            // Draw general imaginary time arrow indicator alongside the geometry
+            const axisStart = project(-planeW - 0.5, -planeD, 0);
+            const axisEnd = project(-planeW - 0.5, planeD, 0);
+            ctx.beginPath();
+            ctx.moveTo(axisStart.x, axisStart.y);
+            ctx.lineTo(axisEnd.x, axisEnd.y);
+            ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            const axisAngle = Math.atan2(axisEnd.y - axisStart.y, axisEnd.x - axisStart.x);
+            drawArrow(ctx, axisEnd.x, axisEnd.y, axisAngle, 6, 'rgba(255,255,255,0.4)');
+            
+            ctx.fillStyle = 'rgba(255,255,255,0.5)';
+            ctx.font = 'italic 12px Inter';
+            ctx.fillText('Imaginary Time τ', axisStart.x - 100, (axisStart.y + axisEnd.y)/2);
+
+            // Draw sewing connections and animated arrows
             for(let i=0; i<state.n; i++) {
                 const z_curr = i * sheetZSpacing;
                 const next_i = (i + 1) % state.n;
@@ -421,19 +636,53 @@
                     const p4 = [lx, -0.05, z_next];
                     
                     let out = 1.5;
-                    if(next_i === 0 && state.n > 1) out = 3.0; // Loop back connection curves wider
+                    if(state.scenario === 'global') out = 0.8;
+                    if(next_i === 0 && state.n > 1) out = state.scenario === 'global' ? 1.5 : 3.0; 
                     
                     const p2 = [lx, out, z_curr + (z_next-z_curr)*0.2];
                     const p3 = [lx, -out, z_next - (z_next-z_curr)*0.2];
 
                     if(next_i === 0 && state.n > 1) {
-                        p2[1] = 2.5; 
-                        p3[1] = 2.5; 
+                        p2[1] = state.scenario === 'global' ? 1.0 : 2.5; 
+                        p3[1] = state.scenario === 'global' ? 1.0 : 2.5; 
                         p2[2] = z_curr + 1.0;
                         p3[2] = z_next - 1.0;
                     }
 
+                    // Draw the dotted line
                     drawCurve3D(ctx, p1, p2, p3, p4, threadColor, 1.5, [3,3]);
+
+                    // Animate a glowing arrow travelling along specific threads
+                    if (t === 0 || t === Math.floor(threads/2) || t === threads) {
+                        let phase = (state.animTime * 0.4) % 1.0; // Controls speed of looping
+                        
+                        // Small offset calculation to get direction safely without blowing up
+                        let delta = 0.001;
+                        let phaseNext = Math.min(1.0, phase + delta);
+                        let phasePrev = Math.max(0.0, phase - delta);
+
+                        let ptNext = getBezierPoint(p1, p2, p3, p4, phaseNext);
+                        let ptPrev = getBezierPoint(p1, p2, p3, p4, phasePrev);
+                        
+                        let projNext = project(ptNext[0], ptNext[1], ptNext[2]);
+                        let projPrev = project(ptPrev[0], ptPrev[1], ptPrev[2]);
+                        
+                        let angle = Math.atan2(projNext.y - projPrev.y, projNext.x - projPrev.x);
+                        
+                        let pt = getBezierPoint(p1, p2, p3, p4, phase);
+                        let proj = project(pt[0], pt[1], pt[2]);
+                        
+                        drawArrow(ctx, proj.x, proj.y, angle, 8, '#22d3ee');
+
+                        // Add explicit text label indicating cycle mapping
+                        if (t === Math.floor(threads/2)) {
+                            let labelPt = getBezierPoint(p1, p2, p3, p4, 0.5); // Midpoint of curve
+                            let projLabel = project(labelPt[0], labelPt[1], labelPt[2]);
+                            ctx.fillStyle = 'rgba(255,255,255,0.8)';
+                            ctx.font = '10px Inter';
+                            ctx.fillText(`Sheet ${i+1} → ${next_i+1}`, projLabel.x + 8, projLabel.y);
+                        }
+                    }
                 }
             }
 
@@ -441,25 +690,89 @@
             order.forEach(i => {
                 const z = i * sheetZSpacing;
 
-                // Back half (y < 0)
-                const pBack = [
-                    project(-planeW, -planeD, z),
-                    project(planeW, -planeD, z),
-                    project(planeW, 0, z),
-                    project(-planeW, 0, z)
-                ];
-                drawPoly(ctx, pBack, sheetFill, sheetStroke, 1);
+                if (state.scenario === 'local') {
+                    // Local quench: slit on Y-axis (tau) from eps to infinity
+                    const eps = 0.2;
+                    
+                    // Top-Left
+                    drawPoly(ctx, [
+                        project(-planeW, eps, z), project(-0.02, eps, z),
+                        project(-0.02, planeD, z), project(-planeW, planeD, z)
+                    ], sheetFill, sheetStroke, 1);
+                    // Top-Right
+                    drawPoly(ctx, [
+                        project(0.02, eps, z), project(planeW, eps, z),
+                        project(planeW, planeD, z), project(0.02, planeD, z)
+                    ], sheetFill, sheetStroke, 1);
+                    
+                    // Bottom-Left
+                    drawPoly(ctx, [
+                        project(-planeW, -planeD, z), project(-0.02, -planeD, z),
+                        project(-0.02, -eps, z), project(-planeW, -eps, z)
+                    ], sheetFill, sheetStroke, 1);
+                    // Bottom-Right
+                    drawPoly(ctx, [
+                        project(0.02, -planeD, z), project(planeW, -planeD, z),
+                        project(planeW, -eps, z), project(0.02, -eps, z)
+                    ], sheetFill, sheetStroke, 1);
 
-                // Front half (y > 0)
-                const pFront = [
-                    project(-planeW, 0, z),
-                    project(planeW, 0, z),
-                    project(planeW, planeD, z),
-                    project(-planeW, planeD, z)
-                ];
-                drawPoly(ctx, pFront, sheetFill, sheetStroke, 1);
+                    // Central connecting band |tau| < eps
+                    drawPoly(ctx, [
+                        project(-planeW, -eps, z), project(planeW, -eps, z),
+                        project(planeW, eps, z), project(-planeW, eps, z)
+                    ], sheetFill, sheetStroke, 1);
 
-                // Draw the CUT A
+                    // Draw vertical physical cuts (Red glowing)
+                    ctx.shadowColor = 'rgba(220, 38, 38, 0.9)';
+                    ctx.shadowBlur = 12;
+                    ctx.lineWidth = 3;
+                    ctx.strokeStyle = '#dc2626';
+                    
+                    let cutStartTop = project(0, eps, z);
+                    let cutEndTop = project(0, planeD, z);
+                    ctx.beginPath(); ctx.moveTo(cutStartTop.x, cutStartTop.y); ctx.lineTo(cutEndTop.x, cutEndTop.y); ctx.stroke();
+
+                    let cutStartBot = project(0, -eps, z);
+                    let cutEndBot = project(0, -planeD, z);
+                    ctx.beginPath(); ctx.moveTo(cutStartBot.x, cutStartBot.y); ctx.lineTo(cutEndBot.x, cutEndBot.y); ctx.stroke();
+                    ctx.shadowBlur = 0;
+
+                } else {
+                    // Back half (y < 0)
+                    const pBack = [
+                        project(-planeW, -planeD, z),
+                        project(planeW, -planeD, z),
+                        project(planeW, 0, z),
+                        project(-planeW, 0, z)
+                    ];
+                    drawPoly(ctx, pBack, sheetFill, sheetStroke, 1);
+
+                    // Front half (y > 0)
+                    const pFront = [
+                        project(-planeW, 0, z),
+                        project(planeW, 0, z),
+                        project(planeW, planeD, z),
+                        project(-planeW, planeD, z)
+                    ];
+                    drawPoly(ctx, pFront, sheetFill, sheetStroke, 1);
+
+                    if (state.scenario === 'global') {
+                        // Draw boundary states at tau = +/- epsilon
+                        ctx.shadowColor = 'rgba(217, 70, 239, 0.8)';
+                        ctx.shadowBlur = 10;
+                        ctx.lineWidth = 3;
+                        ctx.strokeStyle = '#d946ef';
+
+                        let top1 = project(-planeW, planeD, z), top2 = project(planeW, planeD, z);
+                        ctx.beginPath(); ctx.moveTo(top1.x, top1.y); ctx.lineTo(top2.x, top2.y); ctx.stroke();
+
+                        let bot1 = project(-planeW, -planeD, z), bot2 = project(planeW, -planeD, z);
+                        ctx.beginPath(); ctx.moveTo(bot1.x, bot1.y); ctx.lineTo(bot2.x, bot2.y); ctx.stroke();
+                        ctx.shadowBlur = 0;
+                    }
+                }
+
+                // Draw the CUT A (Entanglement sub-region)
                 const cutStart = project(-cutL/2, 0, z);
                 const cutEnd = project(cutL/2, 0, z);
                 
@@ -503,18 +816,16 @@
             });
         }
 
-        // Removed the auto-rotation in animate to keep the figure static
         function animate() {
-            // Re-render when parameters or dragging updates state
-            // It is kept as a requestAnimationFrame loop so that sliders feel completely smooth
+            // Keep incrementing animation time to power the looping path arrows
+            state.animTime += 0.01;
             draw();
             requestAnimationFrame(animate);
         }
 
-        // Initialize
-        draw();
+        // Kick off loop
         animate();
-
+        
     </script>
 </body>
 </html>

@@ -133,11 +133,13 @@ Universal results for entanglement and critical phenomena in 1+1D quantum system
 
 Derivation of universal entanglement entropy formula in 1+1D CFT using replica trick and twist fields.
 
-**Theory:** Read `conformal_field_theory/entanglement-entropy/entanglement-entropy.pdf` (35 pages)
+**Theory:** Read `conformal_field_theory/entanglement-entropy/entanglement-entropy.pdf` (64 pages)
 
 **Code:** See `conformal_field_theory/entanglement-entropy/code/` for correlation matrix method
 
-**Interactive:** See `conformal_field_theory/entanglement-entropy/entanglement-entropy-interactive.html` for visual exploration
+**Interactive Visualizations:**
+- `entanglement-entropy-interactive.html` - 3D replica trick visualizer with ground/global/local quench scenarios
+- `uniformizing-map-interactive.html` - Interactive two-step uniformizing transformation (Möbius + power map)
 
 **Main result:** For 1+1D CFT with central charge \(c\):
 \[
@@ -219,8 +221,9 @@ quantum-computing-roadmap/
 │
 ├── conformal_field_theory/            # CFT and entanglement
 │   ├── entanglement-entropy/          # Replica trick derivation
-│   │   ├── entanglement-entropy.pdf   (32 pages)
+│   │   ├── entanglement-entropy.pdf   (64 pages)
 │   │   ├── entanglement-entropy-interactive.html
+│   │   ├── uniformizing-map-interactive.html
 │   │   ├── README.md
 │   │   └── code/                      # Correlation matrix method
 │   └── bogoliubov-transform/          # Coming soon
@@ -238,14 +241,14 @@ quantum-computing-roadmap/
 
 | Metric | Count |
 |--------|-------|
-| **PDF Pages** | 251 (174 Basics + 54 Transformations + 45 CFT) |
+| **PDF Pages** | 273 (174 Basics + 54 Transformations + 64 CFT) |
 | **Code Files** | 48 |
-| **Interactive Visualizations** | 1 (Entanglement Entropy replica trick) |
+| **Interactive Visualizations** | 2 (Entanglement Entropy replica trick + Uniformizing map) |
 | **Code Levels** | 43 |
 | **Algorithms** | 7 (Deutsch-Jozsa, Grover, QFT, Phase Estimation, Shor, Trotter, Suzuki) |
 | **Physical Models** | 2 (Heisenberg, H₂) |
 | **Transformations** | 2 (Jordan-Wigner + QFT/FQFT with code) |
-| **CFT** | 1 (Entanglement Entropy with replica trick, 32 pages) |
+| **CFT** | 1 (Entanglement Entropy with replica trick, 64 pages, 2 interactive visualizations) |
 | **Estimated Study Time** | 16-21 weeks |
 
 ---

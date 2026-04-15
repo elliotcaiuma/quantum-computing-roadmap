@@ -263,6 +263,38 @@ Maps spin-1/2 systems to fermionic systems, enabling simulation of spin chains o
 
 ---
 
+## Conformal Field Theory [NEW]
+
+### Entanglement Entropy in 1+1D CFT
+
+Universal formula for entanglement entropy using replica trick and twist fields.
+
+### Topics
+
+- Reduced density matrix and partial trace
+- Von Neumann entropy vs. Rényi entropies
+- Replica trick: $S_A = -\lim_{n \to 1} \frac{\partial}{\partial n} \text{Tr}(\rho_A^n)$
+- Path integral representation on $n$-sheeted Riemann surface
+- Twist fields as boundary condition changing operators
+- Uniformizing map: Möbius transformation + power map
+- Stress tensor transformation and Schwarzian derivative
+- Scaling dimension: $\Delta_n = \frac{c}{12}(n - 1/n)$
+- Virasoro generators and orbifold CFT
+- Partition function ratio: $Z_n/(Z_1)^n = \langle \mathcal{T}_n(u) \tilde{\mathcal{T}}_n(v) \rangle$
+- Main result: $S_A = \frac{c}{3} \ln(L/a) + \text{const}$
+- Numerical verification via correlation matrix method
+
+### Milestone
+
+✅ Understand replica trick and why it works  
+✅ Derive path integral representation of Tr(ρ_A^n)  
+✅ Explain twist fields and their role  
+✅ Compute scaling dimension via Schwarzian  
+✅ Derive uniformizing map construction  
+✅ Verify CFT prediction numerically for Ising model  
+
+---
+
 ## Next Steps
 
 After completing all 5 phases:

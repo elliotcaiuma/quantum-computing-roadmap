@@ -8,9 +8,13 @@ Universal results for entanglement and critical phenomena in 1+1D quantum system
 
 Derivation of universal entanglement entropy formula in 1+1D CFT using replica trick and twist fields.
 
-**Documentation:** `entanglement-entropy/entanglement-entropy.pdf` (29 pages)
+**Documentation:** `entanglement-entropy/entanglement-entropy.pdf` (64 pages)
 
 **Code:** `entanglement-entropy/code/` - Correlation matrix method for numerical verification
+
+**Interactive Visualizations:**
+- `entanglement-entropy-interactive.html` - 3D replica trick visualizer
+- `uniformizing-map-interactive.html` - Uniformizing transformation explorer
 
 **Topics Covered:**
 - Entanglement entropy definition and physical interpretation
@@ -32,6 +36,15 @@ Derivation of universal entanglement entropy formula in 1+1D CFT using replica t
 - Euclidean path integral for ground state preparation
 - Reduced density matrix via partial trace over region B
 - Replica construction with cyclic boundary conditions
+- Detailed gluing procedure: from Eq. 154 to Z_n/(Z_1)^n with delta functionals
+- Replica sheet distinction: what's identical vs. what differs
+- Uniformizing map derivation: Möbius + power map construction
+- Stress tensor OPE and Virasoro algebra
+- Anomalous transformation law from first principles (OPE → infinitesimal → finite → cocycle)
+- Virasoro generators L_n mode expansion and physical interpretation
+- Twist fields as local operators in n-copy CFT
+- Orbifold CFT and Fourier diagonalization
+- Partition function factorization into k-modes
 
 **Code Module:**
 - `01_correlation_matrix.py` - Compute S for transverse Ising model, verify c = 1/2

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Replica Trick · Uniformizing Map</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; background: #020617; color: #f8fafc; margin: 0; }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 1rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: #334155;
+            border-radius: 9999px;
+        }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px; height: 20px;
+            background: #818cf8;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 8px #6366f1;
+        }
+        canvas { display: block; width: 100%; height: 100%; cursor: grab; }
+        canvas:active { cursor: grabbing; }
+        .control-btn {
+            transition: all 0.15s;
+        }
+    </style>
+    <!-- MathJax for formulas -->
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="h-screen flex flex-col overflow-hidden">
+    <!-- Header -->
+    <header class="bg-slate-900 border-b border-slate-800 px-6 py-4 flex-shrink-0 flex items-center justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-slate-100">The Uniformizing Map</h1>
+            <p class="text-sm text-indigo-300/80">$w(z) = \left( \frac{z-u}{z-v} \right)^{1/n}$ · Unwrapping the replica surface</p>
+        </div>
+        <div class="text-xs bg-indigo-950/60 px-3 py-1.5 rounded-full border border-indigo-700/50 text-indigo-200">
+            <span id="map-status">3D Surface</span>
+        </div>
+    </header>
+
+    <!-- Main: Left panel + Canvas -->
+    <div class="flex-1 flex flex-col lg:flex-row overflow-hidden">
+        <!-- Left Controls & Explanation -->
+        <div class="w-full lg:w-1/3 xl:w-1/4 bg-slate-950 border-r border-slate-800 flex flex-col overflow-y-auto custom-scroll p-6 space-y-6">
+            <div>
+                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Parameters</h2>
+                <div class="space-y-5">
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <label class="text-sm text-slate-300">Replicas $n$</label>
+                            <span id="n-val" class="text-indigo-300 font-mono">3</span>
+                        </div>
+                        <input type="range" id="n-slider" min="1" max="6" step="1" value="3" class="slider">
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <label class="text-sm text-slate-300">Subsystem length $\ell$</label>
+                            <span id="l-val" class="text-indigo-300 font-mono">2.0</span>
+                        </div>
+                        <input type="range" id="l-slider" min="0.8" max="3.5" step="0.1" value="2.0" class="slider">
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Animation</h2>
+                <div class="flex gap-2 mb-3">
+                    <button id="play-btn" class="control-btn flex-1 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-medium text-sm flex items-center justify-center gap-1 shadow-lg shadow-emerald-900/30">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"/></svg>
+                        Play
+                    </button>
+                    <button id="pause-btn" class="control-btn flex-1 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-medium text-sm flex items-center justify-center gap-1">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M5 4h3v12H5V4zm7 0h3v12h-3V4z"/></svg>
+                        Pause
+                    </button>
+                </div>
+                <div class="mb-3">
+                    <div class="flex justify-between mb-1">
+                        <label class="text-xs text-slate-400">Speed</label>
+                        <span id="speed-val" class="text-xs text-indigo-300">1.0x</span>
+                    </div>
+                    <input type="range" id="speed-slider" min="0.2" max="2.5" step="0.1" value="1.0" class="slider">
+                </div>
+                <div class="flex gap-2">
+                    <button id="reset-view" class="flex-1 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm rounded-lg border border-slate-700 transition">
+                        Reset Camera
+                    </button>
+                    <button id="reset-transform" class="flex-1 py-2 bg-indigo-900/60 hover:bg-indigo-800 text-indigo-200 text-sm rounded-lg border border-indigo-700/50 transition">
+                        Reset Transform
+                    </button>
+                </div>
+            </div>
+
+            <!-- Explanation -->
+            <div class="pt-4 border-t border-slate-800 text-sm text-slate-300 space-y-4">
+                <div>
+                    <h3 class="font-bold text-indigo-300 mb-1">The Replica Geometry</h3>
+                    <p class="text-xs leading-relaxed">To compute $\mathrm{Tr}(\rho_A^n)$, we take $n$ copies of the path integral and glue them cyclically along the interval $A=[u,v]$. This creates an $n$-sheeted Riemann surface $\mathcal{R}_{n,1}$.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-indigo-300 mb-1">Uniformizing Map</h3>
+                    <p class="text-xs leading-relaxed">The map $w = \left(\frac{z-u}{z-v}\right)^{1/n}$ unwraps the surface onto the complex plane. Each sheet $k=0,\dots,n-1$ is mapped to the angular sector $\frac{2\pi k}{n} \le \arg(w) < \frac{2\pi(k+1)}{n}$. The branch cut $[u,v]$ becomes the positive real axis.</p>
+                </div>
+                <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800">
+                    <p class="text-xs text-slate-400"><span class="text-white font-medium">Legend:</span> Each color corresponds to a sheet. Faint background shows the target $w$-plane sectors.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Canvas -->
+        <div class="relative flex-1 bg-[#050508] overflow-hidden" id="canvas-container">
+            <canvas id="main-canvas" class="absolute inset-0"></canvas>
+            <!-- Overlay annotations -->
+            <div class="absolute bottom-4 left-4 text-xs text-slate-400 bg-slate-900/70 px-3 py-1.5 rounded-full backdrop-blur-sm pointer-events-none">
+                <span>Drag to rotate · Right‑drag to pan · Scroll to zoom</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function(){
+            const canvas = document.getElementById('main-canvas');
+            const ctx = canvas.getContext('2d');
+            const container = document.getElementById('canvas-container');
+
+            // ----- STATE -----
+            const state = {
+                n: 3,
+                l: 2.0,
+                // Camera
+                pitch: 0.45,
+                yaw: -0.5,
+                scale: 130,
+                panX: 0,
+                panY: 0,
+                // Animation
+                isPlaying: true,
+                animT: 0.0,        // 0 = 3D surface, 1 = 2D plane
+                speed: 1.0,
+                time: 0,
+                // UI refs
+                cx: 0, cy: 0
+            };
+
+            // Grid mesh (regenerated on n/l change)
+            let gridLines = [];
+
+            // ----- DOM elements -----
+            const nSlider = document.getElementById('n-slider');
+            const lSlider = document.getElementById('l-slider');
+            const nVal = document.getElementById('n-val');
+            const lVal = document.getElementById('l-val');
+            const speedSlider = document.getElementById('speed-slider');
+            const speedVal = document.getElementById('speed-val');
+            const playBtn = document.getElementById('play-btn');
+            const pauseBtn = document.getElementById('pause-btn');
+            const resetViewBtn = document.getElementById('reset-view');
+            const resetTransformBtn = document.getElementById('reset-transform');
+            const mapStatus = document.getElementById('map-status');
+
+            nSlider.addEventListener('input', e => {
+                state.n = parseInt(e.target.value);
+                nVal.textContent = state.n;
+                generateGrid();
+            });
+            lSlider.addEventListener('input', e => {
+                state.l = parseFloat(e.target.value);
+                lVal.textContent = state.l.toFixed(1);
+                generateGrid();
+            });
+            speedSlider.addEventListener('input', e => {
+                state.speed = parseFloat(e.target.value);
+                speedVal.textContent = state.speed.toFixed(1) + 'x';
+            });
+
+            playBtn.addEventListener('click', () => { state.isPlaying = true; });
+            pauseBtn.addEventListener('click', () => { state.isPlaying = false; });
+            
+            resetViewBtn.addEventListener('click', () => {
+                state.pitch = 0.45;
+                state.yaw = -0.5;
+                state.scale = 130;
+                state.panX = 0;
+                state.panY = 0;
+            });
+
+            resetTransformBtn.addEventListener('click', () => {
+                // Reset camera
+                state.pitch = 0.45;
+                state.yaw = -0.5;
+                state.scale = 130;
+                state.panX = 0;
+                state.panY = 0;
+                // Reset animation progress
+                state.animT = 0.0;
+                state.isPlaying = false;  // pause after reset, user can press play
+                mapStatus.textContent = '3D Surface';
+            });
+
+            // ----- Math: w = ((z-u)/(z-v))^(1/n) -----
+            function mapW(x, y, k, n, u, v) {
+                const dx1 = x - u, dy1 = y;
+                const r1 = Math.sqrt(dx1*dx1 + dy1*dy1);
+                const dx2 = x - v, dy2 = y;
+                const r2 = Math.sqrt(dx2*dx2 + dy2*dy2);
+                if (r2 < 0.001 || r1 < 0.001) return null;
+                const th1 = Math.atan2(dy1, dx1);
+                const th2 = Math.atan2(dy2, dx2);
+                let dTheta = th1 - th2;
+                if (dTheta < 0) dTheta += 2*Math.PI;
+                const totalPhase = dTheta + 2*Math.PI*k;
+                const R = Math.pow(r1/r2, 1/n);
+                const Phi = totalPhase / n;
+                return { x: R * Math.cos(Phi), y: R * Math.sin(Phi) };
+            }
+
+            // ----- 3D Projection (with interpolation) -----
+            function project(x, y, z, animT) {
+                const cp = state.pitch * (1 - animT);
+                const cy = state.yaw * (1 - animT);
+                const cosY = Math.cos(cy), sinY = Math.sin(cy);
+                let x1 = x * cosY - y * sinY;
+                let y1 = x * sinY + y * cosY;
+                const cosP = Math.cos(cp), sinP = Math.sin(cp);
+                let y2 = y1 * cosP - z * sinP;
+                let z2 = y1 * sinP + z * cosP;
+                const s = state.scale * (1 + animT * 0.35);
+                return {
+                    x: state.cx + x1 * s,
+                    y: state.cy - z2 * s,
+                    depth: y2
+                };
+            }
+
+            // ----- Generate grid mesh for current n,l -----
+            function generateGrid() {
+                gridLines = [];
+                const extent = 2.8;
+                const step = 0.14;
+                const u = -state.l/2, v = state.l/2;
+                const eps = 0.02;
+                for (let k = 0; k < state.n; k++) {
+                    const lines = [];
+                    // Horizontal lines (constant y)
+                    for (let y = -extent; y <= extent; y += step) {
+                        const safeY = (Math.abs(y) < 0.01) ? eps : y;
+                        const line = [];
+                        for (let x = -extent; x <= extent; x += step) line.push({x, y: safeY, sheet: k});
+                        lines.push(line);
+                    }
+                    // Vertical lines (constant x) — split at cut
+                    for (let x = -extent; x <= extent; x += step) {
+                        const safeX = x;
+                        let line1 = [], line2 = [];
+                        for (let y = -extent; y <= extent; y += step) {
+                            if (x > u && x < v) {
+                                if (y < -0.01) line1.push({x: safeX, y, sheet: k});
+                                else if (y > 0.01) line2.push({x: safeX, y, sheet: k});
+                            } else {
+                                const safeY = (Math.abs(y) < 0.01) ? eps : y;
+                                line1.push({x: safeX, y: safeY, sheet: k});
+                            }
+                        }
+                        if (line1.length > 0) lines.push(line1);
+                        if (line2.length > 0) lines.push(line2);
+                    }
+                    gridLines.push(lines);
+                }
+            }
+
+            // ----- Camera interaction -----
+            let isDragging = false, isPanning = false;
+            let lastX = 0, lastY = 0;
+
+            canvas.addEventListener('contextmenu', e => e.preventDefault());
+            canvas.addEventListener('mousedown', e => {
+                if (e.button === 0 && !e.shiftKey) isDragging = true;
+                else if (e.button === 2 || (e.button === 0 && e.shiftKey)) isPanning = true;
+                lastX = e.clientX; lastY = e.clientY;
+            });
+            window.addEventListener('mouseup', () => { isDragging = false; isPanning = false; });
+            window.addEventListener('mousemove', e => {
+                if (!isDragging && !isPanning) return;
+                const dx = e.clientX - lastX, dy = e.clientY - lastY;
+                const rotFactor = Math.max(0, 1 - state.animT);
+                if (isDragging && rotFactor > 0) {
+                    state.yaw += dx * 0.008 * rotFactor;
+                    state.pitch += dy * 0.008 * rotFactor;
+                    state.pitch = Math.max(-0.2, Math.min(1.2, state.pitch));
+                } else if (isPanning) {
+                    state.panX += dx;
+                    state.panY += dy;
+                }
+                lastX = e.clientX; lastY = e.clientY;
+            });
+            canvas.addEventListener('wheel', e => {
+                e.preventDefault();
+                state.scale *= Math.pow(0.999, e.deltaY);
+                state.scale = Math.max(30, Math.min(400, state.scale));
+            }, { passive: false });
+
+            // Touch support (basic)
+            canvas.addEventListener('touchstart', e => {
+                if (e.touches.length === 1) { isDragging = true; lastX = e.touches[0].clientX; lastY = e.touches[0].clientY; }
+                else if (e.touches.length === 2) { isPanning = true; lastX = (e.touches[0].clientX+e.touches[1].clientX)/2; lastY = (e.touches[0].clientY+e.touches[1].clientY)/2; }
+            }, {passive: false});
+            window.addEventListener('touchend', () => { isDragging = false; isPanning = false; });
+            window.addEventListener('touchmove', e => {
+                if (!isDragging && !isPanning) return;
+                e.preventDefault();
+                let cx, cy;
+                const rotFactor = Math.max(0, 1 - state.animT);
+                if (isDragging && e.touches.length === 1) {
+                    cx = e.touches[0].clientX; cy = e.touches[0].clientY;
+                    if (rotFactor > 0) {
+                        state.yaw += (cx - lastX) * 0.008 * rotFactor;
+                        state.pitch += (cy - lastY) * 0.008 * rotFactor;
+                        state.pitch = Math.max(-0.2, Math.min(1.2, state.pitch));
+                    }
+                } else if (isPanning && e.touches.length === 2) {
+                    cx = (e.touches[0].clientX + e.touches[1].clientX)/2;
+                    cy = (e.touches[0].clientY + e.touches[1].clientY)/2;
+                    state.panX += (cx - lastX);
+                    state.panY += (cy - lastY);
+                }
+                lastX = cx; lastY = cy;
+            }, {passive: false});
+
+            // ----- Resize handler -----
+            function resizeCanvas() {
+                const w = container.clientWidth;
+                const h = container.clientHeight;
+                canvas.width = w;
+                canvas.height = h;
+                state.cx = w/2 + state.panX;
+                state.cy = h/2 + state.panY;
+            }
+            window.addEventListener('resize', resizeCanvas);
+
+            // ----- Animation loop -----
+            let lastTimestamp = 0;
+            function animate(now) {
+                requestAnimationFrame(animate);
+                const dt = Math.min(0.05, (now - lastTimestamp) / 1000);
+                lastTimestamp = now;
+
+                // Update animation progress
+                if (state.isPlaying) {
+                    const target = 1.0;
+                    const step = dt * 0.55 * state.speed;
+                    state.animT = Math.min(target, state.animT + step);
+                }
+                // Smooth easing for display
+                const eased = state.animT; // linear works well
+
+                // Update status text
+                mapStatus.textContent = eased < 0.01 ? '3D Surface' : (eased > 0.99 ? '2D Plane (Unwrapped)' : `Unwrapping ${(eased*100).toFixed(0)}%`);
+
+                // Resize and compute centers
+                if (canvas.width !== container.clientWidth || canvas.height !== container.clientHeight) {
+                    resizeCanvas();
+                }
+                state.cx = canvas.width/2 + state.panX;
+                state.cy = canvas.height/2 + state.panY;
+
+                // Clear
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                const u = -state.l/2;
+                const v = state.l/2;
+                const totalHeight = (state.n-1) * 1.2;
+                const sheetZSpacing = 1.2;
+                const wScale = 2.2;
+
+                // ----- Draw faint background plane (target w-plane) -----
+                if (eased > 0.05) {
+                    ctx.save();
+                    ctx.globalAlpha = Math.min(0.3, eased * 0.4);
+                    // Concentric circles
+                    for (let r = 0.6; r <= 3.8; r+=0.6) {
+                        ctx.beginPath();
+                        const center = project(0,0,0, eased);
+                        const edge = project(r*wScale, 0, 0, eased);
+                        const radius = Math.abs(edge.x - center.x);
+                        ctx.arc(center.x, center.y, radius, 0, 2*Math.PI);
+                        ctx.strokeStyle = '#94a3b8';
+                        ctx.lineWidth = 0.6;
+                        ctx.stroke();
+                    }
+                    // Sector lines
+                    for (let k=0; k<state.n; k++) {
+                        const angle = 2*Math.PI*k/state.n;
+                        const end = project(Math.cos(angle)*3.8*wScale, Math.sin(angle)*3.8*wScale, 0, eased);
+                        const start = project(0,0,0, eased);
+                        ctx.beginPath();
+                        ctx.moveTo(start.x, start.y);
+                        ctx.lineTo(end.x, end.y);
+                        ctx.strokeStyle = '#64748b';
+                        ctx.lineWidth = 0.8;
+                        ctx.setLineDash([4,4]);
+                        ctx.stroke();
+                        ctx.setLineDash([]);
+                    }
+                    ctx.restore();
+                }
+
+                // Sort sheets by depth
+                const order = Array.from({length: state.n}, (_,i) => i);
+                order.sort((a,b) => {
+                    const da = project(0,0, a*sheetZSpacing - totalHeight/2, eased).depth;
+                    const db = project(0,0, b*sheetZSpacing - totalHeight/2, eased).depth;
+                    return da - db;
+                });
+
+                // Draw each sheet's grid
+                for (let idx of order) {
+                    const k = idx;
+                    const hue = (k * 360 / state.n);
+                    ctx.strokeStyle = `hsla(${hue}, 80%, 65%, ${0.6 + eased*0.2})`;
+                    ctx.lineWidth = 1.5;
+                    const lines = gridLines[k] || [];
+                    for (let line of lines) {
+                        ctx.beginPath();
+                        let first = true;
+                        for (let pt of line) {
+                            const z3D = k*sheetZSpacing - totalHeight/2;
+                            const wPt = mapW(pt.x, pt.y, k, state.n, u, v);
+                            let p1 = {x: pt.x, y: pt.y, z: z3D};
+                            if (wPt) {
+                                let r = Math.hypot(wPt.x, wPt.y);
+                                if (r > 5.2) { wPt.x *= 5.2/r; wPt.y *= 5.2/r; }
+                                p1 = {x: wPt.x * wScale, y: wPt.y * wScale, z: 0};
+                            }
+                            const currX = p1.x * eased + pt.x * (1-eased);
+                            const currY = p1.y * eased + pt.y * (1-eased);
+                            const currZ = p1.z * eased + z3D * (1-eased);
+                            const proj = project(currX, currY, currZ, eased);
+                            if (first) { ctx.moveTo(proj.x, proj.y); first = false; }
+                            else ctx.lineTo(proj.x, proj.y);
+                        }
+                        ctx.stroke();
+                    }
+                }
+
+                // Draw branch cut (fading out)
+                if (eased < 0.95) {
+                    for (let k of order) {
+                        const z3D = k*sheetZSpacing - totalHeight/2;
+                        const currZ = z3D * (1-eased);
+                        const start = project(u, 0, currZ, eased);
+                        const end = project(v, 0, currZ, eased);
+                        ctx.beginPath();
+                        ctx.moveTo(start.x, start.y);
+                        ctx.lineTo(end.x, end.y);
+                        ctx.strokeStyle = `rgba(249,115,22, ${1-eased})`;
+                        ctx.lineWidth = 3;
+                        ctx.shadowColor = '#f97316';
+                        ctx.shadowBlur = eased < 0.5 ? 10 : 5;
+                        ctx.stroke();
+                        ctx.shadowBlur = 0;
+                    }
+                }
+
+                // Label sheets (when partially unwrapped)
+                if (eased > 0.4 && eased < 0.95) {
+                    ctx.font = 'bold 12px Inter';
+                    ctx.fillStyle = '#e2e8f0';
+                    ctx.shadowColor = '#000'; ctx.shadowBlur = 6;
+                    for (let k=0; k<state.n; k++) {
+                        const angle = 2*Math.PI*k/state.n + Math.PI/state.n;
+                        const r = 2.5 * wScale;
+                        const pos = project(Math.cos(angle)*r, Math.sin(angle)*r, 0, eased);
+                        ctx.fillText(`k=${k}`, pos.x, pos.y-6);
+                    }
+                    ctx.shadowBlur = 0;
+                }
+
+                // Draw branch point markers
+                for (let pt of [u, v]) {
+                    const z = 0; // average
+                    const proj = project(pt, 0, z, eased);
+                    ctx.beginPath();
+                    ctx.arc(proj.x, proj.y, 4 + 2*eased, 0, 2*Math.PI);
+                    ctx.fillStyle = '#fcd34d';
+                    ctx.shadowColor = '#fbbf24';
+                    ctx.shadowBlur = 10;
+                    ctx.fill();
+                }
+                ctx.shadowBlur = 0;
+            }
+
+            // Initialize
+            generateGrid();
+            resizeCanvas();
+            requestAnimationFrame(animate);
+        })();
+    </script>
+    <style>
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #0f172a; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+    </style>
+</body>
+</html>
