@@ -4,8 +4,6 @@ Level 4: Custom State Creator - Generalized
 
 Now we generalize! Instead of hardcoding specific states,
 we create a function that can make ANY single-qubit state.
-
-Learning goal: From task-specific to general tool!
 """
 
 import numpy as np
@@ -54,5 +52,3 @@ print("\n4. Custom state (α=0.6, β=0.8):")
 print(psi_custom)
 print("   Probability of 0:", abs(psi_custom[0])**2)
 print("   Probability of 1:", abs(psi_custom[1])**2)
-
-# Now you can create ANY state!

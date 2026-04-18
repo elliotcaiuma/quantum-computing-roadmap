@@ -25,7 +25,7 @@ A structured learning path through quantum computing fundamentals with theory (P
 - Single-qubit gates (X, Y, Z, H, S, T) with geometric interpretations
 - Quantum measurement (complete mathematical treatment)
 
-**Theory:** Read `docs/quantum-computing-phase1.pdf` (40 pages)
+**Theory:** Read `docs/quantum-computing-phase1.pdf` (36 pages)
 
 **Code:** Levels 1-9 in `code/foundations/`
 
@@ -201,7 +201,7 @@ quantum-computing-roadmap/
 │   │   └── hamiltonian_simulation/      # Levels 36-43: Hamiltonian sim
 │   │
 │   └── docs/                            # Quantum Basics PDFs
-│       ├── quantum-computing-phase1.pdf   (40 pages)
+│       ├── quantum-computing-phase1.pdf   (36 pages)
 │       ├── quantum-computing-phase2.pdf   (44 pages)
 │       ├── quantum-computing-phase3.pdf   (31 pages)
 │       ├── quantum-computing-phase4.pdf   (29 pages)
@@ -241,7 +241,7 @@ quantum-computing-roadmap/
 
 | Metric | Count |
 |--------|-------|
-| **PDF Pages** | 273 (174 Basics + 54 Transformations + 64 CFT) |
+| **PDF Pages** | 269 (170 Basics + 54 Transformations + 64 CFT) |
 | **Code Files** | 48 |
 | **Interactive Visualizations** | 2 (Entanglement Entropy replica trick + Uniformizing map) |
 | **Code Levels** | 43 |

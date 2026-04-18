@@ -1,65 +1,57 @@
 #!/usr/bin/env python3
 """
-Level 8: Apply All Single-Qubit Gates - Task Specific
+Level 8: Apply All Single-Qubit Gates
 
-Applies all common single-qubit gates (X, Y, Z, H, S, T) to |0⟩.
-Task-specific (only |0⟩), but demonstrates multiple gates.
-
-Learning goal: Understand what each gate does!
+Applies all standard single-qubit gates (X, Y, Z, H, S, T)
+to |0⟩ state and shows the results.
 """
 
 from qiskit import QuantumCircuit
 from qiskit.quantum_info import Statevector
 
+# Start with |0⟩
+initial = Statevector.from_label('0')
+print("Initial state: |0⟩")
+print(initial)
 
-def apply_gate(gate_name, initial_state='0'):
-    """
-    Apply a single-qubit gate to a state.
-    
-    Args:
-        gate_name: 'X', 'Y', 'Z', 'H', 'S', 'T'
-        initial_state: '0' or '1'
-    
-    Returns:
-        Final statevector
-    """
-    # Start with initial state
-    psi = Statevector.from_label(initial_state)
-    
-    # Create circuit
-    qc = QuantumCircuit(1)
-    
-    # Apply gate
-    if gate_name == 'X':
-        qc.x(0)
-    elif gate_name == 'Y':
-        qc.y(0)
-    elif gate_name == 'Z':
-        qc.z(0)
-    elif gate_name == 'H':
-        qc.h(0)
-    elif gate_name == 'S':
-        qc.s(0)
-    elif gate_name == 'T':
-        qc.t(0)
-    else:
-        raise ValueError(f"Unknown gate: {gate_name}")
-    
-    # Apply and return
-    final = psi.evolve(qc)
-    return final
+# X Gate
+qc_x = QuantumCircuit(1)
+qc_x.x(0)
+result_x = initial.evolve(qc_x)
+print("\nAfter X gate:")
+print(result_x)
 
+# Y Gate
+qc_y = QuantumCircuit(1)
+qc_y.y(0)
+result_y = initial.evolve(qc_y)
+print("\nAfter Y gate:")
+print(result_y)
 
-# Test all gates on |0⟩
-gates = ['X', 'Y', 'Z', 'H', 'S', 'T']
+# Z Gate
+qc_z = QuantumCircuit(1)
+qc_z.z(0)
+result_z = initial.evolve(qc_z)
+print("\nAfter Z gate:")
+print(result_z)
 
-print("Applying all single-qubit gates to |0⟩:\n")
+# H Gate
+qc_h = QuantumCircuit(1)
+qc_h.h(0)
+result_h = initial.evolve(qc_h)
+print("\nAfter H gate:")
+print(result_h)
 
-for gate in gates:
-    final = apply_gate(gate, '0')
-    print(f"{gate} gate: {final}")
+# S Gate
+qc_s = QuantumCircuit(1)
+qc_s.s(0)
+result_s = initial.evolve(qc_s)
+print("\nAfter S gate:")
+print(result_s)
 
-# Notice:
-# X: |0⟩ → |1⟩
-# H: |0⟩ → |+⟩ (superposition!)
-# Z: |0⟩ → |0⟩ (no change, but phase matters)
+# T Gate
+qc_t = QuantumCircuit(1)
+qc_t.t(0)
+result_t = initial.evolve(qc_t)
+print("\nAfter T gate:")
+print(result_t)

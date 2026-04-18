@@ -3,9 +3,6 @@
 Level 7: Apply X Gate - Task Specific
 
 Applies X gate (NOT gate) to |0⟩ state.
-Task-specific: only X gate on one specific state.
-
-Learning goal: See how gates transform states!
 """
 
 from qiskit import QuantumCircuit

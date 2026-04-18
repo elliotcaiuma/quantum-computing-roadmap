@@ -46,30 +46,38 @@ Levels 5-6: Measurement (specific → general)
 Levels 7-9: Gates (specific → general)
 ```
 
+**Documentation:** See `../docs/quantum-computing-phase1.pdf` (36 pages) for complete theory with derivations and code examples.
+
 ---
 
 ## Multi-Qubit
 
 | Level | File | Concept | Progression |
 |-------|------|---------|-------------|
-| **10** | `10_hello_2qubit.py` | Create |00⟩ | Task-specific, 2 qubits |
-| **11** | `11_tensor_product.py` | |0⟩ ⊗ |1⟩ | Task-specific, one case |
-| **12** | `12_tensor_product_calculator.py` | ANY tensor product | **Generalized**: function |
-| **13** | `13_create_bell_phi_plus.py` | Create |Φ⁺⟩ | Task-specific, one Bell state |
-| **14** | `14_all_bell_states.py` | All 4 Bell states | Task-specific, all cases |
-| **15** | `15_bell_factory.py` | Create ANY Bell state | **Generalized**: parameterized |
-| **16** | `16_measure_bell.py` | Measure |Φ⁺⟩ | Task-specific, measurement |
-| **17** | `17_bell_analyzer.py` | Analyze ANY Bell state | **Generalized**: complete tool |
+| **11** | `11_hello_2qubit.py` | Create |00⟩ | Task-specific, 2 qubits |
+| **12** | `12_tensor_product.py` | |0⟩ ⊗ |1⟩ | Task-specific, one case |
+| **13** | `13_tensor_product_calculator.py` | ANY tensor product | **Generalized**: function |
+| **14** | `14_create_bell_phi_plus.py` | Create |Φ⁺⟩ | Task-specific, one Bell state |
+| **15** | `15_all_bell_states.py` | All 4 Bell states | Task-specific, all cases |
+| **16** | `16_bell_factory.py` | Create ANY Bell state | **Generalized**: parameterized |
+| **17** | `17_measure_bell.py` | Measure Bell state | Task-specific, measurement |
+| **18** | `18_bell_analyzer.py` | Analyze ANY Bell state | **Generalized**: complete tool |
+| **19** | `19_ancilla_measurement.py` | Ancilla measurement | Physical measurement process |
+| **20** | `20_controlled_u_decomposition.py` | Universal controlled-U | A-X-B-X-C decomposition |
 
 ### Learning Path
 
 ```
-Levels 10-12: Tensor products (specific → general)
+Levels 11-13: Tensor products (specific → general)
     ↓
-Levels 13-15: Bell states (specific → general)
+Levels 14-16: Bell states (specific → general)
     ↓
-Levels 16-17: Measurement & analysis (specific → general)
+Levels 17-18: Measurement & analysis (specific → general)
+    ↓
+Levels 19-20: Advanced topics (ancilla, controlled-U)
 ```
+
+**Documentation:** See `../docs/quantum-computing-phase2.pdf` (44 pages) for complete theory.
 
 ---
 
@@ -80,7 +88,8 @@ Levels 16-17: Measurement & analysis (specific → general)
 1. **Start at Level 1** - Don't skip!
 2. **Run each file** - See output
 3. **Modify code** - Break it, fix it
-4. **Don't rush** - Master each level before next
+4. **Read the PDF** - Theory in `../docs/quantum-computing-phase1.pdf`
+5. **Don't rush** - Master each level before next
 
 ### For Intermediate Learners
 
@@ -162,4 +171,4 @@ Don't skip the simple stuff—it builds intuition!
 
 ---
 
-*Last Updated: March 2026*
+*Last Updated: April 2026*

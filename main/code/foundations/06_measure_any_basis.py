@@ -3,9 +3,6 @@
 Level 6: Measure in Any Basis - Generalized
 
 Generalizes measurement to X, Y, or Z basis.
-From task-specific (Z only) to general tool!
-
-Learning goal: Understand that measurement basis matters!
 """
 
 import numpy as np
@@ -60,5 +57,3 @@ print("\nMeasuring |0⟩ in different bases:")
 print(f"   Z basis: {measure_basis(zero, 'Z')}")  # 100% 0
 print(f"   X basis: {measure_basis(zero, 'X')}")  # 50/50
 print(f"   Y basis: {measure_basis(zero, 'Y')}")  # 50/50
-
-# Key insight: Measurement depends on basis!

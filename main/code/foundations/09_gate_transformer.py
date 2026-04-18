@@ -2,36 +2,29 @@
 """
 Level 9: Gate Transformer - Generalized
 
-Generalizes gate application: any gate, any state, any sequence.
-From task-specific to fully general tool!
-
-Learning goal: Build reusable quantum circuit tools!
+Apply ANY sequence of gates to ANY initial state.
 """
 
 from qiskit import QuantumCircuit
 from qiskit.quantum_info import Statevector
-import numpy as np
 
 
-def apply_gates(initial_state, gates):
+def apply_gates(initial_state, gate_sequence):
     """
-    Apply a sequence of gates to any initial state.
+    Apply sequence of gates to initial state.
     
     Args:
-        initial_state: '0', '1', '+', '-', etc.
-        gates: List of gate names ['H', 'X', 'Z', ...]
+        initial_state: Starting Statevector
+        gate_sequence: List of gate names ('X', 'Y', 'Z', 'H', 'S', 'T')
     
     Returns:
-        Final statevector and circuit
+        Final Statevector after all gates
     """
-    # Start with initial state
-    psi = Statevector.from_label(initial_state)
-    
     # Create circuit
     qc = QuantumCircuit(1)
     
     # Apply each gate in sequence
-    for gate in gates:
+    for gate in gate_sequence:
         if gate == 'X':
             qc.x(0)
         elif gate == 'Y':
@@ -44,34 +37,28 @@ def apply_gates(initial_state, gates):
             qc.s(0)
         elif gate == 'T':
             qc.t(0)
-        elif gate == 'Rx':
-            qc.rx(np.pi/2, 0)  # π/2 rotation
-        elif gate == 'Ry':
-            qc.ry(np.pi/2, 0)
-        elif gate == 'Rz':
-            qc.rz(np.pi/2, 0)
-        else:
-            raise ValueError(f"Unknown gate: {gate}")
     
-    # Apply circuit
-    final = psi.evolve(qc)
-    return final, qc
+    # Evolve state through circuit
+    final_state = initial_state.evolve(qc)
+    return final_state
 
 
-# Example 1: H then Z
-print("1. |0⟩ --[H]--> --[Z]-->")
-final, circuit = apply_gates('0', ['H', 'Z'])
-print(f"   Result: {final}")
-print(f"   Circuit:\n{circuit}")
+# Example 1: |0⟩ -> X -> |1⟩
+result1 = apply_gates(Statevector.from_label('0'), ['X'])
+print("1. |0⟩ --X--> |1⟩:")
+print(result1)
 
-# Example 2: X then H then S
-print("\n2. |0⟩ --[X]--> --[H]--> --[S]-->")
-final, circuit = apply_gates('0', ['X', 'H', 'S'])
-print(f"   Result: {final}")
+# Example 2: |0⟩ -> H -> |+⟩
+result2 = apply_gates(Statevector.from_label('0'), ['H'])
+print("\n2. |0⟩ --H--> |+⟩:")
+print(result2)
 
-# Example 3: Start from |1⟩
-print("\n3. |1⟩ --[H]--> --[X]-->")
-final, circuit = apply_gates('1', ['H', 'X'])
-print(f"   Result: {final}")
+# Example 3: |0⟩ -> H -> Z -> H -> |1⟩
+result3 = apply_gates(Statevector.from_label('0'), ['H', 'Z', 'H'])
+print("\n3. |0⟩ --H Z H--> |1⟩:")
+print(result3)
 
-# Now you can apply ANY gate sequence to ANY state!
+# Example 4: Custom sequence
+result4 = apply_gates(Statevector.from_label('0'), ['H', 'S', 'T'])
+print("\n4. |0⟩ --H S T--> custom state:")
+print(result4)

@@ -15,6 +15,16 @@ This roadmap covers **foundations** - single-qubit and multi-qubit systems.
 - Bloch sphere visualization
 - Single-qubit gates: X, Y, Z, H, S, T
 - Measurement theory and Born rule
+- Complete derivations with all intermediate steps
+- Equation numbering and cross-references
+
+### Documentation
+
+**PDF:** `docs/quantum-computing-phase1.pdf` (36 pages)
+
+**LaTeX Source:** `report-latex/phase1/quantum-computing-phase1.tex`
+
+**Code:** `code/foundations/` (Levels 1-9)
 
 ### Code Progression
 
@@ -36,6 +46,8 @@ This roadmap covers **foundations** - single-qubit and multi-qubit systems.
 ✅ Visualize on Bloch sphere
 ✅ Implement all single-qubit gates
 ✅ Measure in any basis
+✅ Calculate probabilities using Born rule
+✅ Understand superposition vs classical uncertainty
 
 ---
 
