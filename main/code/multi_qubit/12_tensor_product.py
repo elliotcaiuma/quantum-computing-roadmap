@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 """
-Level 11: Tensor Product - Task Specific
+Level 12: Tensor Product - Task Specific
 
 Computes tensor product of two specific states: |0⟩ ⊗ |1⟩ = |01⟩.
-Task-specific (only this one case), but introduces tensor product concept.
-
-Learning goal: Understand how to combine qubits!
 """
 
 import numpy as np

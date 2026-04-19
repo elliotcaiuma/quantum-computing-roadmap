@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 """
-Level 16: Measure Bell State - Task Specific
+Level 17: Measure Bell State - Task Specific
 
 Measures |Φ⁺⟩ Bell state and shows perfect correlations.
-Task-specific (only Φ⁺), but demonstrates entanglement measurement!
-
-Learning goal: See entanglement in action!
 """
 
 from qiskit import QuantumCircuit, Aer, execute

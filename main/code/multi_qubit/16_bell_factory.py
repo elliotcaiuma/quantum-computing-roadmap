@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 """
-Level 15: Bell State Factory - Generalized
+Level 16: Bell State Factory - Generalized
 
 Generalizes Bell state creation: any Bell state with parameters.
-From task-specific to fully general factory!
-
-Learning goal: Build a parameterized Bell state generator!
 """
 
 from qiskit import QuantumCircuit

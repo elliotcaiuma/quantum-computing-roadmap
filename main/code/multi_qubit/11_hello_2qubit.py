@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 """
-Level 10: Hello 2-Qubit - Task Specific
+Level 11: Hello 2-Qubit - Task Specific
 
 Creates a simple 2-qubit state |00⟩.
-Task-specific, but now we're in multi-qubit land!
-
-Learning goal: First step into multi-qubit systems!
 """
 
 from qiskit.quantum_info import Statevector

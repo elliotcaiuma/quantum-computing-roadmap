@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 """
-Level 13: Create Bell State Φ⁺ - Task Specific
+Level 14: Create Bell State Φ⁺ - Task Specific
 
 Creates one specific Bell state: |Φ⁺⟩ = (|00⟩ + |11⟩)/√2.
-Task-specific (only this Bell state), but introduces entanglement!
-
-Learning goal: First entangled state!
 """
 
 from qiskit import QuantumCircuit

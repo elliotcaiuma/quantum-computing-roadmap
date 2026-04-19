@@ -38,7 +38,7 @@ A structured learning path through quantum computing fundamentals with theory (P
 - Quantum teleportation
 - Superdense coding
 
-**Theory:** Read `docs/quantum-computing-phase2.pdf` (44 pages)
+**Theory:** Read `docs/quantum-computing-phase2.pdf` (42 pages)
 
 **Code:** Levels 11-20 in `code/multi_qubit/`
 
@@ -62,7 +62,7 @@ A structured learning path through quantum computing fundamentals with theory (P
 - Shor's factoring algorithm (cryptanalysis application)
 - Quantum Fourier Transform (QFT) with complete derivation
 
-**Theory:** Read `docs/quantum-computing-phase4.pdf` (29 pages)
+**Theory:** Read `docs/quantum-computing-phase4.pdf` (27 pages)
 
 **Code:** Levels 30-35 in `code/algorithms/`
 
@@ -76,7 +76,7 @@ A structured learning path through quantum computing fundamentals with theory (P
 - Molecular H₂ simulation (electronic structure, dissociation curve)
 - Error analysis and resource estimation (chemical accuracy, quantum advantage)
 
-**Theory:** Read `docs/quantum-computing-phase5.pdf` (30 pages)
+**Theory:** Read `docs/quantum-computing-phase5.pdf` (23 pages)
 
 **Code:** Levels 36-43 in `code/hamiltonian_simulation/`
 
@@ -202,10 +202,10 @@ quantum-computing-roadmap/
 │   │
 │   └── docs/                            # Quantum Basics PDFs
 │       ├── quantum-computing-phase1.pdf   (36 pages)
-│       ├── quantum-computing-phase2.pdf   (44 pages)
-│       ├── quantum-computing-phase3.pdf   (31 pages)
-│       ├── quantum-computing-phase4.pdf   (29 pages)
-│       └── quantum-computing-phase5.pdf   (30 pages)
+│       ├── quantum-computing-phase2.pdf   (42 pages)
+│       ├── quantum-computing-phase3.pdf   (32 pages)
+│       ├── quantum-computing-phase4.pdf   (27 pages)
+│       └── quantum-computing-phase5.pdf   (23 pages)
 │
 ├── transformations/                   # Key transformations
 │   ├── README.md
@@ -241,7 +241,7 @@ quantum-computing-roadmap/
 
 | Metric | Count |
 |--------|-------|
-| **PDF Pages** | 269 (170 Basics + 54 Transformations + 64 CFT) |
+| **PDF Pages** | 260 (160 Basics + 52 Transformations + 64 CFT) |
 | **Code Files** | 48 |
 | **Interactive Visualizations** | 2 (Entanglement Entropy replica trick + Uniformizing map) |
 | **Code Levels** | 43 |

@@ -50,9 +50,10 @@ Levels 7-9: Gates (specific → general)
 
 ---
 
-## Multi-Qubit
+## Multi-Qubit (Levels 11-20)
 
 | Level | File | Concept | Progression |
+|-------|------|---------|-------------|
 |-------|------|---------|-------------|
 | **11** | `11_hello_2qubit.py` | Create |00⟩ | Task-specific, 2 qubits |
 | **12** | `12_tensor_product.py` | |0⟩ ⊗ |1⟩ | Task-specific, one case |
@@ -77,7 +78,7 @@ Levels 17-18: Measurement & analysis (specific → general)
 Levels 19-20: Advanced topics (ancilla, controlled-U)
 ```
 
-**Documentation:** See `../docs/quantum-computing-phase2.pdf` (44 pages) for complete theory.
+**Documentation:** See `../docs/quantum-computing-phase2.pdf` (42 pages) for complete theory.
 
 ---
 
@@ -95,11 +96,11 @@ Levels 19-20: Advanced topics (ancilla, controlled-U)
 
 1. **Skim Levels 1-3** - Review basics
 2. **Study Levels 4, 6, 9** - Generalization patterns
-3. **Build on Level 17** - Create your own tools
+3. **Build on Level 20** - Create your own tools
 
 ### For Advanced Users
 
-1. **Review Level 17** - Bell analyzer
+1. **Review Level 20** - Controlled-U decomposition
 2. **Extend** - Add features (visualization, export)
 3. **Optimize** - Improve performance
 4. **Teach** - Use these files to teach others
@@ -114,13 +115,13 @@ Levels 19-20: Advanced topics (ancilla, controlled-U)
 | **4-6** | Single function, one purpose | Learning functions |
 | **7-9** | Multiple examples, reusable | Building toolkit |
 | **10-14** | Domain-specific functions | Multi-qubit basics |
-| **15-17** | Complete, production-ready | Real projects |
+| **15-20** | Complete, production-ready | Real projects |
 
 ---
 
 ## Next Steps
 
-After completing all 17 levels:
+After completing all 43 levels:
 
 ### Build Your Own Projects
 - State visualizer (Bloch sphere + probabilities)
@@ -153,7 +154,7 @@ After completing all 17 levels:
 - Use Levels 1-3 as live coding demos
 - Assign Levels 4-6 as homework
 - Use Levels 7-9 as pair programming
-- Levels 10-17 as group projects
+- Levels 10-20 as group projects (Bell states, teleportation)
 
 ---
 

@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 """
-Level 14: All Bell States - Task Specific
+Level 15: All Bell States - Task Specific
 
 Creates all 4 Bell states.
-Task-specific (only Bell states), but demonstrates all 4 types.
-
-Learning goal: Understand the complete Bell basis!
 """
 
 from qiskit import QuantumCircuit

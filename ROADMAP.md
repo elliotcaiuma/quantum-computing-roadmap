@@ -164,13 +164,13 @@ See `code/README.md` for details.
 
 | Phase | Topic | PDF | Code Levels | Status |
 |-------|-------|-----|-------------|--------|
-| Phase 1 | Single-Qubit Foundations | 40 pages | 1-9 | ✅ COMPLETE |
-| Phase 2 | Multi-Qubit Systems | 44 pages | 11-20 | ✅ COMPLETE |
-| Phase 3 | Density Matrix & Decomposition | 31 pages | 21-29 | ✅ COMPLETE |
-| Phase 4 | Quantum Algorithms | 29 pages | 30-35 | ✅ COMPLETE |
-| Phase 5 | Hamiltonian Simulation | 22 pages | 36-43 | ✅ COMPLETE |
+| Phase 1 | Single-Qubit Foundations | 36 pages | 1-9 | ✅ COMPLETE |
+| Phase 2 | Multi-Qubit Systems | 42 pages | 11-20 | ✅ COMPLETE |
+| Phase 3 | Density Matrix & Decomposition | 32 pages | 21-29 | ✅ COMPLETE |
+| Phase 4 | Quantum Algorithms | 27 pages | 30-35 | ✅ COMPLETE |
+| Phase 5 | Hamiltonian Simulation | 23 pages | 36-43 | ✅ COMPLETE |
 
-**Total:** 166 pages of theory + 43 code levels
+**Total:** 160 pages of theory + 43 code levels
 
 ---
 

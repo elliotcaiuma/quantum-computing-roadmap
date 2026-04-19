@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 """
-Level 17: Bell State Analyzer - Generalized
+Level 18: Bell State Analyzer - Generalized
 
 Generalizes Bell state measurement: any Bell state, verify entanglement.
-From task-specific to general analysis tool!
-
-Learning goal: Build a complete Bell state analysis tool!
 """
 
 from qiskit import QuantumCircuit, Aer, execute

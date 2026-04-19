@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 """
-Level 12: Tensor Product Calculator - Generalized
+Level 13: Tensor Product Calculator - Generalized
 
 Generalizes tensor product: any two single-qubit states.
-From task-specific to general tool!
-
-Learning goal: Build a reusable tensor product function!
 """
 
 import numpy as np
